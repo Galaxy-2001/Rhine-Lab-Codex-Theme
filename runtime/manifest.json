@@ -1,0 +1,212 @@
+{
+  "files": [
+    {
+      "sha256": "9c5d4e9f92b2ec9722a6f4c2edc66880f094ce3f3a3fbda983d081638f195d11",
+      "path": "appearance.mjs",
+      "size": 5978
+    },
+    {
+      "sha256": "7c4bd139c305ac4de332c12cf4a3b10184715990afcf48b49f2478fbd1b0e19e",
+      "path": "assets/codex-white.ico",
+      "size": 31140
+    },
+    {
+      "sha256": "ca3c5ac2a4cf51027919fef3fa675a1d8db8f687624ebb3349d95d5b991a4a1f",
+      "path": "assets/identity-dark-still.svg",
+      "size": 1702
+    },
+    {
+      "sha256": "9b0b3fee3d72480a964222dd7794aa5bf848c0d6568e6e8f1fdac2b309569ab5",
+      "path": "assets/identity-dark.svg",
+      "size": 1955
+    },
+    {
+      "sha256": "63946d64747186857b870f951918e826095e154efbb73163099f4a42e998d686",
+      "path": "assets/identity-light-still.svg",
+      "size": 1702
+    },
+    {
+      "sha256": "f46b682844a6ac7a6cb12b1b6c925eeb542306fc6a3b5e894975001e2b792687",
+      "path": "assets/identity-light.svg",
+      "size": 1955
+    },
+    {
+      "sha256": "f8bd217aef4ec24250242c826c43357ac99429be6a93a8574501dbeda6aaee1e",
+      "path": "assets/rail-dark-still.svg",
+      "size": 632
+    },
+    {
+      "sha256": "6343465330bb9eb2cf3c266b9b8124e7499d4fcfe3a74316e3a97565050fbc72",
+      "path": "assets/rail-dark.svg",
+      "size": 885
+    },
+    {
+      "sha256": "5410ec224e4b5bb115c0e0ee3853a2ad05365348e6930ca359e6b2f24f472276",
+      "path": "assets/rail-light-still.svg",
+      "size": 632
+    },
+    {
+      "sha256": "d218ca6fce55b41dc0c614341b0d7e8f98ce82fc7f95f89a14a1fa3c69232848",
+      "path": "assets/rail-light.svg",
+      "size": 885
+    },
+    {
+      "sha256": "a17908c4ae2e5c10b4a016256bfb2e4a0c4f722a4577ad6c06e37b99b3eea70f",
+      "path": "assets/rhine-lab-dark.json",
+      "size": 564
+    },
+    {
+      "sha256": "0b48573146071adc6ad3b8ae5522264f7f7ab120d945f24cd8ea74a4e6e0e85f",
+      "path": "assets/rhine-lab-light.json",
+      "size": 565
+    },
+    {
+      "sha256": "0810c9dc210d43e1d611497567872a59023635715c8c6ee9ed49d1d664ce7b6f",
+      "path": "assets/structure-dark-still.svg",
+      "size": 1078
+    },
+    {
+      "sha256": "7096b068244eecbad9b0e27d5b944508b05a4cec98b77f7c459e04503c4992ed",
+      "path": "assets/structure-dark.svg",
+      "size": 1331
+    },
+    {
+      "sha256": "fad398e984acc7284b51f16e94bf2037f7a5e5fa0747ba3775d3cf80022f13c4",
+      "path": "assets/structure-light-still.svg",
+      "size": 1078
+    },
+    {
+      "sha256": "629f82ddac665d5618cb34f737aa16ba9db8383f8c03b6edbaacc71001779d74",
+      "path": "assets/structure-light.svg",
+      "size": 1331
+    },
+    {
+      "sha256": "cb863c755165fc4af990f704f2e8870cdea56e868924860a040ea8f95fcb9785",
+      "path": "assets/theme.css",
+      "size": 1768
+    },
+    {
+      "sha256": "8943e6a135c698fc00d4d132088bd12a4acaa2339bb5745ee6fbbfe1f8f7e664",
+      "path": "assets/watermark-dark-still.svg",
+      "size": 632
+    },
+    {
+      "sha256": "af1aaaf1825b7ccf8a07c8560c5344850777e7fe45e6523e9463334fc18f07b1",
+      "path": "assets/watermark-dark.svg",
+      "size": 885
+    },
+    {
+      "sha256": "d94857fd7c95a386e1d12d0929c7acb46dd60ab8a42ff7a2be14dfc71569ddff",
+      "path": "assets/watermark-light-still.svg",
+      "size": 632
+    },
+    {
+      "sha256": "f0c46ee9da0c0684ff8d82a3f3332172c04c2fad9da3873b97f426f31849a344",
+      "path": "assets/watermark-light.svg",
+      "size": 885
+    },
+    {
+      "sha256": "db9d76397e38f7f138705c951e556f277f7d15c9c09f00b0a568353c06e4b687",
+      "path": "cdp.mjs",
+      "size": 1829
+    },
+    {
+      "sha256": "d960310b069c1226c39da9d3b40d8247b4a30f19216077a1d529e611925262ef",
+      "path": "engine.mjs",
+      "size": 5892
+    },
+    {
+      "sha256": "f689f93514ab78ddde23d3b84d4fb9961876badf7b3828d489ae233de16af5b9",
+      "path": "install-core.ps1",
+      "size": 5597
+    },
+    {
+      "sha256": "f17deb260e588d0d002780c889d6c7e40353478ecefc74d19251b5d4796d9db5",
+      "path": "install.ps1",
+      "size": 1454
+    },
+    {
+      "sha256": "86192d60afa041e273e8caf02bc31821012119cf16d8ed06050f4320b0fce07d",
+      "path": "LICENSE",
+      "size": 1091
+    },
+    {
+      "sha256": "5e4bf1c1fcc4d17130fe136729264f896c1d1e529d9550b9ee5d0fcc76c72d54",
+      "path": "Manager.cs",
+      "size": 13177
+    },
+    {
+      "sha256": "5e6867d4a882f5d7b06e46e6bb4c85bc5a2345a2cb4bc781d150f44ac1852649",
+      "path": "package-common.ps1",
+      "size": 7170
+    },
+    {
+      "sha256": "cd36153ecf0ac82d8b51d1ba747d0bcf45e61bbaaa68673644bb995b77e1195a",
+      "path": "renderer.js",
+      "size": 3222
+    },
+    {
+      "sha256": "a29818286f4c556afaf3a5c1c2c4f789195f2ca4e56b17c1f2dfa7b01c9c85a7",
+      "path": "RhineLabTheme.exe",
+      "size": 50688
+    },
+    {
+      "sha256": "882e7fb3607eb316d5fbccd72dacf3039adfed468ef370c4e8e85bd058425b41",
+      "path": "start-official.ps1",
+      "size": 4810
+    },
+    {
+      "sha256": "ff5bcb38539a4caf32e663ff107f5b82b831969280370bd7d08017bfc19e600e",
+      "path": "theme.ps1",
+      "size": 5507
+    },
+    {
+      "sha256": "9c0110e713e5d9f4367f2ed5d47545532d8adf5de09d6ccf4724d716368ea30f",
+      "path": "THIRD_PARTY_NOTICES.md",
+      "size": 1428
+    },
+    {
+      "sha256": "518fa0aaa679c762918a8f0f2ae6b01851c0d4fc90fa9d0c8a7645f517a6dcbb",
+      "path": "uninstall.ps1",
+      "size": 2223
+    },
+    {
+      "sha256": "75ef07e5c008b5533d59ce43537f7da4eb687cd3d7937ff7355a8ed7b7887af1",
+      "path": "vendor/common-windows.ps1",
+      "size": 59991
+    },
+    {
+      "sha256": "6c7d8a5dc3579c1d0f5f0aee070ca5821b965d05855718c699191f8334596f28",
+      "path": "vendor/config-utf8.ps1",
+      "size": 65619
+    },
+    {
+      "sha256": "18f8478d0f9efd45307e5f17790194593b116658145c758ced3166398eb05b21",
+      "path": "vendor/LICENSE",
+      "size": 1093
+    },
+    {
+      "sha256": "ee28a6efd4e5f67d04ba5fa4150dd262029adef46910f14bbf4e397cb6826ca7",
+      "path": "vendor/provenance.json",
+      "size": 213
+    },
+    {
+      "sha256": "09ce310a8bcc1bb5c7dc2813c88b4bfbbeb685e4c186a9631ff54da7e85c880f",
+      "path": "vendor/smol-toml/index.cjs",
+      "size": 28632
+    },
+    {
+      "sha256": "fa5659948374d4f555594f47f6da073b40dc503e921aeeece30df4362b3051a5",
+      "path": "vendor/smol-toml/LICENSE",
+      "size": 1499
+    },
+    {
+      "sha256": "293c8a0a479180add08c937766fc297cd6c36c87beeafd2860f9e91fd1d0e526",
+      "path": "vendor/smol-toml/provenance.json",
+      "size": 338
+    }
+  ],
+  "id": "rhine-lab",
+  "runtime": "official-store-cdp",
+  "version": "1.0.0"
+}

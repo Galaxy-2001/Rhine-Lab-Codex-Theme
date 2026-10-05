@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/Fei-Away/Codex-Dream-Skin",
+  "files": [
+    "common-windows.ps1",
+    "config-utf8.ps1",
+    "LICENSE"
+  ],
+  "commit": "9b832b046a98808a0f201d063cde75f7c2a279f1"
+}

@@ -1,0 +1,28 @@
+/* All decoration uses background paint or an absolute, noninteractive layer. */
+html[data-rhine-enabled="true"] { --rhine-surface:#ECEDE8; --rhine-ink:#20292C; --rhine-accent:#9B4D19; }
+html[data-rhine-enabled="true"][data-theme="dark"] { --rhine-surface:#131A1E; --rhine-ink:#E9EDE4; --rhine-accent:#F0AB63; }
+html[data-rhine-enabled="true"] [data-rhine-surface="main"],
+html[data-rhine-enabled="true"] [data-rhine-surface="settings"] {
+  background-color:var(--rhine-surface);
+  background-image:var(--rhine-identity),var(--rhine-watermark),var(--rhine-structure);
+  background-size:min(780px,calc(100% - 64px)) auto,480px auto,100% 100%;
+  background-position:center top 70px,right -84px top 260px,center;
+  background-repeat:no-repeat;
+}
+html[data-rhine-enabled="true"][data-rhine-route="settings"] [data-rhine-surface="main"] { background-image:none; }
+html[data-rhine-enabled="true"] [data-rhine-surface="settings"] {
+  background-position:center top 88px,right -84px top 300px,center;
+}
+html[data-rhine-enabled="true"] aside.app-shell-left-panel::after {
+  content:""; position:absolute; inset:0; pointer-events:none; z-index:3;
+  background-image:var(--rhine-rail); background-repeat:no-repeat;
+  background-size:min(190px,calc(100% - 84px)) auto; background-position:right 20px bottom 26px;
+}
+html[data-rhine-enabled="true"] [data-sidebar-destination][aria-current="page"] { background-color:color-mix(in srgb,var(--rhine-accent) 13%,var(--rhine-surface)); }
+@media(max-width:700px) {
+  html[data-rhine-enabled="true"] [data-rhine-surface="main"],
+  html[data-rhine-enabled="true"] [data-rhine-surface="settings"] {
+    background-size:calc(100% - 28px) auto,320px auto,100% 100%;
+    background-position:center top 70px,right -100px top 230px,center;
+  }
+}

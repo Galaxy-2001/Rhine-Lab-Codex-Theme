@@ -1,2 +1,14 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+*.cs text eol=crlf
+*.mjs text eol=lf
+*.js text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.css text eol=lf
+*.svg text eol=lf
+*.ico binary
+*.exe binary
+*.zip binary
+# Runtime integrity hashes cover exact bytes; preserve them across Git checkouts.
+runtime/** -text

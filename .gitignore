@@ -1,0 +1,8 @@
+dist/
+.checks/
+*.log
+*.tmp
+*.tgz
+__pycache__/
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,4 @@
+interface:
+  display_name: "莱茵生命 Codex 主题"
+  short_description: "安装与管理莱茵生命动态背景，验证真实聊天和设置页面，并可恢复官方外观"
+  default_prompt: "使用 $rhine-lab-theme 应用莱茵生命主题并检查设置页背景。"

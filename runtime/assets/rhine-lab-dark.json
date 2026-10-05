@@ -1,0 +1,22 @@
+{
+  "codeThemeId": "everforest",
+  "variant": "dark",
+  "theme": {
+    "accent": "#F0AB63",
+    "accentSource": "custom",
+    "contrast": 72,
+    "fonts": {
+      "ui": "\"Arial\", \"Microsoft YaHei\", sans-serif",
+      "content": "\"Arial\", \"Microsoft YaHei\", sans-serif",
+      "code": "\"Consolas\", \"Microsoft YaHei\", monospace"
+    },
+    "ink": "#E9EDE4",
+    "opaqueWindows": true,
+    "semanticColors": {
+      "diffAdded": "#C9DE58",
+      "diffRemoved": "#E38267",
+      "skill": "#85B8C0"
+    },
+    "surface": "#131A1E"
+  }
+}
