@@ -1,4 +1,15 @@
-# 莱茵生命 Codex 动态主题
+# 莱茵生命动态主题 · Codex / DSH
+
+这个仓库提供 Codex 和 DeepSeek Harness 两个版本。
+
+| 使用的客户端 | 下载 | 安装说明 |
+| --- | --- | --- |
+| 官方 DeepSeek Harness 桌面版 / 网页版 | [DSH 插件 1.1.1](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.1.1) | [DSH 安装说明](dsh/README.md) |
+| Windows Codex / 集成 Codex 的 ChatGPT | [Codex 主题 1.0.0](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/v1.0.0) | 见下文 |
+
+DSH 用户下载 `dsh-plugin-rhine-lab-theme-1.1.1.tgz`，无需解压，在客户端“插件 → 添加插件”输入文件的完整绝对路径，安装后点击“立即启用”。主题首次启用自动应用，日常继续使用原来的 DSH 图标。DSH 源码在 [`dsh/`](dsh/)。
+
+## Codex 版
 
 Windows Codex 桌面端的莱茵生命主题：暖灰浅色背景、橙色标志、黑白档案名牌，以及沿固定轮廓循环的标志缺口。聊天、设置与侧栏使用统一视觉，装饰作为背景绘制，保留原生聊天范围和侧栏拖动。
 

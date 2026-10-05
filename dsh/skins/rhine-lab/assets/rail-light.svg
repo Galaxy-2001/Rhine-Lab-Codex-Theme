@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1118 680"><style>
+@keyframes rhine-gap { from { stroke-dashoffset:971.5530; } to { stroke-dashoffset:-1558.5329; } }
+.rhine-ribbon { animation:rhine-gap 6s linear infinite; }
+@media(prefers-reduced-motion:reduce) { .rhine-ribbon { animation:none; } }
+</style><g opacity=".17"><g fill="#20292C"><path d="M552 266 L409.5219 134.4781 A186 186 0 1 0 409.5219 397.5219 L552 266 L695.4781 134.4781 A186 186 0 1 1 695.4781 397.5219 L552 266 Z" fill="none" stroke="#20292C" stroke-width="84" stroke-linejoin="round" stroke-dasharray="2449.1232 80.9627" stroke-dashoffset="971.5530" class="rhine-ribbon"/><path d="M217 240h159v51H217z M272 185h51v159h-51z M747 242h144v51H747z"/><text x="559" y="630" text-anchor="middle" font-family="Arial,sans-serif" font-size="56" font-weight="700" letter-spacing="43">RHINE·LAB</text></g></g></svg>

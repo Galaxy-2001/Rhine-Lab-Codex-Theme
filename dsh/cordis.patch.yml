@@ -1,0 +1,5 @@
+- insert:
+    - id: rhine-lab-theme-assets
+      name: dsh-plugin-rhine-lab-theme
+    - id: rhine-lab-theme-center
+      name: '@linxin666/dsh-client-ui-skin-center'

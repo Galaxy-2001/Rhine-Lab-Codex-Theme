@@ -1,0 +1,38 @@
+{
+  "$schema": "https://schemas.linxin666.org/dsh-skin/v2.json",
+  "skinManifestVersion": 2,
+  "id": "rhine-lab",
+  "name": "莱茵生命",
+  "nameEn": "Rhine Lab",
+  "version": "1.1.1",
+  "author": "Galaxy-2001",
+  "tagline": "暖灰纸面 · 橙色循环缺口 · STRU 档案背景",
+  "description": "莱茵生命研究终端风格。浅深配色、背景水印与循环标志沿用 Codex 版设计，适配 DeepSeek Harness 皮肤中心。",
+  "tags": [
+    "rhine-lab",
+    "arknights",
+    "research",
+    "animated",
+    "light"
+  ],
+  "accent": "#9B4D19",
+  "order": 50,
+  "attribution": "莱茵生命、RHINE LAB 及相关标志属于《明日方舟》权利方；此为非官方同人主题。",
+  "preview": {
+    "light": "preview/light.png",
+    "dark": "preview/dark.png"
+  },
+  "contributes": {
+    "stylesheet": "skin.css",
+    "backgroundMedia": {
+      "light": {
+        "type": "image",
+        "src": "assets/background-light.svg"
+      },
+      "dark": {
+        "type": "image",
+        "src": "assets/background-dark.svg"
+      }
+    }
+  }
+}
