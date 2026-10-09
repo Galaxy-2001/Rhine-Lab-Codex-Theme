@@ -50,9 +50,13 @@ if (-not $ProbeOnly) {
     $previous=Get-Content -Encoding UTF8 -LiteralPath $engineStatePath -Raw|ConvertFrom-Json
     $process=Get-CimInstance Win32_Process -Filter ("ProcessId = "+[int]$previous.pid)
     if($null -ne $process){
-      if($process.ExecutablePath -ine $previous.node -or $process.CommandLine -notlike ('*'+$previous.script+'*')){throw 'Recorded theme process identity changed.'}
-      $engineRunning=$previous.browserId -eq $identity.BrowserId -and $previous.script -eq (Join-Path $PSScriptRoot 'engine.mjs')
-      if(-not $engineRunning){Stop-Process -Id ([int]$previous.pid)}
+      # A saved PID may now belong to an unrelated process. Leave it running
+      # and start a new theme engine instead of blocking theme recovery.
+      $recordedEngineMatches=$process.ExecutablePath -ieq $previous.node -and $process.CommandLine -like ('*'+$previous.script+'*')
+      if($recordedEngineMatches){
+        $engineRunning=$previous.browserId -eq $identity.BrowserId -and $previous.script -eq (Join-Path $PSScriptRoot 'engine.mjs')
+        if(-not $engineRunning){Stop-Process -Id ([int]$previous.pid)}
+      }
     }
   }
   if(-not $engineRunning){

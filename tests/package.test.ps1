@@ -1,10 +1,11 @@
 ﻿$ErrorActionPreference='Stop'
 $root=Split-Path $PSScriptRoot -Parent
+$version=(Get-Content -LiteralPath (Join-Path $root 'VERSION') -Raw).Trim()
 function Assert-True($Value,[string]$Message){if(-not $Value){throw $Message}}
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $checks=Join-Path $root '.checks';New-Item -ItemType Directory -Path $checks -Force|Out-Null
 $fixture=Join-Path $checks ('package-'+[Guid]::NewGuid().ToString('N'));New-Item -ItemType Directory -Path $fixture|Out-Null
-$zip=Join-Path $root 'dist\Rhine-Lab-Codex-Theme-1.0.0-Windows.zip'
+$zip=Join-Path $root ('dist\Rhine-Lab-Codex-Theme-'+$version+'-Windows.zip')
 [IO.Compression.ZipFile]::ExtractToDirectory($zip,(Join-Path $fixture 'extracted'))
 $source=Join-Path $fixture 'extracted\Rhine-Lab-Codex-Theme\runtime'
 . (Join-Path $source 'package-common.ps1')
@@ -39,7 +40,7 @@ $outside=Join-Path $fixture 'outside';New-Item -ItemType Directory -Path $outsid
 $removeRejected=$false;try{Remove-RhineTree $outside $state}catch{$removeRejected=$true};Assert-True ($removeRejected -and (Test-Path -LiteralPath (Join-Path $outside 'marker'))) 'Foreign directory was removed.'
 Add-Content -LiteralPath (Join-Path $engine 'assets\theme.css') -Value 'tampered'
 $integrityRejected=$false;try{Read-RhineManifest $engine|Out-Null}catch{$integrityRejected=$true};Assert-True $integrityRejected 'Tampered package was accepted.'
-$skillDestination=Join-Path $fixture 'skill';[IO.Compression.ZipFile]::ExtractToDirectory((Join-Path $root 'dist\rhine-lab-theme-1.0.0-skill.zip'),$skillDestination)
+$skillDestination=Join-Path $fixture 'skill';[IO.Compression.ZipFile]::ExtractToDirectory((Join-Path $root ('dist\rhine-lab-theme-'+$version+'-skill.zip')),$skillDestination)
 Assert-True ((Read-RhineManifest (Join-Path $skillDestination 'rhine-lab-theme\assets\runtime')).files.Count -eq $manifest.files.Count) 'Skill runtime is incomplete.'
 . (Join-Path $source 'install-core.ps1')
 $installState=Join-Path $fixture 'fresh-install'
@@ -49,7 +50,7 @@ Set-Content -LiteralPath $installConfig -Value "model = `"sample`"`n[desktop]`ns
 $installArgs=@{SourceRoot=$source;StateRoot=$installState;DesktopDirectory=$installDesktop;StartMenuDirectory=$installStart;NodePath=(Get-Command node).Source;ConfigPath=$installConfig;NoLaunch=$true}
 Install-RhinePackage @installArgs|Out-Null
 $installReceipt=Get-Content -LiteralPath (Join-Path $installState 'installed.json') -Encoding UTF8 -Raw|ConvertFrom-Json
-Assert-True ($installReceipt.version -eq '1.0.0' -and $installReceipt.entries.Count -eq 2) 'Fresh install receipt is incomplete.'
+Assert-True ($installReceipt.version -eq $version -and $installReceipt.entries.Count -eq 2) 'Fresh install receipt is incomplete.'
 Assert-True ($installReceipt.entries[0].created -and (Test-RhineLink $installReceipt.desktopEntry (Join-Path $installState 'engine\RhineLabTheme.exe'))) 'Fresh desktop entry was not installed.'
 Install-RhinePackage @installArgs|Out-Null
 $beforeReceipt=(Get-FileHash -LiteralPath (Join-Path $installState 'installed.json')).Hash

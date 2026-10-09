@@ -32,7 +32,7 @@
   function schedule() { if(!queued&&!removed) { queued=true; requestAnimationFrame(refresh); } }
   const domObserver=new MutationObserver(schedule); domObserver.observe(document.documentElement,{childList:true,subtree:true});
   const appearanceObserver=new MutationObserver(schedule); appearanceObserver.observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-  window[key]={version:payload.version,configure(next){config=next;refresh();},setEnabled(value){config={...config,enabled:value===true};refresh();},verify(){
+  window[key]={version:payload.version,configure(next){config=next;style.textContent=next.css;refresh();},setEnabled(value){config={...config,enabled:value===true};refresh();},verify(){
     const settings=document.querySelector('[data-rhine-surface="settings"]');
     const main=document.querySelector('main[data-app-shell-main-surface]');
     return {enabled:config.enabled,stylePresent:style.isConnected,route:document.documentElement.getAttribute('data-rhine-route'),settingsPainted:!!settings&&getComputedStyle(settings).backgroundImage!=='none',mainPresent:!!main,sidebarPresent:!!document.querySelector('aside.app-shell-left-panel'),composerPresent:!!document.querySelector('.ProseMirror')};

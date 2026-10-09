@@ -5,12 +5,13 @@ html[data-rhine-enabled="true"] [data-rhine-surface="main"],
 html[data-rhine-enabled="true"] [data-rhine-surface="settings"] {
   background-color:var(--rhine-surface);
   background-image:var(--rhine-identity),var(--rhine-watermark),var(--rhine-structure);
-  background-size:min(780px,calc(100% - 64px)) auto,480px auto,100% 100%;
-  background-position:center top 70px,right -84px top 260px,center;
+  background-size:min(780px,calc(100% - 64px)) auto,min(640px,calc(100% - 64px)) auto,100% 100%;
+  background-position:center top 70px,center center,center;
   background-repeat:no-repeat;
 }
 html[data-rhine-enabled="true"][data-rhine-route="settings"] [data-rhine-surface="main"] { background-image:none; }
 html[data-rhine-enabled="true"] [data-rhine-surface="settings"] {
+  background-size:min(780px,calc(100% - 64px)) auto,480px auto,100% 100%;
   background-position:center top 88px,right -84px top 300px,center;
 }
 html[data-rhine-enabled="true"] aside.app-shell-left-panel::after {
@@ -22,7 +23,7 @@ html[data-rhine-enabled="true"] [data-sidebar-destination][aria-current="page"] 
 @media(max-width:700px) {
   html[data-rhine-enabled="true"] [data-rhine-surface="main"],
   html[data-rhine-enabled="true"] [data-rhine-surface="settings"] {
-    background-size:calc(100% - 28px) auto,320px auto,100% 100%;
-    background-position:center top 70px,right -100px top 230px,center;
+    background-size:calc(100% - 28px) auto,min(420px,calc(100% - 28px)) auto,100% 100%;
+    background-position:center top 70px,center center,center;
   }
 }

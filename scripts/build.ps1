@@ -2,7 +2,7 @@
 $root=Split-Path $PSScriptRoot -Parent
 $runtime=Join-Path $root 'runtime'
 $version=(Get-Content -LiteralPath (Join-Path $root 'VERSION') -Raw).Trim()
-if($version -ne '1.0.0'){throw 'Update the release version checks before building a new version.'}
+if($version -notmatch '^\d+\.\d+\.\d+$'){throw 'Invalid release version.'}
 $compiler=Join-Path $env:WINDIR 'Microsoft.NET\Framework64\v4.0.30319\csc.exe'
 if(-not(Test-Path -LiteralPath $compiler)){throw 'The Windows x64 .NET Framework C# compiler was not found.'}
 Push-Location $runtime
@@ -10,7 +10,7 @@ try{& $compiler /nologo /target:winexe /platform:x64 /optimize+ /out:RhineLabThe
 Copy-Item -LiteralPath (Join-Path $root 'LICENSE') -Destination (Join-Path $runtime 'LICENSE') -Force
 Copy-Item -LiteralPath (Join-Path $root 'THIRD_PARTY_NOTICES.md') -Destination $runtime -Force
 # Windows PowerShell 5.1 needs a BOM for Chinese script text.
-foreach($file in Get-ChildItem -LiteralPath $root -Recurse -File -Filter '*.ps1'|Where-Object{$_.FullName -notlike '*\dist\*' -and $_.FullName -notlike '*\.checks\*'}){
+foreach($file in Get-ChildItem -LiteralPath $root -Recurse -File -Filter '*.ps1'|Where-Object{$_.FullName -notlike '*\node_modules\*' -and $_.FullName -notlike '*\dist\*' -and $_.FullName -notlike '*\.checks\*'}){
   $text=[IO.File]::ReadAllText($file.FullName);$text=$text -replace '\r?\n',"`r`n"
   [IO.File]::WriteAllText($file.FullName,$text,[Text.UTF8Encoding]::new($true))
 }
@@ -46,7 +46,7 @@ try{
   $runtimeFiles=@($runtimeNames|ForEach-Object{'runtime/'+$_})+@('runtime/manifest.json')
   $skillTemplate=@('skill/rhine-lab-theme/SKILL.md','skill/rhine-lab-theme/scripts/theme.ps1','skill/rhine-lab-theme/agents/openai.yaml')
   $userFiles=$rootFiles+$documents+$runtimeFiles+$skillTemplate+@('scripts/entry.ps1')+@($commands.Keys)
-  $sourceFiles=$userFiles+@('scripts/build.ps1','tests/appearance.test.mjs','tests/package.test.ps1')
+  $sourceFiles=$userFiles+@('scripts/build.ps1','scripts/generate-watermark.mjs','scripts/ribbon-geometry.mjs','tests/ribbon.test.mjs','tests/appearance.test.mjs','tests/package.test.ps1')
   Write-RhineZip (Join-Path $dist ('Rhine-Lab-Codex-Theme-'+$version+'-Windows.zip')) $root $userFiles 'Rhine-Lab-Codex-Theme'
   Write-RhineZip (Join-Path $dist ('Rhine-Lab-Codex-Theme-'+$version+'-Source.zip')) $root $sourceFiles 'Rhine-Lab-Codex-Theme'
   $skill=Join-Path $stage 'rhine-lab-theme';New-Item -ItemType Directory -Path $skill|Out-Null
@@ -59,7 +59,7 @@ try{
   foreach($doc in $documents){Copy-Item -LiteralPath (Join-Path $root $doc) -Destination (Join-Path $skill 'references/docs')}
   $skillFiles=@(Get-ChildItem -LiteralPath $skill -Recurse -File|ForEach-Object{$_.FullName.Substring($skill.Length+1)})
   Write-RhineZip (Join-Path $dist ('rhine-lab-theme-'+$version+'-skill.zip')) $skill $skillFiles 'rhine-lab-theme'
-  $sums=@(Get-ChildItem -LiteralPath $dist -Filter '*1.0.0*.zip' -File|Sort-Object Name|ForEach-Object{(Get-FileHash -LiteralPath $_.FullName).Hash.ToLowerInvariant()+'  '+$_.Name})
+  $sums=@(Get-ChildItem -LiteralPath $dist -Filter ('*'+$version+'*.zip') -File|Sort-Object Name|ForEach-Object{(Get-FileHash -LiteralPath $_.FullName).Hash.ToLowerInvariant()+'  '+$_.Name})
   [IO.File]::WriteAllText((Join-Path $dist 'SHA256SUMS.txt'),($sums -join "`n")+"`n",[Text.UTF8Encoding]::new($false))
 }finally{
   . (Join-Path $runtime 'package-common.ps1')

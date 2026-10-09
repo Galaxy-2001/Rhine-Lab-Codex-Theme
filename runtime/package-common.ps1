@@ -12,7 +12,7 @@ function Assert-RhinePath([string]$Path,[string]$Boundary){
 }
 function Read-RhineManifest([string]$Root){
   $manifest=Get-Content -LiteralPath (Join-Path $Root 'manifest.json') -Encoding UTF8 -Raw|ConvertFrom-Json
-  if($manifest.id -ne 'rhine-lab' -or $manifest.version -ne '1.0.0' -or $manifest.files.Count -lt 1){throw 'Unknown theme package.'}
+  if($manifest.id -ne 'rhine-lab' -or $manifest.version -notmatch '^\d+\.\d+\.\d+$' -or $manifest.files.Count -lt 1){throw 'Unknown theme package.'}
   $seen=@{}
   foreach($entry in $manifest.files){
     $relative=[string]$entry.path

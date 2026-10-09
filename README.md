@@ -5,7 +5,7 @@
 | 使用的客户端 | 下载 | 安装说明 |
 | --- | --- | --- |
 | 官方 DeepSeek Harness 桌面版 / 网页版 | [DSH 插件 1.1.2](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.1.2) | [DSH 安装说明](dsh/README.md) |
-| Windows Codex / 集成 Codex 的 ChatGPT | [Codex 主题 1.0.0](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/v1.0.0) | 见下文 |
+| Windows Codex / 集成 Codex 的 ChatGPT | [Codex 主题 1.1.0](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/v1.1.0) | 见下文 |
 
 DSH 用户下载 `dsh-plugin-rhine-lab-theme-1.1.2.tgz`，无需解压，在客户端“插件 → 添加插件”输入文件的完整绝对路径，安装后点击“立即启用”。主题首次启用自动应用，日常继续使用原来的 DSH 图标。DSH 源码在 [`dsh/`](dsh/)。
 
@@ -19,7 +19,7 @@ Windows Codex 桌面端的莱茵生命主题：暖灰浅色背景、橙色标志
 
 ## 下载与安装
 
-在 GitHub Releases 下载 `Rhine-Lab-Codex-Theme-1.0.0-Windows.zip`，完整解压，再双击 **安装主题.cmd**。日常双击桌面 **莱茵生命 Codex**，或双击 **启动主题.cmd**。
+在 GitHub Releases 下载 `Rhine-Lab-Codex-Theme-1.1.0-Windows.zip`，完整解压，再双击 **安装主题.cmd**。日常双击桌面 **莱茵生命 Codex**，或双击 **启动主题.cmd**。
 
 需要：
 
@@ -53,7 +53,7 @@ Windows Codex 桌面端的莱茵生命主题：暖灰浅色背景、橙色标志
 
 双击 **安装可选 Skill.cmd**，将完整 Skill 安装到 `CODEX_HOME/skills`（未设置时使用用户目录 `.codex/skills`）。同名旧 Skill 会备份到 `skill-backups`。
 
-也可以从 Releases 下载 `rhine-lab-theme-1.0.0-skill.zip`，在 Windows 文件属性中解除下载 ZIP 的锁定后解压，将里面的 `rhine-lab-theme` 文件夹放到 Codex 的 skills 目录。新聊天中可以说：
+也可以从 Releases 下载 `rhine-lab-theme-1.1.0-skill.zip`，在 Windows 文件属性中解除下载 ZIP 的锁定后解压，将里面的 `rhine-lab-theme` 文件夹放到 Codex 的 skills 目录。新聊天中可以说：
 
 - “安装莱茵生命主题”
 - “应用莱茵生命主题”
@@ -70,7 +70,7 @@ Skill 已携带完整运行资源，安装后无需保留下载目录。
 
 不打包客户端副本，也不修改 WindowsApps 中的官方文件。调试端口固定为 `127.0.0.1:9436`；同一用户的其他本机进程可以连接，完整恢复会关闭该主题会话。暂停主题仅隐藏背景，不关闭此会话。
 
-视觉基础版本已在官方客户端 **26.930.3930.0** 验证聊天、实际设置页、浅深模式、背景动画与侧栏拖动。1.0.0 发布安装器另有隔离测试；尚未在第二台电脑完成冷启动安装验证。客户端更新后，内部页面结构或调试参数可能变化。
+视觉基础版本已在官方客户端 **26.930.3930.0** 验证聊天、实际设置页、浅深模式、背景动画与侧栏拖动。1.1.0 发布安装器通过隔离测试；中央动画已在官方客户端 26.1002.7124.0 检查聊天布局与资源加载（详情见 [中央动画说明](docs/CENTRAL_ANIMATION.md)）；尚未在第二台电脑完成冷启动安装验证。客户端更新后，内部页面结构或调试参数可能变化。
 
 ## 常见问题
 

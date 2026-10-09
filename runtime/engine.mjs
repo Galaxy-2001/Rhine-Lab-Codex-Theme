@@ -24,7 +24,7 @@ async function readConfig(){
   try{config=JSON.parse((await fs.readFile(path.join(runtime,'preferences.json'),'utf8')).replace(/^\uFEFF/,''));}catch(e){if(e.code!=='ENOENT')throw e;}
   if(typeof config.enabled!=='boolean'||typeof config.motion!=='boolean')throw new Error('Invalid theme preferences.');
   const stamp=JSON.stringify(config);
-  payload={version:'1.0.0',enabled:config.enabled,motion:config.motion,css,art};
+  payload={version:'1.1.0',enabled:config.enabled,motion:config.motion,css,art};
   return stamp;
 }
 function appTarget(t){
