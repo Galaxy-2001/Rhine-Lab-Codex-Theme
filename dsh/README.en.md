@@ -2,11 +2,11 @@
 
 A DeepSeek Harness port of the Rhine Lab Codex theme. Warm grey surfaces, orange symbols, STRU archive labels and a six-second moving gap remain in the artwork. Backgrounds do not reserve chat or composer space.
 
-Get the plugin tarball from the [DSH 1.1.1 release](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.1.1). The Skin ZIP is for manual installation with Skin Center already present; the Source ZIP is for development.
+Get the plugin tarball from the [DSH 1.1.2 release](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.1.2). The Skin ZIP is for manual installation with Skin Center already present; the Source ZIP is for development.
 
-Download `dsh-plugin-rhine-lab-theme-1.1.1.tgz`. In official DSH Desktop, open Plugins > Add plugin, enter the tarball's absolute local path and install. After installation, click Enable now. The plugin declares Skin Center as a dependency, installs its artwork on first activation and selects Rhine Lab automatically. Later launches preserve your choices. Keep using the ordinary DSH application shortcut. The package has not been published to npm yet.
+Download `dsh-plugin-rhine-lab-theme-1.1.2.tgz`. In official DSH Desktop, open Plugins > Add plugin, enter the tarball's absolute local path and install. After installation, click Enable now. The plugin declares Skin Center as a dependency, installs its artwork on first activation and selects Rhine Lab automatically. Later launches preserve your choices. Keep using the ordinary DSH application shortcut. The package has not been published to npm yet.
 
-For Web, run `dsh plugin --profile web add "C:\Downloads\dsh-plugin-rhine-lab-theme-1.1.1.tgz"`, then start the host with `dsh web`. A refused connection at port 3080 means the host is not running; installing a theme does not start a persistent web host. Do not use the ordinary CLI to mutate Desktop's reserved profile.
+For Web, run `dsh plugin --profile web add "C:\Downloads\dsh-plugin-rhine-lab-theme-1.1.2.tgz"`, then start the host with `dsh web`. A refused connection at port 3080 means the host is not running; installing a theme does not start a persistent web host. Do not use the ordinary CLI to mutate Desktop's reserved profile.
 
 For an asset-only installation with Skin Center already present, copy the Skin ZIP's `rhine-lab` directory into `$DSH_HOME/skins/` and select Rhine Lab in Settings > Skin Center.
 

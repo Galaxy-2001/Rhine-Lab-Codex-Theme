@@ -92,6 +92,7 @@
   --dsw-alias-scrollbar-hover-l1: #69727666;
   --dsw-alias-scrollbar-hover-l2: #69727666;
   --dsw-alias-toast-bg: #20292C;
+  --dsw-alias-toast-label: #ECEDE8;
   --dsw-alias-tooltip-bg: #20292C;
   --dsw-alias-tooltip-fg: #ECEDE8;
   --dsw-specific-bubble: #F5F6F1;
@@ -208,9 +209,11 @@ body[data-ds-dark-theme] {
   --dsw-alias-scrollbar-bg-l2: #A3ADA766;
   --dsw-alias-scrollbar-hover-l1: #A3ADA766;
   --dsw-alias-scrollbar-hover-l2: #A3ADA766;
-  --dsw-alias-toast-bg: #E9EDE4;
-  --dsw-alias-tooltip-bg: #E9EDE4;
-  --dsw-alias-tooltip-fg: #131A1E;
+  /* Native toast labels and tooltip text stay light in both modes. */
+  --dsw-alias-toast-bg: #253138;
+  --dsw-alias-toast-label: #E9EDE4;
+  --dsw-alias-tooltip-bg: #253138;
+  --dsw-alias-tooltip-fg: #E9EDE4;
   --dsw-specific-bubble: #1C262B;
   --dsw-specific-input-major: #1C262B;
   --dsw-specific-login-input: #1C262B;

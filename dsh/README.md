@@ -10,12 +10,12 @@
 
 ## 安装
 
-下载 [DSH 1.1.1 发布包](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.1.1)。桌面版选用 `dsh-plugin-rhine-lab-theme-1.1.1.tgz`；Skin ZIP 用于已有皮肤中心的手动安装，Source ZIP 用于开发。
+下载 [DSH 1.1.2 发布包](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.1.2)。桌面版选用 `dsh-plugin-rhine-lab-theme-1.1.2.tgz`；Skin ZIP 用于已有皮肤中心的手动安装，Source ZIP 用于开发。
 
 ### 官方桌面客户端（推荐）
 
-1. 下载 Release 中的 `dsh-plugin-rhine-lab-theme-1.1.1.tgz`，保持压缩包原样。
-2. 打开官方 DSH 桌面版，在“插件 → 添加插件”输入这个文件的完整绝对路径，例如 `C:\Downloads\dsh-plugin-rhine-lab-theme-1.1.1.tgz`。
+1. 下载 Release 中的 `dsh-plugin-rhine-lab-theme-1.1.2.tgz`，保持压缩包原样。
+2. 打开官方 DSH 桌面版，在“插件 → 添加插件”输入这个文件的完整绝对路径，例如 `C:\Downloads\dsh-plugin-rhine-lab-theme-1.1.2.tgz`。
 3. 点击安装，完成后点击“立即启用”。客户端会安装依赖，首次启用自动应用主题。日常仍从原来的 DSH 图标打开。
 
 首次安装需要联网下载皮肤中心依赖。如果客户端提示重新加载，按其提示操作。这个包尚未发布到 npm，不能直接按包名从注册表安装。不要用普通 CLI 改写保留的 desktop profile。
@@ -23,7 +23,7 @@
 ### 网页版
 
 ```powershell
-dsh plugin --profile web add "C:\Downloads\dsh-plugin-rhine-lab-theme-1.1.1.tgz"
+dsh plugin --profile web add "C:\Downloads\dsh-plugin-rhine-lab-theme-1.1.2.tgz"
 dsh web
 ```
 

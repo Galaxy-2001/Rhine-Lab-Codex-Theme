@@ -4,10 +4,10 @@
 
 | 使用的客户端 | 下载 | 安装说明 |
 | --- | --- | --- |
-| 官方 DeepSeek Harness 桌面版 / 网页版 | [DSH 插件 1.1.1](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.1.1) | [DSH 安装说明](dsh/README.md) |
+| 官方 DeepSeek Harness 桌面版 / 网页版 | [DSH 插件 1.1.2](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.1.2) | [DSH 安装说明](dsh/README.md) |
 | Windows Codex / 集成 Codex 的 ChatGPT | [Codex 主题 1.0.0](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/v1.0.0) | 见下文 |
 
-DSH 用户下载 `dsh-plugin-rhine-lab-theme-1.1.1.tgz`，无需解压，在客户端“插件 → 添加插件”输入文件的完整绝对路径，安装后点击“立即启用”。主题首次启用自动应用，日常继续使用原来的 DSH 图标。DSH 源码在 [`dsh/`](dsh/)。
+DSH 用户下载 `dsh-plugin-rhine-lab-theme-1.1.2.tgz`，无需解压，在客户端“插件 → 添加插件”输入文件的完整绝对路径，安装后点击“立即启用”。主题首次启用自动应用，日常继续使用原来的 DSH 图标。DSH 源码在 [`dsh/`](dsh/)。
 
 ## Codex 版
 
