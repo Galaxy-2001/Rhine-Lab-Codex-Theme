@@ -1,4 +1,4 @@
-# 莱茵生命 DSH 插件 1.1.2
+# 莱茵生命 DSH 插件 1.2.0
 
 修复深色主题下“已归档对话暂时无法查看”等提示出现浅底白字的问题。提示框改为深色底、浅色字，同时修复悬浮提示的同类问题。聊天背景、动画和布局保持原有设计。
 
@@ -6,7 +6,7 @@
 
 ## 安装或更新
 
-1. 下载 `dsh-plugin-rhine-lab-theme-1.1.2.tgz`，不要解压。
+1. 下载 `dsh-plugin-rhine-lab-theme-1.2.0.tgz`，不要解压。
 2. 打开 DSH 桌面版“插件 → 添加插件”，输入压缩包的完整绝对路径。
 3. 点击安装，完成后按客户端提示启用或重新加载。已有 1.1.1 的用户也使用这个入口更新。若客户端提示重启，完全退出后重新打开。
 
@@ -14,13 +14,13 @@
 
 ## 下载文件
 
-- `dsh-plugin-rhine-lab-theme-1.1.2.tgz`：桌面版和网页版的完整插件。
-- `Rhine-Lab-DSH-Theme-1.1.2-Skin.zip`：供已有皮肤中心的用户手动安装素材。
-- `Rhine-Lab-DSH-Theme-1.1.2-Source.zip`：源码、素材、脚本与测试。
+- `dsh-plugin-rhine-lab-theme-1.2.0.tgz`：桌面版和网页版的完整插件。
+- `Rhine-Lab-DSH-Theme-1.2.0-Skin.zip`：供已有皮肤中心的用户手动安装素材。
+- `Rhine-Lab-DSH-Theme-1.2.0-Source.zip`：源码、素材、脚本与测试。
 - `SHA256SUMS.txt`：附件的 SHA-256 校验值。
 
-九项自动测试通过。基于官方 DSH 0.2.0-rc.2 的提示组件样式检查深浅模式，文字对比度均超过 11:1；本机官方桌面客户端实际归档提示已验证为深底浅字。Codex 深色提示配色检查未发现同类问题，本次没有更新 Codex 安装包。详细范围见 [验证记录](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/blob/dsh-v1.1.2/dsh/docs/VALIDATION.md)。
+十一项自动测试通过。中央动画共享 Codex 1.1.0 的折片自转、光照阴影、同轮廓压平与正负号入场；聊天标志改为中央背景，保留皮肤中心背景控制。基于官方 DSH 0.2.0-rc.2 的提示组件样式检查深浅模式，文字对比度均超过 11:1；本机官方桌面客户端实际归档提示已验证为深底浅字。Codex 深色提示配色检查未发现同类问题，本次同步 Codex 已发布的动画，不重复更新 Codex 安装包。详细范围见 [验证记录](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/blob/dsh-v1.2.0/dsh/docs/VALIDATION.md)。
 
-网页版安装命令与恢复方法见 [安装说明](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/tree/dsh-v1.1.2/dsh)。暂未测试 macOS / Linux 桌面版和所有第三方插件组合。
+网页版安装命令与恢复方法见 [安装说明](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/tree/dsh-v1.2.0/dsh)。暂未测试 macOS / Linux 桌面版和所有第三方插件组合。
 
 本发布为 DSH 插件版。Codex 版仍可从 [v1.0.0](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/v1.0.0) 下载。这是《明日方舟》莱茵生命的非官方同人主题，代码使用 MIT 许可。

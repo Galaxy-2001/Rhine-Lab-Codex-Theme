@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-rhine-lab-theme",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "莱茵生命动态主题：适配 DeepSeek Harness 官方桌面版和网页版，首次启用自动应用。",
   "author": "Galaxy-2001",
   "repository": {
@@ -46,7 +46,8 @@
   },
   "scripts": {
     "test": "node --test tests/*.test.mjs",
-    "build": "node scripts/build.mjs"
+    "build": "node scripts/build.mjs",
+    "generate": "node scripts/generate-watermark.mjs && node scripts/compose-background.mjs"
   },
   "devDependencies": {
     "@deepseek-ai/dsh": "0.1.7-rc.1",

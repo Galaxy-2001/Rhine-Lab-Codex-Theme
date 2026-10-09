@@ -1,8 +1,10 @@
 # 莱茵生命 DSH 主题
 
-将莱茵生命 Codex 主题移植到 DeepSeek Harness。保留暖灰浅色、橙色标志、沿轮廓循环的缺口与 STRU 档案水印，也提供深色配色。聊天、设置和左右侧栏使用同一套素材；背景不占布局空间。
+将莱茵生命 Codex 主题移植到 DeepSeek Harness。保留暖灰浅色、橙色标志、沿轮廓循环的缺口与 STRU 档案水印，也提供深色配色。聊天标志改为中央背景，与 Codex 1.1.0 使用同一套三维折片和入场动画；设置和左右侧栏继续显示主题素材；背景不占布局空间。
 
 本项目提供可安装的 DSH 插件 `dsh-plugin-rhine-lab-theme`。插件自带主题素材，依赖 [dsh-skins](https://github.com/zhu1090093659/dsh-skins) 皮肤中心；首次启用会自动安装素材并选中莱茵生命。后续启动保留你在皮肤中心做的选择。
+
+以下界面截图为初版布局记录；1.2.0 已将聊天标志居中并加入立体动画。
 
 ![DSH 浅色聊天页](docs/screenshots/chat-light.png)
 
@@ -10,12 +12,12 @@
 
 ## 安装
 
-下载 [DSH 1.1.2 发布包](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.1.2)。桌面版选用 `dsh-plugin-rhine-lab-theme-1.1.2.tgz`；Skin ZIP 用于已有皮肤中心的手动安装，Source ZIP 用于开发。
+下载 [DSH 1.2.0 发布包](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.2.0)。桌面版选用 `dsh-plugin-rhine-lab-theme-1.2.0.tgz`；Skin ZIP 用于已有皮肤中心的手动安装，Source ZIP 用于开发。
 
 ### 官方桌面客户端（推荐）
 
-1. 下载 Release 中的 `dsh-plugin-rhine-lab-theme-1.1.2.tgz`，保持压缩包原样。
-2. 打开官方 DSH 桌面版，在“插件 → 添加插件”输入这个文件的完整绝对路径，例如 `C:\Downloads\dsh-plugin-rhine-lab-theme-1.1.2.tgz`。
+1. 下载 Release 中的 `dsh-plugin-rhine-lab-theme-1.2.0.tgz`，保持压缩包原样。
+2. 打开官方 DSH 桌面版，在“插件 → 添加插件”输入这个文件的完整绝对路径，例如 `C:\Downloads\dsh-plugin-rhine-lab-theme-1.2.0.tgz`。
 3. 点击安装，完成后点击“立即启用”。客户端会安装依赖，首次启用自动应用主题。日常仍从原来的 DSH 图标打开。
 
 首次安装需要联网下载皮肤中心依赖。如果客户端提示重新加载，按其提示操作。这个包尚未发布到 npm，不能直接按包名从注册表安装。不要用普通 CLI 改写保留的 desktop profile。
@@ -23,7 +25,7 @@
 ### 网页版
 
 ```powershell
-dsh plugin --profile web add "C:\Downloads\dsh-plugin-rhine-lab-theme-1.1.2.tgz"
+dsh plugin --profile web add "C:\Downloads\dsh-plugin-rhine-lab-theme-1.2.0.tgz"
 dsh web
 ```
 
@@ -53,7 +55,7 @@ dsh plugin --profile web add @linxin666/dsh-client-ui-skin-center@0.4.5
 
 目标为 DSH 0.2.0-rc.2、皮肤中心 0.4.5。DSH 的运行时检查包含预发行版本，无需豁免。开发依赖固定为 0.1.7-rc.1，是为了避免 npm 默认 peer 解析排除 0.2 预发行版；使用主题不需要降级 DSH。具体实测范围见验证记录。
 
-动画周期为六秒。系统启用“减少动态效果”时 SVG 停止循环。背景遮罩、模糊与开关由皮肤中心管理；外部壁纸启用时按加载器规则让出背景。
+中央标志使用 14 秒循环：折片自转、光照阴影、压平变形与正负号入场；平面缺口和侧栏缺口仍为六秒循环。系统启用“减少动态效果”时 SVG 停止循环。背景遮罩、模糊与开关由皮肤中心管理；外部壁纸启用时按加载器规则让出背景。
 
 ## 恢复
 
@@ -64,6 +66,7 @@ dsh plugin --profile web add @linxin666/dsh-client-ui-skin-center@0.4.5
 ```powershell
 npm ci --ignore-scripts
 npm test
+npm run generate # 重新生成折片、光影及完整背景
 npm run build
 ```
 
