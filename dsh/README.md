@@ -1,14 +1,27 @@
 # 莱茵生命 DSH 主题
 
-将莱茵生命 Codex 主题移植到 DeepSeek Harness。保留暖灰浅色、橙色标志、沿轮廓循环的缺口与 STRU 档案水印，也提供深色配色。聊天标志改为中央背景，与 Codex 1.1.0 使用同一套三维折片和入场动画；设置和左右侧栏继续显示主题素材；背景不占布局空间。
+将莱茵生命 Codex 主题移植到 DeepSeek Harness。保留暖灰浅色、橙色强调色、沿轮廓循环的缺口与 STRU 档案水印，也提供深色配色。聊天标志改为中央背景，与 Codex 1.1.0 使用同一套三维折片和入场动画；设置和左右侧栏继续显示主题素材；背景不占布局空间。
 
 本项目提供可安装的 DSH 插件 `dsh-plugin-rhine-lab-theme`。插件自带主题素材，依赖 [dsh-skins](https://github.com/zhu1090093659/dsh-skins) 皮肤中心；首次启用会自动安装素材并选中莱茵生命。后续启动保留你在皮肤中心做的选择。
 
-以下界面截图为初版布局记录；1.2.0 已将聊天标志居中并加入立体动画。
+![DSH 1.2.0 中央动画](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/central-animation.gif)
 
-![DSH 浅色聊天页](docs/screenshots/chat-light.png)
+新版采用 14 秒折片自转与压平循环：明暗来自表面法线、光源和遮挡；正号放大并旋转 90°，减号从细竖线横向展开。与 Codex 1.1.0 的动画一致，并保留深色提示框修复。
 
-![DSH 浅色设置页](docs/screenshots/settings-light.png)
+![DSH 1.2.0 浅色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-chat-light.png)
+
+![DSH 1.2.0 深色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-chat-dark.png)
+
+<details>
+<summary>设置素材预览</summary>
+
+![DSH 1.2.0 浅色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-settings-light.png)
+
+![DSH 1.2.0 深色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-settings-dark.png)
+
+</details>
+
+这些界面图使用当前发布素材绘制，非客户端截图；动图直接来自发布 SVG。动画为代码重制，不是官方视频剪辑。
 
 ## 安装
 

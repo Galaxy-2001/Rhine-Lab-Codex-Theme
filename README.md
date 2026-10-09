@@ -1,21 +1,53 @@
 # 莱茵生命动态主题 · Codex / DSH
 
-这个仓库提供 Codex 和 DeepSeek Harness 两个版本。
+莱茵生命风格的动态主题，支持 Codex 和 DeepSeek Harness。当前版本是 **Codex 1.1.0 / DSH 1.2.0**，两版都已同步中央立体动画。
+
+折片沿同一条无穷形轮廓自转，以光照和遮挡形成明暗，再压平为标志。正号从中心放大并旋转 90°，减号从细线横向展开；平面阶段保留循环缺口。
+
+![新版中央动画：折片自转、压平与正负号入场](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/central-animation.gif)
+
+动图来自当前发布的 SVG 素材，完整循环 14 秒。下方界面图也是发布素材绘制的预览，已在图上注明，非客户端截图。动画为代码重制，非官方视频剪辑或逐帧复刻。
 
 | 使用的客户端 | 下载 | 安装说明 |
 | --- | --- | --- |
 | 官方 DeepSeek Harness 桌面版 / 网页版 | [DSH 插件 1.2.0](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.2.0) | [DSH 安装说明](dsh/README.md) |
 | Windows Codex / 集成 Codex 的 ChatGPT | [Codex 主题 1.1.0](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/v1.1.0) | 见下文 |
 
-DSH 用户下载 `dsh-plugin-rhine-lab-theme-1.1.2.tgz`，无需解压，在客户端“插件 → 添加插件”输入文件的完整绝对路径，安装后点击“立即启用”。主题首次启用自动应用，日常继续使用原来的 DSH 图标。DSH 源码在 [`dsh/`](dsh/)。
+DSH 用户下载 `dsh-plugin-rhine-lab-theme-1.2.0.tgz`，无需解压，在客户端“插件 → 添加插件”输入文件的完整绝对路径，安装后点击“立即启用”。主题首次启用自动应用，日常继续使用原来的 DSH 图标。DSH 源码在 [`dsh/`](dsh/)。
+
+## DSH 版
+
+通过官方 DSH 插件管理器安装，首次启用自动应用主题；后续启动保留皮肤选择、背景开关和遮罩设置。日常使用原来的 DSH 图标。已保留 1.1.2 的深色提示框文字对比度修复。
+
+![DSH 1.2.0 浅色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-chat-light.png)
+
+<details>
+<summary>DSH 深色与设置素材预览</summary>
+
+![DSH 1.2.0 深色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-chat-dark.png)
+
+![DSH 1.2.0 浅色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-settings-light.png)
+
+![DSH 1.2.0 深色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-settings-dark.png)
+
+</details>
 
 ## Codex 版
 
-Windows Codex 桌面端的莱茵生命主题：暖灰浅色背景、橙色标志、黑白档案名牌，以及沿固定轮廓循环的标志缺口。聊天、设置与侧栏使用统一视觉，装饰作为背景绘制，保留原生聊天范围和侧栏拖动。
+Windows Codex 桌面端的莱茵生命主题：暖灰浅色与深色背景、橙色强调色、STRU 档案名牌，以及中央折片自转和压平动画。聊天、设置与侧栏使用统一视觉，装饰作为背景绘制，保留原生聊天范围和侧栏拖动。
 
-![浅色主题素材示意](docs/preview-light.svg)
+![Codex 1.1.0 浅色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/codex-chat-light.png)
 
-上图为主题素材示意，使用随包 SVG 和配色绘制；不是实际客户端截图。发布包不含个人聊天截图。
+<details>
+<summary>Codex 深色与设置素材预览</summary>
+
+![Codex 1.1.0 深色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/codex-chat-dark.png)
+
+![Codex 1.1.0 浅色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/codex-settings-light.png)
+
+![Codex 1.1.0 深色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/codex-settings-dark.png)
+
+</details>
 
 ## 下载与安装
 
@@ -37,7 +69,7 @@ Windows Codex 桌面端的莱茵生命主题：暖灰浅色背景、橙色标志
 
 主题运行后，右击任务栏中的主题应用图标，选择 **固定到任务栏**。原商店固定项仍会打开普通官方会话；可自行取消固定。Windows 的固定操作需要用户完成，安装器不会修改任务栏注册表。
 
-桌面、主题任务栏入口和托盘都使用官方原版白色图标。右击通知区图标可应用或暂停主题、开启或暂停缺口动画、恢复官方外观。主题开关与动画开关会记住状态。
+桌面、主题任务栏入口和托盘都使用官方原版白色图标。右击通知区图标可应用或暂停主题、开启或暂停折片与缺口动画、恢复官方外观。主题开关与动画开关会记住状态。
 
 背景中的 RHINE LAB / STRU 名牌不占聊天布局高度，图案不接收鼠标事件。浅色与深色均包含聊天、设置滚动区和侧栏图案。
 

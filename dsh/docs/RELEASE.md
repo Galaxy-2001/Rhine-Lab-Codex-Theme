@@ -1,6 +1,16 @@
 # 莱茵生命 DSH 插件 1.2.0
 
-修复深色主题下“已归档对话暂时无法查看”等提示出现浅底白字的问题。提示框改为深色底、浅色字，同时修复悬浮提示的同类问题。聊天背景、动画和布局保持原有设计。
+同步 Codex 1.1.0 的中央立体动画：折片沿同一轮廓自转，用光照和遮挡呈现明暗，随后压平为标志。正号放大并旋转 90°，减号从细线横向展开。背景不占聊天或输入框布局空间。
+
+保留 1.1.2 的深色提示框、悬浮提示文字对比度修复，以及皮肤中心背景控制。
+
+![DSH 1.2.0 中央动画](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/central-animation.gif)
+
+![DSH 1.2.0 浅色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-chat-light.png)
+
+![DSH 1.2.0 深色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-chat-dark.png)
+
+界面图为发布素材绘制的预览，非客户端截图；动画为代码重制。
 
 首次启用自动应用主题，更新保留用户的皮肤选择与背景设置。日常继续使用原来的 DSH 图标。
 

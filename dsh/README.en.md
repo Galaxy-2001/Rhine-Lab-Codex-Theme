@@ -2,6 +2,14 @@
 
 A DeepSeek Harness port of the Rhine Lab Codex theme. The central chat background now shares Codex 1.1.0’s 14-second folded ribbon rotation, lighting and flattening sequence. The plus grows and rotates 90 degrees; the minus expands horizontally. The six-second moving gap and STRU archive labels remain. Backgrounds do not reserve chat or composer space.
 
+![DSH 1.2.0 central animation](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/central-animation.gif)
+
+![DSH 1.2.0 light artwork preview](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-chat-light.png)
+
+![DSH 1.2.0 dark artwork preview](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-chat-dark.png)
+
+The UI previews are illustrations rendered from released assets, not client screenshots. The GIF renders the released SVG animation. This is an original vector reconstruction, not an official video clip or frame-exact reproduction.
+
 Get the plugin tarball from the [DSH 1.2.0 release](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.2.0). The Skin ZIP is for manual installation with Skin Center already present; the Source ZIP is for development.
 
 Download `dsh-plugin-rhine-lab-theme-1.2.0.tgz`. In official DSH Desktop, open Plugins > Add plugin, enter the tarball's absolute local path and install. After installation, click Enable now. The plugin declares Skin Center as a dependency, installs its artwork on first activation and selects Rhine Lab automatically. Later launches preserve your choices. Keep using the ordinary DSH application shortcut. The package has not been published to npm yet.
