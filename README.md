@@ -1,6 +1,6 @@
 # 莱茵生命动态主题 · Codex / DSH
 
-莱茵生命风格的动态主题，支持 Codex 和 DeepSeek Harness。当前版本是 **Codex 1.1.0 / DSH 1.2.0**，两版都已同步中央立体动画。
+莱茵生命风格的动态主题，支持 Codex 和 DeepSeek Harness。当前版本是 **Codex 1.1.0 / DSH 1.2.1**，两版都已同步中央立体动画。
 
 ## 完整介绍视频
 
@@ -8,7 +8,7 @@
 
 [观看 / 下载 1080p 视频](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/download/demo-2026-10-12/Rhine-Lab-Full-Demo-1080p.mp4) · [下载离线 HTML 演示](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/download/demo-2026-10-12/Rhine-Lab-Full-Demo.html) · [视频说明与配乐来源](docs/FULL_DEMO.md)
 
-1 分 44 秒，完整展示中央动画、浅深模式、聊天、设置和两种安装方式。画面由 HTML 演示页绘制，所有会话、文件、账户和金额均为虚构，非客户端操作实录。视频包含本机后续的 DSH 深色配色与计费时段配色修复；这些修复尚未打包为新的 DSH Release，安装包版本以下载表为准。
+1 分 44 秒，完整展示中央动画、浅深模式、聊天、设置和两种安装方式。画面由 HTML 演示页绘制，所有会话、文件、账户和金额均为虚构，非客户端操作实录。视频展示的 DSH 深色配色与计费时段配色修复已包含在 DSH 1.2.1 安装包中。
 
 折片沿同一条无穷形轮廓自转，以光照和遮挡形成明暗，再压平为标志。正号从中心放大并旋转 90°，减号从细线横向展开；平面阶段保留循环缺口。
 
@@ -18,10 +18,10 @@
 
 | 使用的客户端 | 下载 | 安装说明 |
 | --- | --- | --- |
-| 官方 DeepSeek Harness 桌面版 / 网页版 | [DSH 插件 1.2.0](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.2.0) | [DSH 安装说明](dsh/README.md) |
+| 官方 DeepSeek Harness 桌面版 / 网页版 | [DSH 插件 1.2.1](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.2.1) | [DSH 安装说明](dsh/README.md) |
 | Windows Codex / 集成 Codex 的 ChatGPT | [Codex 主题 1.1.0](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/v1.1.0) | 见下文 |
 
-DSH 用户下载 `dsh-plugin-rhine-lab-theme-1.2.0.tgz`，无需解压，在客户端“插件 → 添加插件”输入文件的完整绝对路径，安装后点击“立即启用”。主题首次启用自动应用，日常继续使用原来的 DSH 图标。DSH 源码在 [`dsh/`](dsh/)。
+DSH 用户下载 `dsh-plugin-rhine-lab-theme-1.2.1.tgz`，无需解压，在客户端“插件 → 添加插件”输入文件的完整绝对路径，安装后点击“立即启用”。主题首次启用自动应用，日常继续使用原来的 DSH 图标。DSH 源码在 [`dsh/`](dsh/)。
 
 ## DSH 版
 

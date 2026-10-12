@@ -4,7 +4,7 @@
 
 本项目提供可安装的 DSH 插件 `dsh-plugin-rhine-lab-theme`。插件自带主题素材，依赖 [dsh-skins](https://github.com/zhu1090093659/dsh-skins) 皮肤中心；首次启用会自动安装素材并选中莱茵生命。后续启动保留你在皮肤中心做的选择。
 
-![DSH 1.2.0 中央动画](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/central-animation.gif)
+![DSH 1.2.1 中央动画](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/central-animation.gif)
 
 新版采用 14 秒折片自转与压平循环：明暗来自表面法线、光源和遮挡；正号放大并旋转 90°，减号从细竖线横向展开。与 Codex 1.1.0 的动画一致，并保留深色提示框修复。
 
@@ -25,12 +25,12 @@
 
 ## 安装
 
-下载 [DSH 1.2.0 发布包](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.2.0)。桌面版选用 `dsh-plugin-rhine-lab-theme-1.2.0.tgz`；Skin ZIP 用于已有皮肤中心的手动安装，Source ZIP 用于开发。
+下载 [DSH 1.2.1 发布包](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.2.1)。桌面版选用 `dsh-plugin-rhine-lab-theme-1.2.1.tgz`；Skin ZIP 用于已有皮肤中心的手动安装，Source ZIP 用于开发。
 
 ### 官方桌面客户端（推荐）
 
-1. 下载 Release 中的 `dsh-plugin-rhine-lab-theme-1.2.0.tgz`，保持压缩包原样。
-2. 打开官方 DSH 桌面版，在“插件 → 添加插件”输入这个文件的完整绝对路径，例如 `C:\Downloads\dsh-plugin-rhine-lab-theme-1.2.0.tgz`。
+1. 下载 Release 中的 `dsh-plugin-rhine-lab-theme-1.2.1.tgz`，保持压缩包原样。
+2. 打开官方 DSH 桌面版，在“插件 → 添加插件”输入这个文件的完整绝对路径，例如 `C:\Downloads\dsh-plugin-rhine-lab-theme-1.2.1.tgz`。
 3. 点击安装，完成后点击“立即启用”。客户端会安装依赖，首次启用自动应用主题。日常仍从原来的 DSH 图标打开。
 
 首次安装需要联网下载皮肤中心依赖。如果客户端提示重新加载，按其提示操作。这个包尚未发布到 npm，不能直接按包名从注册表安装。不要用普通 CLI 改写保留的 desktop profile。
@@ -38,7 +38,7 @@
 ### 网页版
 
 ```powershell
-dsh plugin --profile web add "C:\Downloads\dsh-plugin-rhine-lab-theme-1.2.0.tgz"
+dsh plugin --profile web add "C:\Downloads\dsh-plugin-rhine-lab-theme-1.2.1.tgz"
 dsh web
 ```
 
@@ -88,3 +88,7 @@ npm run build
 ## 许可
 
 主题代码使用 MIT 许可。莱茵生命及相关标志属于《明日方舟》权利方，此为非官方同人主题，代码许可不包含品牌授权。见 [来源说明](THIRD_PARTY_NOTICES.md)。
+
+## 1.2.1 更新
+
+计费时段采用高峰琥珀色、平价蓝青色加斜纹、周末绿色；降低深色聊天区文字、卡片与背景装饰亮度。不修改计费逻辑。

@@ -14,7 +14,7 @@ function collect(dir) {
   }
 }
 for (const directory of ['skins', 'lib', 'scripts', 'tests', 'docs']) collect(join(root, directory));
-for (const filename of ['README.md', 'README.en.md', 'LICENSE', 'THIRD_PARTY_NOTICES.md', 'package.json', 'package-lock.json', 'cordis.patch.yml', 'icon.svg', '.gitignore', '安装莱茵主题.cmd', '安装皮肤中心-Web.cmd']) files[filename] = new Uint8Array(readFileSync(join(root, filename)));
+for (const filename of ['README.md', 'README.en.md', 'LICENSE', 'THIRD_PARTY_NOTICES.md', 'package.json', 'screenshots.json', 'package-lock.json', 'cordis.patch.yml', 'icon.svg', '.gitignore', '安装莱茵主题.cmd', '安装皮肤中心-Web.cmd']) files[filename] = new Uint8Array(readFileSync(join(root, filename)));
 const dist = join(root, 'dist'); mkdirSync(dist, { recursive: true });
 const version = JSON.parse(readFileSync(join(root,'package.json'),'utf8')).version;
 const sourceName = 'Rhine-Lab-DSH-Theme-' + version + '-Source.zip';

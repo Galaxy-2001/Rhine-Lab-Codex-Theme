@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-rhine-lab-theme",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "莱茵生命动态主题：适配 DeepSeek Harness 官方桌面版和网页版，首次启用自动应用。",
   "author": "Galaxy-2001",
   "repository": {
@@ -34,7 +34,8 @@
     "README.en.md",
     "LICENSE",
     "THIRD_PARTY_NOTICES.md",
-    "docs"
+    "docs",
+    "screenshots.json"
   ],
   "dsh": {
     "engines": {

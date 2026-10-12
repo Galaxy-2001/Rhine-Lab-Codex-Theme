@@ -1,5 +1,8 @@
 /* Rhine Lab: L1 tokens and L2 semantic surfaces. No JavaScript hooks. */
 :root {
+  --rhine-billing-off: #176A91;
+  --rhine-billing-peak: #9C4F12;
+  --rhine-billing-weekend: #27683D;
   --dsw-alias-bg-base: transparent;
   --dsw-alias-bg-layer-1: #F5F6F1;
   --dsw-alias-bg-document-preview: #F5F6F1;
@@ -118,6 +121,9 @@
   --rhine-rail: url(assets/rail-light.svg);
 }
 body[data-ds-dark-theme] {
+  --rhine-billing-off: #6CCCF0;
+  --rhine-billing-peak: #FFBA69;
+  --rhine-billing-weekend: #83DA9C;
   --dsw-alias-bg-base: transparent;
   --dsw-alias-bg-layer-1: #1C262B;
   --dsw-alias-bg-document-preview: #1C262B;
@@ -290,4 +296,80 @@ body::selection { background:var(--rhine-accent);color:var(--dsw-alias-label-pri
     --rhine-watermark:url(assets/watermark-dark-still.svg);
     --rhine-rail:url(assets/rail-dark-still.svg);
   }
+}
+
+/* dsh-cost-meter: price periods must not inherit the orange brand accent.
+   Root specificity keeps these rules effective even if plugin CSS loads later. */
+:root .cm-peak-high, :root .cm-peak-rail-high,
+:root .cm-peak-rail-classic-segment.peak { background: var(--rhine-billing-peak); }
+:root .cm-peak-low, :root .cm-peak-rail-low,
+:root .cm-peak-rail-classic-segment.off {
+  background: var(--rhine-billing-off);
+  background-image: repeating-linear-gradient(135deg, transparent 0 4px, #FFFFFF26 4px 6px);
+}
+:root .cm-peak-strip, :root .cm-peak-classic,
+:root .cm-peak-rail, :root .cm-peak-rail-classic { --rhine-billing-current: var(--rhine-billing-peak); }
+:root .cm-peak-strip.off, :root .cm-peak-classic.off,
+:root .cm-peak-rail.off, :root .cm-peak-rail-classic.off { --rhine-billing-current: var(--rhine-billing-off); }
+:root .cm-peak-strip.weekend, :root .cm-peak-classic.weekend,
+:root .cm-peak-rail.weekend, :root .cm-peak-rail-classic.weekend { --rhine-billing-current: var(--rhine-billing-weekend); }
+:root :is(.cm-peak-strip, .cm-peak-classic, .cm-peak-rail, .cm-peak-rail-classic):is(.peak, .off, .weekend)
+  :is(.cm-peak-chip, .cm-peak-classic-chip, .cm-peak-rail-label, .cm-peak-rail-classic-label) {
+  color: var(--rhine-billing-current);
+}
+:root .cm-peak-marker, :root .cm-peak-rail-marker,
+:root .cm-peak-classic-marker, :root .cm-peak-rail-classic-marker {
+  background: var(--rhine-surface);
+  box-shadow: 0 0 0 1px var(--rhine-ink);
+}
+:root :is(.cm-peak-classic, .cm-peak-rail-classic):is(.peak, .off, .weekend)
+  :is(.cm-peak-classic-marker, .cm-peak-rail-classic-marker) { border-color: var(--rhine-billing-current); }
+:root .cm-peak-classic:is(.peak, .off, .weekend) .cm-peak-classic-marker:after { border-top-color: var(--rhine-billing-current); }
+:root .cm-peak-alert-peak { border-top-color: var(--rhine-billing-peak); }
+:root .cm-peak-alert-offpeak { border-top-color: var(--rhine-billing-off); }
+:root .cm-peak-alert-peak .cm-peak-alert-badge { color: var(--rhine-billing-peak); }
+:root .cm-peak-alert-offpeak .cm-peak-alert-badge { color: var(--rhine-billing-off); }
+
+/* Softer dark chat palette, scoped to official conversation regions.
+   Keep sidebar/billing colors and the light theme unchanged. */
+body[data-ds-dark-theme] :is([data-conversation-region="chat"], [data-conversation-region="composer"], [data-dsh-surface="conversation"]) {
+  --dsw-alias-label-primary: #C6CEC7;
+  --dsw-alias-label-primary-bluish: #C6CEC7;
+  --dsw-alias-label-secondary: #A8B3AC;
+  --dsw-alias-label-primary-dimmed: #A8B3AC;
+  --dsw-alias-label-tertiary: #919D96;
+  --dsw-alias-label-dimmed: #919D96;
+  --dsw-alias-label-caption: #919D96;
+  --dsw-alias-label-document-preview: #C6CEC7;
+  --dsw-alias-bg-layer-1: #182126;
+  --dsw-alias-bg-layer-2: #202A2F;
+  --dsw-alias-bg-layer-3: #283338;
+  --dsw-alias-bg-layer-4: #283338;
+  --dsw-alias-markdown-code-block: #182126;
+  --dsw-alias-markdown-code-segment-unselected: #182126;
+  --dsw-alias-markdown-tag: #182126;
+  --dsw-alias-markdown-code-block-banner: #202A2F;
+  --dsw-alias-markdown-inline-code: #202A2F;
+  --dsw-alias-markdown-code-segment-selected: #202A2F;
+  --dsw-alias-markdown-placeholder: #A8B3AC;
+  --dsw-alias-brand-primary: #D49A61;
+  --dsw-alias-brand-primary-new-colorprimary-new-color: #D49A61;
+  --dsw-alias-brand-text: #D49A61;
+  --dsw-alias-link: #D49A61;
+  --dsw-alias-markdown-citation: #D49A61;
+  --dsw-alias-button-primary-fill: #D49A61;
+  --dsw-alias-button-info-fill: #D49A61;
+  --dsw-alias-button-primary-hover: #E2A971;
+  --dsw-alias-button-info-hover: #E2A971;
+  --dsw-alias-border-l1: #354248;
+  --dsw-alias-border-l2: #354248;
+  --dsw-alias-border-l2-darkmode-thin: #354248;
+  --dsw-alias-border-l3: #354248;
+  --dsw-alias-border-l4: #354248;
+  --dsw-specific-bubble: #182126;
+  --dsw-specific-input-major: #182126;
+  --rhine-card: #182126;
+  --rhine-ink: #C6CEC7;
+  --rhine-accent: #D49A61;
+  color: var(--dsw-alias-label-primary);
 }
