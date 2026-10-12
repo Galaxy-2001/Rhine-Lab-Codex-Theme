@@ -3,3 +3,5 @@
 对应 Codex 1.1.0 / DSH 1.2.0。界面 PNG 为发布素材绘制的预览，非客户端截图，不包含个人会话。GIF 直接渲染 `runtime/assets/watermark-light.svg`，按 8 fps 记录完整 14 秒循环；同时推进 SVG SMIL 和 CSS 动画时钟。
 
 渲染脚本：`scripts/render-doc-previews.mjs`，需要 DSH 开发依赖中的 Playwright 与 Windows Edge。运行后生成 PNG 和 `.checks/frames` 下的临时帧。使用 FFmpeg 的 palettegen/paletteuse 可将帧合成为 GIF。临时帧不进入 Git 或发布包。
+
+`full-demo-cover.png` 是 2026-10-12 完整 HTML 介绍的封面，`demo-music-LICENSE.txt` 为该介绍保留的配乐许可。视频和离线 HTML 下载入口见 [完整介绍说明](../FULL_DEMO.md)。该演示包含本机后续 DSH 修复，版本范围在说明中单独注明。

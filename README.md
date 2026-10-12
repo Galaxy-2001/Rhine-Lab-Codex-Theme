@@ -2,6 +2,14 @@
 
 莱茵生命风格的动态主题，支持 Codex 和 DeepSeek Harness。当前版本是 **Codex 1.1.0 / DSH 1.2.0**，两版都已同步中央立体动画。
 
+## 完整介绍视频
+
+[![Codex 与 DSH 新版完整介绍](docs/media/full-demo-cover.png)](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/demo-2026-10-12)
+
+[观看 / 下载 1080p 视频](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/download/demo-2026-10-12/Rhine-Lab-Full-Demo-1080p.mp4) · [下载离线 HTML 演示](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/download/demo-2026-10-12/Rhine-Lab-Full-Demo.html) · [视频说明与配乐来源](docs/FULL_DEMO.md)
+
+1 分 44 秒，完整展示中央动画、浅深模式、聊天、设置和两种安装方式。画面由 HTML 演示页绘制，所有会话、文件、账户和金额均为虚构，非客户端操作实录。视频包含本机后续的 DSH 深色配色与计费时段配色修复；这些修复尚未打包为新的 DSH Release，安装包版本以下载表为准。
+
 折片沿同一条无穷形轮廓自转，以光照和遮挡形成明暗，再压平为标志。正号从中心放大并旋转 90°，减号从细线横向展开；平面阶段保留循环缺口。
 
 ![新版中央动画：折片自转、压平与正负号入场](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/central-animation.gif)
