@@ -8,16 +8,16 @@
 
 新版采用 14 秒折片自转与压平循环：明暗来自表面法线、光源和遮挡；正号放大并旋转 90°，减号从细竖线横向展开。与 Codex 1.1.0 的动画一致，并保留深色提示框修复。
 
-![DSH 1.2.0 浅色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-chat-light.png)
+![DSH 1.2.1 浅色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-chat-light-1.2.1.png)
 
-![DSH 1.2.0 深色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-chat-dark.png)
+![DSH 1.2.1 深色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-chat-dark-1.2.1.png)
 
 <details>
 <summary>设置素材预览</summary>
 
-![DSH 1.2.0 浅色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-settings-light.png)
+![DSH 1.2.1 浅色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-settings-light-1.2.1.png)
 
-![DSH 1.2.0 深色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-settings-dark.png)
+![DSH 1.2.1 深色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-settings-dark-1.2.1.png)
 
 </details>
 

@@ -4,9 +4,9 @@ A DeepSeek Harness port of the Rhine Lab Codex theme. The central chat backgroun
 
 ![DSH 1.2.1 central animation](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/central-animation.gif)
 
-![DSH 1.2.0 light artwork preview](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-chat-light.png)
+![DSH 1.2.1 light artwork preview](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-chat-light-1.2.1.png)
 
-![DSH 1.2.0 dark artwork preview](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-chat-dark.png)
+![DSH 1.2.1 dark artwork preview](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-chat-dark-1.2.1.png)
 
 The UI previews are illustrations rendered from released assets, not client screenshots. The GIF renders the released SVG animation. This is an original vector reconstruction, not an official video clip or frame-exact reproduction.
 

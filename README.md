@@ -27,16 +27,16 @@ DSH 用户下载 `dsh-plugin-rhine-lab-theme-1.2.1.tgz`，无需解压，在客�
 
 通过官方 DSH 插件管理器安装，首次启用自动应用主题；后续启动保留皮肤选择、背景开关和遮罩设置。日常使用原来的 DSH 图标。已保留 1.1.2 的深色提示框文字对比度修复。
 
-![DSH 1.2.0 浅色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-chat-light.png)
+![DSH 1.2.1 浅色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-chat-light-1.2.1.png)
 
 <details>
 <summary>DSH 深色与设置素材预览</summary>
 
-![DSH 1.2.0 深色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-chat-dark.png)
+![DSH 1.2.1 深色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-chat-dark-1.2.1.png)
 
-![DSH 1.2.0 浅色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-settings-light.png)
+![DSH 1.2.1 浅色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-settings-light-1.2.1.png)
 
-![DSH 1.2.0 深色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/dsh-settings-dark.png)
+![DSH 1.2.1 深色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-settings-dark-1.2.1.png)
 
 </details>
 
