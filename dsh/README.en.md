@@ -45,6 +45,8 @@ Off-peak billing periods use blue with stripes, peak periods use amber, and week
 ## Contributions and acknowledgements
 
 - **[Galaxy-2001](https://github.com/Galaxy-2001)**: project initiator and maintainer; design direction, requirements, reference materials, hands-on validation, visual feedback and release decisions.
-- **OpenAI Codex (AI development assistant)**: implemented most of the code under the maintainer's direction and feedback, and contributed to visual design, 3D SVG animation, Codex and DSH integration, fixes, testing, packaging, documentation, demo materials, GitHub releases and the marketplace submission.
+- **[OpenAI Codex](https://github.com/codex) (AI development assistant)**: implemented most of the code under the maintainer's direction and feedback, and contributed to visual design, 3D SVG animation, Codex and DSH integration, fixes, testing, packaging, documentation, demo materials, GitHub releases and the marketplace submission.
 
 The project was developed collaboratively by its maintainer and an AI assistant. This credit records development contributions and does not imply an official OpenAI project or endorsement.
+
+Codex-assisted commits use `Co-authored-by: Codex <noreply@openai.com>` to record commit-level credit alongside the maintainer. Earlier published commits retain their original history.
