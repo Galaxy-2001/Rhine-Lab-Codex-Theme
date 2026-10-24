@@ -127,3 +127,10 @@ Skill 已携带完整运行资源，安装后无需保留下载目录。
 源码、预编译管理器及固定版本第三方代码都在 `runtime/`，入口脚本在 `scripts/`，Skill 模板在 `skill/`。运行 `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build.ps1` 可重新编译并生成 `dist/` 下的用户 ZIP、源码 ZIP、Skill ZIP 与 `SHA256SUMS.txt`。详见 [发布说明](docs/PUBLISHING.md) 和 [测试说明](docs/TESTING.md)。
 
 项目代码采用 MIT 许可。第三方代码与官方图标、品牌元素的来源和许可范围见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+
+## 贡献与致谢
+
+- **[Galaxy-2001](https://github.com/Galaxy-2001)**：项目发起与维护，提出设计方向和需求，提供参考素材，参与实际使用验证与效果反馈，并负责发布决策。
+- **OpenAI Codex（AI 开发助手）**：在维护者的指导与反馈下，承担主要代码实现，参与主题视觉设计、三维 SVG 动画、Codex 与 DSH 适配、问题修复、测试、安装包制作、文档和演示素材制作，以及 GitHub 发布与市场收录提交。
+
+本项目由维护者与 AI 助手协作完成。上述 Codex 署名用于记录实际开发贡献，不代表 OpenAI 官方项目或官方背书。

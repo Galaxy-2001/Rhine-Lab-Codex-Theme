@@ -41,3 +41,10 @@ Theme code is MIT licensed. Rhine Lab and related Arknights marks belong to thei
 ## 1.2.1 update
 
 Off-peak billing periods use blue with stripes, peak periods use amber, and weekends use green. Dark chat text, cards and background artwork are softer. Billing logic is unchanged.
+
+## Contributions and acknowledgements
+
+- **[Galaxy-2001](https://github.com/Galaxy-2001)**: project initiator and maintainer; design direction, requirements, reference materials, hands-on validation, visual feedback and release decisions.
+- **OpenAI Codex (AI development assistant)**: implemented most of the code under the maintainer's direction and feedback, and contributed to visual design, 3D SVG animation, Codex and DSH integration, fixes, testing, packaging, documentation, demo materials, GitHub releases and the marketplace submission.
+
+The project was developed collaboratively by its maintainer and an AI assistant. This credit records development contributions and does not imply an official OpenAI project or endorsement.
