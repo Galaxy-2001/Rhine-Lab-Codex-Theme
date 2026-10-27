@@ -1,6 +1,6 @@
 # 莱茵生命动态主题 · Codex / DSH
 
-莱茵生命风格的动态主题，支持 Codex 和 DeepSeek Harness。当前版本是 **Codex 1.1.0 / DSH 1.2.1**，两版都已同步中央立体动画。
+莱茵生命风格的动态主题，支持 Codex 和 DeepSeek Harness。当前版本是 **Codex 1.1.1 / DSH 1.2.1**，两版都已同步中央立体动画。
 
 ## 完整介绍视频
 
@@ -19,7 +19,7 @@
 | 使用的客户端 | 下载 | 安装说明 |
 | --- | --- | --- |
 | 官方 DeepSeek Harness 桌面版 / 网页版 | [DSH 插件 1.2.1](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.2.1) | [DSH 安装说明](dsh/README.md) |
-| Windows Codex / 集成 Codex 的 ChatGPT | [Codex 主题 1.1.0](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/v1.1.0) | 见下文 |
+| Windows Codex / 集成 Codex 的 ChatGPT | [Codex 主题 1.1.1](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/v1.1.1) | 见下文 |
 
 DSH 用户下载 `dsh-plugin-rhine-lab-theme-1.2.1.tgz`，无需解压，在客户端“插件 → 添加插件”输入文件的完整绝对路径，安装后点击“立即启用”。主题首次启用自动应用，日常继续使用原来的 DSH 图标。DSH 源码在 [`dsh/`](dsh/)。
 
@@ -57,9 +57,13 @@ Windows Codex 桌面端的莱茵生命主题：暖灰浅色与深色背景、橙
 
 </details>
 
+## Codex 1.1.1 启动器修复
+
+主题进程启动后最多等待 40 秒建立连接，界面加载确认最多等待 45 秒。普通入口已运行、主题正在启动、无法验证身份和端口冲突会分别报告，不会为重试自动关闭已有 Codex 窗口。`theme.ps1 -Action status` 可查看启动阶段和原因；`start-official.ps1 -DiagnoseOnly` 提供只读诊断。
+
 ## 下载与安装
 
-在 GitHub Releases 下载 `Rhine-Lab-Codex-Theme-1.1.0-Windows.zip`，完整解压，再双击 **安装主题.cmd**。日常双击桌面 **莱茵生命 Codex**，或双击 **启动主题.cmd**。
+在 GitHub Releases 下载 `Rhine-Lab-Codex-Theme-1.1.1-Windows.zip`，完整解压，再双击 **安装主题.cmd**。日常双击桌面 **莱茵生命 Codex**，或双击 **启动主题.cmd**。
 
 需要：
 
@@ -93,7 +97,7 @@ Windows Codex 桌面端的莱茵生命主题：暖灰浅色与深色背景、橙
 
 双击 **安装可选 Skill.cmd**，将完整 Skill 安装到 `CODEX_HOME/skills`（未设置时使用用户目录 `.codex/skills`）。同名旧 Skill 会备份到 `skill-backups`。
 
-也可以从 Releases 下载 `rhine-lab-theme-1.1.0-skill.zip`，在 Windows 文件属性中解除下载 ZIP 的锁定后解压，将里面的 `rhine-lab-theme` 文件夹放到 Codex 的 skills 目录。新聊天中可以说：
+也可以从 Releases 下载 `rhine-lab-theme-1.1.1-skill.zip`，在 Windows 文件属性中解除下载 ZIP 的锁定后解压，将里面的 `rhine-lab-theme` 文件夹放到 Codex 的 skills 目录。新聊天中可以说：
 
 - “安装莱茵生命主题”
 - “应用莱茵生命主题”

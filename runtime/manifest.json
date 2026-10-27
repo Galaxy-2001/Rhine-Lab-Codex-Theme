@@ -113,7 +113,7 @@
                   },
                   {
                       "path":  "engine.mjs",
-                      "sha256":  "a00b5154ab120a760e65c8dc86aed97e608730a035e321b4c01643e47730839c",
+                      "sha256":  "e4a314372760654c620f615b5e011283eef6752c85c9e87fe7f8348db899f28d",
                       "size":  5892
                   },
                   {
@@ -148,18 +148,23 @@
                   },
                   {
                       "path":  "RhineLabTheme.exe",
-                      "sha256":  "9ae0c880f7a144bb10527a16e88d675370de923b57f1a2389105ba31ae7e0aae",
+                      "sha256":  "472a6881216a3e64c5dcc416c3b782e53c8071016b39627c9811f38f1032b713",
                       "size":  50688
                   },
                   {
                       "path":  "start-official.ps1",
-                      "sha256":  "09fd720b37caff8409158b92911a589d3cf895f6b58ac8c313197c9de10b575f",
-                      "size":  4977
+                      "sha256":  "eac6dd8169d53b25978f08e65f7236b995c434ddcec4737104fc25505e25e90e",
+                      "size":  5945
+                  },
+                  {
+                      "path":  "startup-state.ps1",
+                      "sha256":  "feec23674f45bdd0f79e7e7d104414523feeb4c39896ddb1e712702a5640adf3",
+                      "size":  4642
                   },
                   {
                       "path":  "theme.ps1",
-                      "sha256":  "ff5bcb38539a4caf32e663ff107f5b82b831969280370bd7d08017bfc19e600e",
-                      "size":  5507
+                      "sha256":  "a438252173b4de3e52003b9603c8c1a1e3d946caed0499e1a80d5378cbc44639",
+                      "size":  5717
                   },
                   {
                       "path":  "THIRD_PARTY_NOTICES.md",
@@ -208,5 +213,5 @@
                   }
               ],
     "id":  "rhine-lab",
-    "version":  "1.1.0"
+    "version":  "1.1.1"
 }

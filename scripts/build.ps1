@@ -20,6 +20,7 @@ foreach($name in $commands.Keys){
   [IO.File]::WriteAllText((Join-Path $root $name),$text+"`r`n",[Text.UTF8Encoding]::new($false))
 }
 $runtimeNames=@('RhineLabTheme.exe','Manager.cs','install.ps1','install-core.ps1','uninstall.ps1','package-common.ps1','appearance.mjs','start-official.ps1','theme.ps1','engine.mjs','cdp.mjs','renderer.js','LICENSE','THIRD_PARTY_NOTICES.md','assets/theme.css','assets/codex-white.ico','assets/rhine-lab-light.json','assets/rhine-lab-dark.json','vendor/common-windows.ps1','vendor/config-utf8.ps1','vendor/LICENSE','vendor/provenance.json','vendor/smol-toml/index.cjs','vendor/smol-toml/LICENSE','vendor/smol-toml/provenance.json')
+$runtimeNames+=@('startup-state.ps1')
 $runtimeNames+=@(Get-ChildItem -LiteralPath (Join-Path $runtime 'assets') -Filter '*.svg' -File|ForEach-Object{'assets/'+$_.Name})
 $entries=@(foreach($name in $runtimeNames|Sort-Object){$file=Get-Item -LiteralPath (Join-Path $runtime $name);if($file.Attributes -band [IO.FileAttributes]::ReparsePoint){throw 'Package file is a link.'};@{path=$name;sha256=(Get-FileHash -LiteralPath $file.FullName).Hash.ToLowerInvariant();size=$file.Length}})
 $manifest=@{id='rhine-lab';version=$version;runtime='official-store-cdp';files=$entries}
@@ -47,6 +48,7 @@ try{
   $skillTemplate=@('skill/rhine-lab-theme/SKILL.md','skill/rhine-lab-theme/scripts/theme.ps1','skill/rhine-lab-theme/agents/openai.yaml')
   $userFiles=$rootFiles+$documents+$runtimeFiles+$skillTemplate+@('scripts/entry.ps1')+@($commands.Keys)
   $sourceFiles=$userFiles+@('scripts/build.ps1','scripts/generate-watermark.mjs','scripts/ribbon-geometry.mjs','tests/ribbon.test.mjs','tests/appearance.test.mjs','tests/package.test.ps1')
+  $sourceFiles+=@('tests/startup.test.ps1')
   Write-RhineZip (Join-Path $dist ('Rhine-Lab-Codex-Theme-'+$version+'-Windows.zip')) $root $userFiles 'Rhine-Lab-Codex-Theme'
   Write-RhineZip (Join-Path $dist ('Rhine-Lab-Codex-Theme-'+$version+'-Source.zip')) $root $sourceFiles 'Rhine-Lab-Codex-Theme'
   $skill=Join-Path $stage 'rhine-lab-theme';New-Item -ItemType Directory -Path $skill|Out-Null

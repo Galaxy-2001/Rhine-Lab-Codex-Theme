@@ -24,7 +24,7 @@ async function readConfig(){
   try{config=JSON.parse((await fs.readFile(path.join(runtime,'preferences.json'),'utf8')).replace(/^\uFEFF/,''));}catch(e){if(e.code!=='ENOENT')throw e;}
   if(typeof config.enabled!=='boolean'||typeof config.motion!=='boolean')throw new Error('Invalid theme preferences.');
   const stamp=JSON.stringify(config);
-  payload={version:'1.1.0',enabled:config.enabled,motion:config.motion,css,art};
+  payload={version:'1.1.1',enabled:config.enabled,motion:config.motion,css,art};
   return stamp;
 }
 function appTarget(t){
@@ -71,7 +71,7 @@ try{
   if(process.argv.includes('--remove')){await remove();console.log(JSON.stringify({removed:true}));}
   else{
     let results=await cycle();
-    const deadline=Date.now()+15000;
+    const deadline=Date.now()+45000;
     while(!results.some(r=>r.stylePresent&&r.mainPresent)&&Date.now()<deadline){await new Promise(resolve=>setTimeout(resolve,250));results=await cycle();}
     console.log(JSON.stringify({official:session.official.Version,results}));
     if(!results.some(r=>r.stylePresent&&r.mainPresent))throw new Error('The live Codex renderer did not confirm the theme.');

@@ -23,7 +23,8 @@ function Stop-ThemeEngine {
 try { switch($Action){
   'status' {
     $verification=Join-Path $runtimeRoot 'verification.json'
-    @{preferences=$preferences;installedRoot=$PSScriptRoot;verification=if(Test-Path -LiteralPath $verification){Get-Content -Encoding UTF8 -LiteralPath $verification -Raw|ConvertFrom-Json}else{$null}}|ConvertTo-Json -Depth 6
+    $startupStatus=Join-Path $runtimeRoot 'startup-status.json'
+    @{preferences=$preferences;installedRoot=$PSScriptRoot;startupStatus=if(Test-Path -LiteralPath $startupStatus){Get-Content -Encoding UTF8 -LiteralPath $startupStatus -Raw|ConvertFrom-Json}else{$null};verification=if(Test-Path -LiteralPath $verification){Get-Content -Encoding UTF8 -LiteralPath $verification -Raw|ConvertFrom-Json}else{$null}}|ConvertTo-Json -Depth 6
     exit
   }
   'restore' {
