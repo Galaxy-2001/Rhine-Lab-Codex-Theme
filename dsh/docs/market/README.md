@@ -1,5 +1,7 @@
-# 插件市场预览
+# 插件市场截图
 
-对应 DSH 1.2.1，使用当前发布版 SVG 素材绘制的界面预览，不是客户端截图，不包含私人会话。聊天预览分别采样 14 秒动画的 1.9 秒立体折片阶段和 8 秒平面标志阶段；设置页展示当前背景素材。
+当前截图对应 DeepSeek Harness 主题 **1.3.0**，来自官方 Windows 0.2.1-rc.3 客户端实录，包含浅色、深色及两种模式下的实际设置页。头像已替换为通用图标，账户与费用已遮盖。
 
-运行 `node scripts/render-doc-previews.mjs --market` 重新生成（需要 dsh 开发依赖与 Windows Edge）。截图清单在 `dsh/screenshots.json`，独立于安装包版本更新；不更换既有 Release 附件。
+市场图片清单位于 [`dsh/screenshots.json`](../../screenshots.json)，市场构建时从插件仓库读取；详细介绍读取 [`dsh/README.md`](../../README.md)。新图文件名带有 `1.3.0`，与旧版示意图使用不同地址。市场仓库的下载条目需要单独更新，发布 GitHub Release 不会自动改写其中固定的 tarball URL。
+
+本目录保留的 `1.2.1` 图片为历史素材预览，不是本次实机截图。`scripts/render-doc-previews.mjs --market` 生成的是旧版示意布局，不能用其输出替换当前实机图。
