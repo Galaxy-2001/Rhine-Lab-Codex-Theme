@@ -15,8 +15,9 @@ const paths=order.map(index=>{
  return `<path d="${values[0].d}" fill="${values[0].color}" opacity="${values[0].visible}"><animate attributeName="d" values="${values.map(f=>f.d).join(';')}" keyTimes="${keyTimes}" dur="14s" repeatCount="indefinite"/><animate attributeName="fill" values="${values.map(f=>f.color).join(';')}" keyTimes="${keyTimes}" dur="14s" repeatCount="indefinite"/><animate attributeName="opacity" values="${values.map(f=>f.visible).join(';')}" keyTimes="${keyTimes}" dur="14s" repeatCount="indefinite"/></path>`;
 }).join('');
 for(const mode of ['light','dark']){
- const flat=mode==='light'?'#FFFFFF':'#E9EDE4';
- const foldOpacity=mode==='light'?'.42':'.12',flatOpacity=mode==='light'?'.70':'.105';
+ const flat=mode==='light'?'#292923':'#D7D4C9';
+ // The approved 16% applies to the artwork alone, never to a chat ancestor.
+ const foldOpacity='.16',flatOpacity='.16';
  const flatMark=`<g fill="${flat}"><path d="${outline}" fill="none" stroke="${flat}" stroke-width="84" stroke-linejoin="round" stroke-dasharray="${(totalLength-81).toFixed(4)} 81" stroke-dashoffset="971.5530" class="rhine-ribbon"/>${plus}${minus}${label}</g>`;
  const style=`<style>
 @keyframes rhine-fold-visible{0%,34%{opacity:1}45%,88%{opacity:0}100%{opacity:1}}

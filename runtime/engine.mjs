@@ -12,7 +12,7 @@ const css=await fs.readFile(path.join(import.meta.dirname,'assets/theme.css'),'u
 const art={};
 for(const mode of ['light','dark'])for(const motion of ['motion','still']){
   const group={};
-  for(const kind of ['identity','watermark','rail','structure']){
+  for(const kind of ['identity','watermark','rail','structure','terminal','instrument']){
     const svg=await fs.readFile(path.join(import.meta.dirname,`assets/${kind}-${mode}${motion==='still'?'-still':''}.svg`),'utf8');
     group[kind]=`data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`;
   }
@@ -24,7 +24,7 @@ async function readConfig(){
   try{config=JSON.parse((await fs.readFile(path.join(runtime,'preferences.json'),'utf8')).replace(/^\uFEFF/,''));}catch(e){if(e.code!=='ENOENT')throw e;}
   if(typeof config.enabled!=='boolean'||typeof config.motion!=='boolean')throw new Error('Invalid theme preferences.');
   const stamp=JSON.stringify(config);
-  payload={version:'1.1.1',enabled:config.enabled,motion:config.motion,css,art};
+  payload={version:'1.2.0',enabled:config.enabled,motion:config.motion,css,art};
   return stamp;
 }
 function appTarget(t){

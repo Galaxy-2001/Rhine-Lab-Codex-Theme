@@ -1,69 +1,53 @@
-# 莱茵生命动态主题 · Codex / DSH
+# 莱茵生命动态主题 · Codex / DeepSeek Harness
 
-莱茵生命风格的动态主题，支持 Codex 和 DeepSeek Harness。当前版本是 **Codex 1.1.1 / DSH 1.2.1**，两版都已同步中央立体动画。
+莱茵生命风格的动态主题，当前版本为 **Codex 1.2.0 / DeepSeek Harness 1.3.0**。采用 [Pioneer 终端面板](docs/PIONEER_DESIGN.md)：奶油白与石墨黑、Terminal 大标题、双语 New chat 卡片、圆环刻度和橙 / 黄 / 青三色细边，中央动画水印强度 **16%**。
 
-## 完整介绍视频
+两端浅色标题栏与原生窗口按钮使用一致的底色；DeepSeek Harness 顶栏显示完整名称，侧栏按钮保持原位和正常点击范围。装饰不挤占输入框，不接收鼠标事件。保留深色提示、计费时段配色及启动器等待重试修复。
 
-[![Codex 与 DSH 新版完整介绍](docs/media/full-demo-cover.png)](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/demo-2026-10-12)
+## 实机介绍视频
 
-[观看 / 下载 1080p 视频](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/download/demo-2026-10-12/Rhine-Lab-Full-Demo-1080p.mp4) · [下载离线 HTML 演示](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/download/demo-2026-10-12/Rhine-Lab-Full-Demo.html) · [视频说明与配乐来源](docs/FULL_DEMO.md)
+[![Codex 与 DeepSeek Harness 实机演示](docs/media/full-demo-cover.png)](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/demo-2026-10-30)
 
-1 分 44 秒，完整展示中央动画、浅深模式、聊天、设置和两种安装方式。画面由 HTML 演示页绘制，所有会话、文件、账户和金额均为虚构，非客户端操作实录。视频展示的 DSH 深色配色与计费时段配色修复已包含在 DSH 1.2.1 安装包中。
+[观看 / 下载 1080p 视频](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/download/demo-2026-10-30/Rhine-Lab-Native-Demo-1080p.mp4) · [视频说明与配乐许可](docs/FULL_DEMO.md)
 
-折片沿同一条无穷形轮廓自转，以光照和遮挡形成明暗，再压平为标志。正号从中心放大并旋转 90°，减号从细线横向展开；平面阶段保留循环缺口。
+**1 分 36 秒，官方 Windows 客户端实录。** 展示两端浅深模式、中央折片动画、原生设置与侧栏操作。使用空白会话，头像替换为通用图标，账户与金额已遮盖。下方图片也取自本次实录；片头、片尾和字幕为后期制作。
 
-![新版中央动画：折片自转、压平与正负号入场](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/central-animation.gif)
-
-动图来自当前发布的 SVG 素材，完整循环 14 秒。下方界面图也是发布素材绘制的预览，已在图上注明，非客户端截图。动画为代码重制，非官方视频剪辑或逐帧复刻。
+折片沿同一条无穷形轮廓自转，以光照和遮挡形成明暗，再压平为标志。正号从中心放大并旋转 90°，减号从细线横向展开，平面阶段保留循环缺口。动画为代码重制，非官方视频剪辑或逐帧复刻。
 
 | 使用的客户端 | 下载 | 安装说明 |
 | --- | --- | --- |
-| 官方 DeepSeek Harness 桌面版 / 网页版 | [DSH 插件 1.2.1](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.2.1) | [DSH 安装说明](dsh/README.md) |
-| Windows Codex / 集成 Codex 的 ChatGPT | [Codex 主题 1.1.1](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/v1.1.1) | 见下文 |
+| 官方 DeepSeek Harness 桌面版 / 网页版 | [插件 1.3.0](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.3.0) | [安装说明](dsh/README.md) |
+| Windows Codex / 集成 Codex 的 ChatGPT | [主题 1.2.0](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/v1.2.0) | 见下文 |
 
-DSH 用户下载 `dsh-plugin-rhine-lab-theme-1.2.1.tgz`，无需解压，在客户端“插件 → 添加插件”输入文件的完整绝对路径，安装后点击“立即启用”。主题首次启用自动应用，日常继续使用原来的 DSH 图标。DSH 源码在 [`dsh/`](dsh/)。
+DeepSeek Harness 用户下载 `dsh-plugin-rhine-lab-theme-1.3.0.tgz`，无需解压，在客户端“插件 → 添加插件”输入文件的完整绝对路径，安装后点击“立即启用”。首次启用自动应用，后续启动保留皮肤选择与背景设置，日常继续使用原来的客户端图标。源码在 [`dsh/`](dsh/)。
 
-## DSH 版
+## DeepSeek Harness 实机效果
 
-通过官方 DSH 插件管理器安装，首次启用自动应用主题；后续启动保留皮肤选择、背景开关和遮罩设置。日常使用原来的 DSH 图标。已保留 1.1.2 的深色提示框文字对比度修复。
+![DeepSeek Harness 1.3.0 浅色实机截图](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-chat-light-1.3.0.png)
 
-![DSH 1.2.1 浅色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-chat-light-1.2.1.png)
+![DeepSeek Harness 1.3.0 深色实机截图](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-chat-dark-1.3.0.png)
 
-<details>
-<summary>DSH 深色与设置素材预览</summary>
+![DeepSeek Harness 1.3.0 浅色设置实机截图](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-settings-light-1.3.0.png)
 
-![DSH 1.2.1 深色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-chat-dark-1.2.1.png)
+![DeepSeek Harness 1.3.0 深色设置实机截图](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-settings-dark-1.3.0.png)
 
-![DSH 1.2.1 浅色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-settings-light-1.2.1.png)
+## Codex 实机效果
 
-![DSH 1.2.1 深色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-settings-dark-1.2.1.png)
+![Codex 1.2.0 浅色实机截图](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/codex-chat-light-1.2.0.png)
 
-</details>
+![Codex 1.2.0 深色实机截图](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/codex-chat-dark-1.2.0.png)
 
-## Codex 版
+![Codex 1.2.0 浅色设置实机截图](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/codex-settings-light-1.2.0.png)
 
-Windows Codex 桌面端的莱茵生命主题：暖灰浅色与深色背景、橙色强调色、STRU 档案名牌，以及中央折片自转和压平动画。聊天、设置与侧栏使用统一视觉，装饰作为背景绘制，保留原生聊天范围和侧栏拖动。
+![Codex 1.2.0 深色设置实机截图](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/codex-settings-dark-1.2.0.png)
 
-![Codex 1.1.0 浅色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/codex-chat-light.png)
-
-<details>
-<summary>Codex 深色与设置素材预览</summary>
-
-![Codex 1.1.0 深色聊天素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/codex-chat-dark.png)
-
-![Codex 1.1.0 浅色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/codex-settings-light.png)
-
-![Codex 1.1.0 深色设置素材预览](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/docs/media/codex-settings-dark.png)
-
-</details>
-
-## Codex 1.1.1 启动器修复
+## 启动器状态与重试
 
 主题进程启动后最多等待 40 秒建立连接，界面加载确认最多等待 45 秒。普通入口已运行、主题正在启动、无法验证身份和端口冲突会分别报告，不会为重试自动关闭已有 Codex 窗口。`theme.ps1 -Action status` 可查看启动阶段和原因；`start-official.ps1 -DiagnoseOnly` 提供只读诊断。
 
 ## 下载与安装
 
-在 GitHub Releases 下载 `Rhine-Lab-Codex-Theme-1.1.1-Windows.zip`，完整解压，再双击 **安装主题.cmd**。日常双击桌面 **莱茵生命 Codex**，或双击 **启动主题.cmd**。
+在 GitHub Releases 下载 `Rhine-Lab-Codex-Theme-1.2.0-Windows.zip`，完整解压，再双击 **安装主题.cmd**。日常双击桌面 **莱茵生命 Codex**，或双击 **启动主题.cmd**。
 
 需要：
 
@@ -97,7 +81,7 @@ Windows Codex 桌面端的莱茵生命主题：暖灰浅色与深色背景、橙
 
 双击 **安装可选 Skill.cmd**，将完整 Skill 安装到 `CODEX_HOME/skills`（未设置时使用用户目录 `.codex/skills`）。同名旧 Skill 会备份到 `skill-backups`。
 
-也可以从 Releases 下载 `rhine-lab-theme-1.1.1-skill.zip`，在 Windows 文件属性中解除下载 ZIP 的锁定后解压，将里面的 `rhine-lab-theme` 文件夹放到 Codex 的 skills 目录。新聊天中可以说：
+也可以从 Releases 下载 `rhine-lab-theme-1.2.0-skill.zip`，在 Windows 文件属性中解除下载 ZIP 的锁定后解压，将里面的 `rhine-lab-theme` 文件夹放到 Codex 的 skills 目录。新聊天中可以说：
 
 - “安装莱茵生命主题”
 - “应用莱茵生命主题”
@@ -114,7 +98,7 @@ Skill 已携带完整运行资源，安装后无需保留下载目录。
 
 不打包客户端副本，也不修改 WindowsApps 中的官方文件。调试端口固定为 `127.0.0.1:9436`；同一用户的其他本机进程可以连接，完整恢复会关闭该主题会话。暂停主题仅隐藏背景，不关闭此会话。
 
-视觉基础版本已在官方客户端 **26.930.3930.0** 验证聊天、实际设置页、浅深模式、背景动画与侧栏拖动。1.1.0 发布安装器通过隔离测试；中央动画已在官方客户端 26.1002.7124.0 检查聊天布局与资源加载（详情见 [中央动画说明](docs/CENTRAL_ANIMATION.md)）；尚未在第二台电脑完成冷启动安装验证。客户端更新后，内部页面结构或调试参数可能变化。
+1.2.0 已在官方 Windows 客户端 **26.1023.6621.0** 检查浅深模式、新聊天、实际设置页、标题栏和中央动画；DSH 1.3.0 已在官方 **0.2.1-rc.3** 桌面端检查同类画面与侧栏点击。安装器和启动器通过隔离回归，尚未在第二台电脑完成冷启动安装验证。客户端更新后，内部页面结构或调试参数可能变化。详细范围见 [验证记录](docs/VALIDATION.md)。
 
 ## 常见问题
 

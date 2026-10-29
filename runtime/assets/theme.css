@@ -1,29 +1,167 @@
-/* All decoration uses background paint or an absolute, noninteractive layer. */
-html[data-rhine-enabled="true"] { --rhine-surface:#ECEDE8; --rhine-ink:#20292C; --rhine-accent:#9B4D19; }
-html[data-rhine-enabled="true"][data-theme="dark"] { --rhine-surface:#131A1E; --rhine-ink:#E9EDE4; --rhine-accent:#F0AB63; }
+/* Pioneer terminal. Paint never creates space in the conversation. */
+html[data-rhine-enabled="true"] {
+  --rhine-surface:#EEE9DD; --rhine-panel:#F6F1E5; --rhine-sidebar:#E8E2D3;
+  --rhine-ink:#292923; --rhine-muted:#565347; --rhine-line:#D5CDBD;
+  --rhine-accent:#8B3C1C; --rhine-orange:#DC7946; --rhine-gold:#D3B45E;
+  --rhine-blue:#70A9A5; --rhine-chrome:#242722; --rhine-on-chrome:#F4EFDF;
+  --rhine-titlebar:#E3DED2; --rhine-titlebar-ink:#292923; --rhine-titlebar-muted:#565347;
+  --rhine-titlebar-border:#ADA898; --rhine-titlebar-hover:#29292312;
+  --color-background-surface-primary:var(--rhine-surface);
+  --color-background-surface-secondary:var(--rhine-panel);
+  --color-background-surface-tertiary:var(--rhine-sidebar);
+  --color-background-surface-elevated:var(--rhine-panel);
+  --color-text-primary:var(--rhine-ink); --color-text-secondary:var(--rhine-muted);
+  --color-text-tertiary:var(--rhine-muted); --color-border-primary:var(--rhine-line);
+  --color-border-secondary:var(--rhine-line); --color-text-accent:var(--rhine-accent);
+  --color-background-accent:var(--rhine-accent);
+  font-family:Arial,"Microsoft YaHei","PingFang SC",sans-serif;
+}
+html[data-rhine-enabled="true"][data-theme="dark"] {
+  --rhine-surface:#1D2222; --rhine-panel:#252B2A; --rhine-sidebar:#252B29;
+  --rhine-ink:#D7D4C9; --rhine-muted:#AAA99E; --rhine-line:#434943;
+  --rhine-accent:#E69968; --rhine-orange:#C27C53; --rhine-gold:#B6A16C;
+  --rhine-blue:#79AAA4; --rhine-chrome:#151B1B; --rhine-on-chrome:#DEDBD0;
+  --rhine-titlebar:#151B1B; --rhine-titlebar-ink:#DEDBD0; --rhine-titlebar-muted:#D2CEBF;
+  --rhine-titlebar-border:#66695C; --rhine-titlebar-hover:#FFFFFF17;
+}
+html[data-rhine-enabled="true"] body {background-color:var(--rhine-surface);color:var(--rhine-ink)}
 html[data-rhine-enabled="true"] [data-rhine-surface="main"],
 html[data-rhine-enabled="true"] [data-rhine-surface="settings"] {
   background-color:var(--rhine-surface);
-  background-image:var(--rhine-identity),var(--rhine-watermark),var(--rhine-structure);
-  background-size:min(780px,calc(100% - 64px)) auto,min(640px,calc(100% - 64px)) auto,100% 100%;
-  background-position:center top 70px,center center,center;
+  background-image:var(--rhine-watermark),var(--rhine-structure);
+  background-size:min(640px,calc(100% - 64px)) auto,100% 100%;
+  background-position:center center,center;
   background-repeat:no-repeat;
 }
-html[data-rhine-enabled="true"][data-rhine-route="settings"] [data-rhine-surface="main"] { background-image:none; }
-html[data-rhine-enabled="true"] [data-rhine-surface="settings"] {
-  background-size:min(780px,calc(100% - 64px)) auto,480px auto,100% 100%;
-  background-position:center top 88px,right -84px top 300px,center;
+html[data-rhine-enabled="true"][data-rhine-route="settings"] [data-rhine-surface="main"] {background-image:none}
+html[data-rhine-enabled="true"] [data-rhine-surface="settings"] {background-attachment:local}
+html[data-rhine-enabled="true"] aside.app-shell-left-panel {
+  background-color:var(--rhine-sidebar);border-color:var(--rhine-line);
 }
-html[data-rhine-enabled="true"] aside.app-shell-left-panel::after {
-  content:""; position:absolute; inset:0; pointer-events:none; z-index:3;
-  background-image:var(--rhine-rail); background-repeat:no-repeat;
-  background-size:min(190px,calc(100% - 84px)) auto; background-position:right 20px bottom 26px;
+/* Native menu controls remain real, clickable and in their original order.
+   Windows caption buttons keep their original background and hit region. */
+[data-rhine-decoration] {display:none;pointer-events:none;user-select:none}
+html[data-rhine-enabled="true"] [data-rhine-chrome] {
+  position:relative;isolation:isolate;gap:9px;padding-inline:12px 142px;
+  color:var(--rhine-titlebar-ink);background:linear-gradient(to right,var(--rhine-titlebar) 0 calc(100% - 136px),transparent calc(100% - 136px));
+  --color-text-primary:var(--rhine-titlebar-ink);--color-text-secondary:var(--rhine-titlebar-muted);--color-text-tertiary:var(--rhine-titlebar-muted);
+  --button-text-color:var(--rhine-titlebar-ink);--color-text-codex-description:var(--rhine-titlebar-ink);
 }
-html[data-rhine-enabled="true"] [data-sidebar-destination][aria-current="page"] { background-color:color-mix(in srgb,var(--rhine-accent) 13%,var(--rhine-surface)); }
+html[data-rhine-enabled="true"] [data-rhine-chrome]::after {
+  content:"";position:absolute;left:0;right:0;bottom:0;height:3px;pointer-events:none;
+  background:linear-gradient(90deg,var(--rhine-orange) 44%,var(--rhine-gold) 44% 72%,var(--rhine-blue) 72%);
+}
+html[data-rhine-enabled="true"] [data-rhine-decoration="brand"] {
+  display:flex;align-items:center;gap:9px;order:-3;flex:none;
+  font:900 15px/1 Arial,sans-serif;letter-spacing:1.1px;white-space:nowrap;
+}
+html[data-rhine-enabled="true"] [data-rhine-decoration="brand"] b {
+  padding:3px 4px;background:var(--rhine-titlebar-ink);color:var(--rhine-titlebar);letter-spacing:-1px;font-size:17px;
+}
+html[data-rhine-enabled="true"] [data-rhine-decoration="project"] {
+  display:block;order:-2;color:var(--rhine-titlebar-muted);font:10px/1.4 Consolas,monospace;
+  letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;max-width:255px;flex:1;
+}
+html[data-rhine-enabled="true"] [data-rhine-decoration="client"] {
+  display:block;margin-left:auto;padding:4px 12px;border:1px solid var(--rhine-titlebar-border);border-radius:2px;
+  color:var(--rhine-titlebar-ink);font:12px/1 Arial,sans-serif;flex:none;
+}
+html[data-rhine-enabled="true"] [data-rhine-chrome] > :not([data-rhine-decoration]) {flex-shrink:0}
+html[data-rhine-enabled="true"] [data-rhine-chrome] :is(button,[role="menuitem"]) {color:var(--rhine-titlebar-muted);--button-text-color:var(--rhine-titlebar-muted)}
+html[data-rhine-enabled="true"] [data-rhine-chrome] :is(button,[role="menuitem"]):hover {background-color:var(--rhine-titlebar-hover);color:var(--rhine-titlebar-ink)}
+html[data-rhine-enabled="true"] [data-rhine-titlebar] {
+  height:calc(var(--app-shell-titlebar-height,var(--height-toolbar,52px)) + 32px);container-type:inline-size;
+  background:var(--rhine-surface);border-bottom:1px solid var(--rhine-line);
+  border-start-start-radius:12px;border-start-end-radius:12px;
+}
+html[data-rhine-enabled="true"] [data-rhine-content] {
+  padding-top:calc(var(--app-shell-header-height,var(--height-toolbar,52px)) + 32px);
+}
+html[data-rhine-enabled="true"] [data-rhine-decoration="channel"] {
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  position:absolute;left:0;right:0;bottom:0;height:32px;padding:0 26px;
+  border-top:1px solid var(--rhine-line);font:10px/1.4 Consolas,"Microsoft YaHei",monospace;
+  letter-spacing:.7px;color:var(--rhine-muted);white-space:nowrap;
+}
+html[data-rhine-enabled="true"] [data-rhine-decoration="channel"] > :first-child {
+  color:var(--rhine-accent);border-bottom:2px solid var(--rhine-orange);height:100%;
+  display:flex;align-items:center;font-size:11px;font-weight:600;
+}
+/* The outer aside also owns the application rail and resize handle. A normal
+   flow banner inside the actual launch list cannot overlap either of them. */
+html[data-rhine-enabled="true"] [data-rhine-launcher] {
+  position:relative;container-type:inline-size;padding:12px 10px 6px;
+  border-top:3px solid var(--rhine-orange);
+}
+html[data-rhine-enabled="true"] [data-rhine-decoration="station"] {
+  display:block;position:relative;flex:none;margin-bottom:18px;padding:4px 0 19px;
+  color:var(--rhine-ink);border-bottom:4px solid transparent;
+  border-image:linear-gradient(90deg,var(--rhine-orange) 44%,var(--rhine-gold) 44% 72%,var(--rhine-blue) 72%) 1;
+}
+html[data-rhine-enabled="true"] .rhine-station-kicker {
+  font:10px/1.45 Consolas,"Courier New",monospace;letter-spacing:.8px;color:var(--rhine-muted);
+}
+html[data-rhine-enabled="true"] .rhine-station-title {
+  position:relative;margin-top:7px;font:900 clamp(28px,19cqi,46px)/1.05 Arial,sans-serif;letter-spacing:-1.8px;
+}
+html[data-rhine-enabled="true"] .rhine-station-title span {
+  position:absolute;left:0;top:100%;transform:scaleY(-.6);transform-origin:center 8px;opacity:.085;
+}
+html[data-rhine-enabled="true"] [data-rhine-part="new-chat"] {
+  position:relative;min-height:78px;height:78px;box-sizing:border-box;
+  background-color:var(--rhine-panel);border:1px solid var(--rhine-line);
+  border-radius:0;padding:39px 12px 13px;margin:0 0 4px;justify-content:flex-start;
+  font-size:12px;letter-spacing:0;color:var(--rhine-muted);
+  background-image:linear-gradient(90deg,var(--rhine-orange) 44%,var(--rhine-gold) 44% 72%,var(--rhine-blue) 72%);
+  background-position:left bottom;background-size:100% 4px;background-repeat:no-repeat;
+}
+html[data-rhine-enabled="true"] [data-rhine-part="new-chat"]::before {
+  content:"New chat";position:absolute;left:12px;top:15px;
+  color:var(--rhine-ink);font:800 20px/1.15 Arial,sans-serif;letter-spacing:-.6px;pointer-events:none;
+}
+html[data-rhine-enabled="true"] [data-rhine-part="new-chat"]::after {
+  content:"+";position:absolute;right:12px;top:21px;color:var(--rhine-orange);
+  font:400 33px/1 Arial,sans-serif;pointer-events:none;
+}
+html[data-rhine-enabled="true"] [data-rhine-part="new-chat"] :is(svg,.icon-leading-slot) {display:none}
+html[data-rhine-enabled="true"] [data-rhine-part="new-chat"] > div {font-size:12px;color:var(--rhine-muted)}
+html[data-rhine-enabled="true"] [data-rhine-part="new-chat"]:hover {background-color:var(--rhine-surface)}
+html[data-rhine-enabled="true"] [data-app-action-sidebar-thread-row][data-app-action-sidebar-thread-selected="true"],
+html[data-rhine-enabled="true"] [data-sidebar-navigation-root] [data-sidebar-destination][aria-current="page"] {
+  background-color:color-mix(in srgb,var(--rhine-accent) 10%,var(--rhine-sidebar));
+  box-shadow:inset 3px 0 var(--rhine-accent);border-radius:2px;
+}
+html[data-rhine-enabled="true"] [data-rhine-heading] {position:relative;letter-spacing:-1px;font-weight:800}
+html[data-rhine-enabled="true"] [data-rhine-heading]::after {
+  content:attr(data-rhine-heading);position:absolute;inset-inline-start:0;top:80%;
+  transform:scaleY(-.5);transform-origin:top;opacity:.065;pointer-events:none;
+}
+html[data-rhine-enabled="true"] [data-rhine-surface="settings"] :is(input,select) {accent-color:var(--rhine-accent)}
+html[data-rhine-enabled="true"] [data-rhine-composer] {
+  --composer-layout-surface-background:var(--rhine-panel);
+  --composer-layout-surface-shadow:none;--composer-layout-surface-backdrop-filter:none;
+  border:0;border-radius:10px;background-color:var(--rhine-panel);
+  background-image:linear-gradient(var(--rhine-orange),var(--rhine-orange));
+  background-size:36px 3px;background-position:16px 0;background-repeat:no-repeat;
+  box-shadow:inset 0 0 0 1px var(--rhine-line);
+}
+html[data-rhine-enabled="true"] [data-rhine-composer]:focus-within {box-shadow:inset 0 0 0 1px var(--rhine-accent)}
+@container(max-width:570px) {
+  html[data-rhine-enabled="true"] [data-rhine-decoration="channel"] > :last-child {display:none}
+}
+@media(max-width:1050px) {
+  html[data-rhine-enabled="true"] [data-rhine-decoration="project"] {display:none}
+}
+@media(max-width:760px) {
+  html[data-rhine-enabled="true"] [data-rhine-decoration="client"] {display:none}
+  html[data-rhine-enabled="true"] [data-rhine-chrome] {gap:4px;padding-inline-start:8px}
+}
+@media(max-width:600px) {
+  html[data-rhine-enabled="true"] [data-rhine-decoration="brand"] strong {display:none}
+}
 @media(max-width:700px) {
   html[data-rhine-enabled="true"] [data-rhine-surface="main"],
   html[data-rhine-enabled="true"] [data-rhine-surface="settings"] {
-    background-size:calc(100% - 28px) auto,min(420px,calc(100% - 28px)) auto,100% 100%;
-    background-position:center top 70px,center center,center;
+    background-size:min(420px,calc(100% - 28px)) auto,100% 100%;
   }
 }

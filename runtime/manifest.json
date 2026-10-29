@@ -32,6 +32,26 @@
                       "size":  1702
                   },
                   {
+                      "path":  "assets/instrument-dark.svg",
+                      "sha256":  "a6c6dd345b1255e9d1d273117700a7893fb443db3c0c45b87868bbf01c64abf3",
+                      "size":  1051
+                  },
+                  {
+                      "path":  "assets/instrument-dark-still.svg",
+                      "sha256":  "a43a114beb0704382de98950898fe6d3e3c88ac07ca6925c0f735680fb357df7",
+                      "size":  927
+                  },
+                  {
+                      "path":  "assets/instrument-light.svg",
+                      "sha256":  "9b9462679262dc8e18fcdab32e87f60b3e3917fc7b7343dff28cf7d8598a563f",
+                      "size":  1051
+                  },
+                  {
+                      "path":  "assets/instrument-light-still.svg",
+                      "sha256":  "a4d1ae60bfabe07d5de226ada7e628ca1ad62fbc2b63044923dda8c76ec92f02",
+                      "size":  927
+                  },
+                  {
                       "path":  "assets/rail-dark.svg",
                       "sha256":  "6343465330bb9eb2cf3c266b9b8124e7499d4fcfe3a74316e3a97565050fbc72",
                       "size":  885
@@ -53,57 +73,77 @@
                   },
                   {
                       "path":  "assets/rhine-lab-dark.json",
-                      "sha256":  "a17908c4ae2e5c10b4a016256bfb2e4a0c4f722a4577ad6c06e37b99b3eea70f",
-                      "size":  564
+                      "sha256":  "7b4d73d6fa793486e9f5d8add2b70e8c0db3aa54f516af02b41c0fb2ad1851d9",
+                      "size":  544
                   },
                   {
                       "path":  "assets/rhine-lab-light.json",
-                      "sha256":  "0b48573146071adc6ad3b8ae5522264f7f7ab120d945f24cd8ea74a4e6e0e85f",
-                      "size":  565
+                      "sha256":  "28bfd225047f6955847b00727f6eb01bbb16bb2278917223fc17fa1b2787a5d6",
+                      "size":  545
                   },
                   {
                       "path":  "assets/structure-dark.svg",
-                      "sha256":  "7096b068244eecbad9b0e27d5b944508b05a4cec98b77f7c459e04503c4992ed",
-                      "size":  1331
+                      "sha256":  "b632a99c6b683d0b95d26e4b5ea42d078d2fe1c1488804a09204ef78e100d029",
+                      "size":  977
                   },
                   {
                       "path":  "assets/structure-dark-still.svg",
-                      "sha256":  "0810c9dc210d43e1d611497567872a59023635715c8c6ee9ed49d1d664ce7b6f",
-                      "size":  1078
+                      "sha256":  "b632a99c6b683d0b95d26e4b5ea42d078d2fe1c1488804a09204ef78e100d029",
+                      "size":  977
                   },
                   {
                       "path":  "assets/structure-light.svg",
-                      "sha256":  "629f82ddac665d5618cb34f737aa16ba9db8383f8c03b6edbaacc71001779d74",
-                      "size":  1331
+                      "sha256":  "1e93ba87d71f253a245972357807c1c212845471178fffa63bae42295c623f10",
+                      "size":  977
                   },
                   {
                       "path":  "assets/structure-light-still.svg",
-                      "sha256":  "fad398e984acc7284b51f16e94bf2037f7a5e5fa0747ba3775d3cf80022f13c4",
-                      "size":  1078
+                      "sha256":  "1e93ba87d71f253a245972357807c1c212845471178fffa63bae42295c623f10",
+                      "size":  977
+                  },
+                  {
+                      "path":  "assets/terminal-dark.svg",
+                      "sha256":  "36be3639b99bbdc7c0207d039268de128057f638a1fd4f833d6fc493589d77ce",
+                      "size":  608
+                  },
+                  {
+                      "path":  "assets/terminal-dark-still.svg",
+                      "sha256":  "36be3639b99bbdc7c0207d039268de128057f638a1fd4f833d6fc493589d77ce",
+                      "size":  608
+                  },
+                  {
+                      "path":  "assets/terminal-light.svg",
+                      "sha256":  "afe8624225aa678442ec4c4ff9be06faabd8bb852e71b010687d60690e8c50e7",
+                      "size":  608
+                  },
+                  {
+                      "path":  "assets/terminal-light-still.svg",
+                      "sha256":  "afe8624225aa678442ec4c4ff9be06faabd8bb852e71b010687d60690e8c50e7",
+                      "size":  608
                   },
                   {
                       "path":  "assets/theme.css",
-                      "sha256":  "69c70b28e9901b319082cec288512252f3a8182e8f5364440d8b281cd3a294d0",
-                      "size":  1871
+                      "sha256":  "8c2eac8e5b053c6c82327c932ab3605b80c898003a5d7f41c5998cba5be27d8c",
+                      "size":  10604
                   },
                   {
                       "path":  "assets/watermark-dark.svg",
-                      "sha256":  "4786da44b053a724f4026be1ee676f28871db3816552a908d40e248b982d060f",
-                      "size":  1554000
+                      "sha256":  "40cf53ccb18ec495d906438aca8b88fde0e84f17fe46e7462ffcf75d24e88876",
+                      "size":  1553999
                   },
                   {
                       "path":  "assets/watermark-dark-still.svg",
-                      "sha256":  "77b79c4426ba127e9318f1bb705b52824e526142a93511a268b188da40aaf87e",
-                      "size":  707
+                      "sha256":  "942063aa3cc91d61c629701213f5e1c561f4ff09c65e6be2098636518985d1b3",
+                      "size":  706
                   },
                   {
                       "path":  "assets/watermark-light.svg",
-                      "sha256":  "8da6fa7ecf1662bfb2975af45c0e49edea95f17adaa8237c70258296f85df9d9",
+                      "sha256":  "9806b4dbced011ea5f41150913a299b4b03151ba7771494dc040ab2e69aaab4f",
                       "size":  1553999
                   },
                   {
                       "path":  "assets/watermark-light-still.svg",
-                      "sha256":  "489a99261ff2a4f5c82e37a9790028288e09af9c1a572d0ee9615b549bcca868",
+                      "sha256":  "14f79a61c5bb9cf1758aea639739756139495cc737eaf05c8a27c35eb253bfea",
                       "size":  706
                   },
                   {
@@ -113,8 +153,8 @@
                   },
                   {
                       "path":  "engine.mjs",
-                      "sha256":  "e4a314372760654c620f615b5e011283eef6752c85c9e87fe7f8348db899f28d",
-                      "size":  5892
+                      "sha256":  "06d7429387a3d033e0f1e123584a20f62811cf7490884f397d0b8cc260bf83c9",
+                      "size":  5916
                   },
                   {
                       "path":  "install.ps1",
@@ -143,12 +183,12 @@
                   },
                   {
                       "path":  "renderer.js",
-                      "sha256":  "f9f8142df644d36d269ed4b1b996c9c6639dfa1f64f37bc8971855447ed0f66c",
-                      "size":  3249
+                      "sha256":  "0a344cd3ba13aa20ac9ef4ca49f2279549eb65ba729797954c23583d614986a4",
+                      "size":  8299
                   },
                   {
                       "path":  "RhineLabTheme.exe",
-                      "sha256":  "472a6881216a3e64c5dcc416c3b782e53c8071016b39627c9811f38f1032b713",
+                      "sha256":  "16c07f3c763257513460eb0dff939d701508dc81a35c8938ce9fa365a7dba92e",
                       "size":  50688
                   },
                   {
@@ -213,5 +253,5 @@
                   }
               ],
     "id":  "rhine-lab",
-    "version":  "1.1.1"
+    "version":  "1.2.0"
 }

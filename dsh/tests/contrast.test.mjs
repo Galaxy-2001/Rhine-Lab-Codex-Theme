@@ -9,7 +9,7 @@ function luminance(hex) {
 }
 function contrast(a,b) {const values=[luminance(a),luminance(b)].sort((a,b)=>b-a);return (values[0]+.05)/(values[1]+.05);}
 const css=readFileSync('skins/rhine-lab/skin.css','utf8');
-const light=css.match(/:root\s*\{([^}]+)\}/)[1];
+const light=css.match(/:root(?:,\s*body)?\s*\{([^}]+)\}/)[1];
 const dark=css.match(/body\[data-ds-dark-theme\]\s*\{([^}]+)\}/)[1];
 function token(block,name) {return block.match(new RegExp(name+':\\s*(#[A-Fa-f\\d]{6});'))?.[1];}
 

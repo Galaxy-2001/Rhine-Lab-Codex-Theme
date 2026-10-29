@@ -24,7 +24,7 @@ $runtimeNames+=@('startup-state.ps1')
 $runtimeNames+=@(Get-ChildItem -LiteralPath (Join-Path $runtime 'assets') -Filter '*.svg' -File|ForEach-Object{'assets/'+$_.Name})
 $entries=@(foreach($name in $runtimeNames|Sort-Object){$file=Get-Item -LiteralPath (Join-Path $runtime $name);if($file.Attributes -band [IO.FileAttributes]::ReparsePoint){throw 'Package file is a link.'};@{path=$name;sha256=(Get-FileHash -LiteralPath $file.FullName).Hash.ToLowerInvariant();size=$file.Length}})
 $manifest=@{id='rhine-lab';version=$version;runtime='official-store-cdp';files=$entries}
-[IO.File]::WriteAllText((Join-Path $runtime 'manifest.json'),($manifest|ConvertTo-Json -Depth 5),[Text.UTF8Encoding]::new($false))
+[IO.File]::WriteAllText((Join-Path $runtime 'manifest.json'),(($manifest|ConvertTo-Json -Depth 5) -replace "`r`n","`n"),[Text.UTF8Encoding]::new($false))
 $dist=Join-Path $root 'dist';New-Item -ItemType Directory -Path $dist -Force|Out-Null
 $stage=Join-Path $dist ('build-'+[Guid]::NewGuid().ToString('N'));New-Item -ItemType Directory -Path $stage|Out-Null
 Add-Type -AssemblyName System.IO.Compression
@@ -49,6 +49,7 @@ try{
   $userFiles=$rootFiles+$documents+$runtimeFiles+$skillTemplate+@('scripts/entry.ps1')+@($commands.Keys)
   $sourceFiles=$userFiles+@('scripts/build.ps1','scripts/generate-watermark.mjs','scripts/ribbon-geometry.mjs','tests/ribbon.test.mjs','tests/appearance.test.mjs','tests/package.test.ps1')
   $sourceFiles+=@('tests/startup.test.ps1')
+  $sourceFiles+=@('scripts/generate-pioneer.mjs','tests/pioneer.test.mjs')
   Write-RhineZip (Join-Path $dist ('Rhine-Lab-Codex-Theme-'+$version+'-Windows.zip')) $root $userFiles 'Rhine-Lab-Codex-Theme'
   Write-RhineZip (Join-Path $dist ('Rhine-Lab-Codex-Theme-'+$version+'-Source.zip')) $root $sourceFiles 'Rhine-Lab-Codex-Theme'
   $skill=Join-Path $stage 'rhine-lab-theme';New-Item -ItemType Directory -Path $skill|Out-Null

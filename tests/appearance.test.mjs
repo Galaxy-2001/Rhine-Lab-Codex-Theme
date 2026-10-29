@@ -11,12 +11,12 @@ await fs.writeFile(config,Buffer.concat([Buffer.from([239,187,191]),Buffer.from(
 await changeAppearance('apply',config,state);
 let bytes=await fs.readFile(config);assert.deepEqual([...bytes.subarray(0,3)],[239,187,191]);
 let data=TOML.parse(bytes.toString('utf8').replace(/^\uFEFF/,''));
-assert.equal(data.model,'sample');assert.equal(data.desktop.sidebarWidth,410);assert.equal(data.desktop.appearanceTheme,'dark');assert.equal(data.desktop.appearanceLightChromeTheme.surface,'#ECEDE8');assert.equal(data.projects['D:/example'].trust_level,'trusted');
+assert.equal(data.model,'sample');assert.equal(data.desktop.sidebarWidth,410);assert.equal(data.desktop.appearanceTheme,'dark');assert.equal(data.desktop.appearanceLightChromeTheme.surface,'#EEE9DD');assert.equal(data.projects['D:/example'].trust_level,'trusted');
 await changeAppearance('apply',config,state);await changeAppearance('restore',config,state);
 data=TOML.parse((await fs.readFile(config,'utf8')).replace(/^\uFEFF/,''));assert.deepEqual(data,TOML.parse(original));
 assert.equal((await changeAppearance('restore',config,state)).changed,false);
 await changeAppearance('apply',config,state);
-let edited=(await fs.readFile(config,'utf8')).replace('appearanceTheme = "dark"','appearanceTheme = "light"').replace('#ECEDE8','#ABCDEF');await fs.writeFile(config,edited);
+let edited=(await fs.readFile(config,'utf8')).replace('appearanceTheme = "dark"','appearanceTheme = "light"').replace('#EEE9DD','#ABCDEF');await fs.writeFile(config,edited);
 await changeAppearance('restore',config,state);
 data=TOML.parse((await fs.readFile(config,'utf8')).replace(/^\uFEFF/,''));assert.equal(data.desktop.appearanceTheme,'light');assert.equal(data.desktop.appearanceLightChromeTheme.surface,'#ABCDEF');assert.equal(data.desktop.sidebarWidth,410);
 const inline='model="sample"\n[desktop]\nappearanceLightChromeTheme={accent="#123456"}\nkeep=true\n';
