@@ -2,19 +2,23 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFileSync,mkdirSync} from 'node:fs';
 import {resolve} from 'node:path';
-import {chromium} from '../dsh/node_modules/playwright/index.mjs';
-import {transformSkinCss} from '../dsh/node_modules/@linxin666/dsh-client-ui-skin-center/lib/index.js';
+import {launchBrowser} from './browser.mjs';
+import {buildArtCss} from '../runtime/art.mjs';
 
 const root=resolve(import.meta.dirname,'..');
 const read=p=>readFileSync(resolve(root,p),'utf8');
-const css=read('runtime/assets/theme.css'),renderer=read('runtime/renderer.js');
-const dshCss=transformSkinCss(read('dsh/skins/rhine-lab/skin.css'),{skinId:'rhine-lab',filename:'skin.css'}).code;
-const art={};
-for(const mode of ['light','dark'])for(const motion of ['motion','still']){
-  const group={};
-  for(const kind of ['identity','watermark','rail','structure','terminal','instrument'])group[kind]='data:image/svg+xml;base64,'+Buffer.from(read(`runtime/assets/${kind}-${mode}${motion==='still'?'-still':''}.svg`)).toString('base64');
-  art[`${mode}-${motion}`]=group;
-}
+const themeCss=read('runtime/assets/theme.css'),renderer=read('runtime/renderer.js');
+// The engine appends the generated artwork rules to the stylesheet.
+const css=themeCss+'\n'+buildArtCss(resolve(root,'runtime/assets'));
+// The DeepSeek Harness branch runs when its own dependencies are installed
+// (npm ci in dsh/); the Codex branch only needs the root devDependencies.
+let dshCss=null;
+try{
+  const {transformSkinCss}=await import('../dsh/node_modules/@linxin666/dsh-client-ui-skin-center/lib/index.js');
+  dshCss=transformSkinCss(read('dsh/skins/rhine-lab/skin.css'),{skinId:'rhine-lab',filename:'skin.css'}).code;
+}catch{console.log('# DSH skin center not installed: DSH layout branch skipped.');}
+const clients=dshCss?['codex','dsh']:['codex'];
+const dataUrls=value=>(value.match(/url\("data:/g)||[]).length;
 function fixture(client,mode,settings=false){
   // Native public hooks, with synthetic content. This is an isolated layout
   // fixture, not a screenshot or verification of a running desktop client.
@@ -31,14 +35,14 @@ function fixture(client,mode,settings=false){
 }
 
 test('Pioneer paint preserves native chat geometry, settings controls and theme removal',async()=>{
-  const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'});
+  const browser=await launchBrowser();
   try{
     const page=await browser.newPage({viewport:{width:1120,height:820}});
     const errors=[];page.on('pageerror',error=>errors.push(error.message));
-    for(const client of ['codex','dsh'])for(const mode of ['light','dark'])for(const settings of [false,true]){
+    for(const client of clients)for(const mode of ['light','dark'])for(const settings of [false,true]){
       await page.setContent(fixture(client,mode,settings));
       const before=await page.locator('main').boundingBox();
-      if(client==='codex')await page.evaluate(`(${renderer})(${JSON.stringify({version:'pioneer-test',enabled:true,motion:true,css,art})})`);
+      if(client==='codex')await page.evaluate(`(${renderer})(${JSON.stringify({version:'pioneer-test',enabled:true,motion:true,css})})`);
       else{
         // URLs use the same bytes as the native CSS loader, embedded only for
         // file-independent regression. Published CSS keeps local asset URLs.
@@ -51,9 +55,20 @@ test('Pioneer paint preserves native chat geometry, settings controls and theme 
       if(settings){
         const toggle=page.getByLabel('仪表动画');await toggle.uncheck();assert.equal(await toggle.isChecked(),false);
         const painted=client==='codex'?'[data-rhine-surface="settings"]':'[data-dsh-surface="settings"]';assert.notEqual(await page.locator(painted).evaluate(el=>getComputedStyle(el).backgroundImage),'none');
+        if(client==='codex'){
+          // Settings keep the ruler and grid; the mark would only show between cards.
+          assert.equal(dataUrls(await page.locator(painted).evaluate(el=>getComputedStyle(el).backgroundImage)),2);
+          assert.equal(await page.locator('html').getAttribute('data-rhine-motion'),'off');
+        }
       }else{
         await page.getByRole('textbox').fill('本地排版测试');assert.equal(await page.getByRole('textbox').textContent(),'本地排版测试');
-        if(client==='codex')assert.equal(await page.locator('[data-rhine-part="new-chat"]').count(),1);
+        if(client==='codex'){
+          assert.equal(await page.locator('[data-rhine-part="new-chat"]').count(),1);
+          // The empty chat page animates; the grid tiles at 44px over the whole surface.
+          assert.equal(await page.locator('html').getAttribute('data-rhine-motion'),'on');
+          const surface=await page.locator('main').evaluate(el=>{const s=getComputedStyle(el);return {image:s.backgroundImage,repeat:s.backgroundRepeat,size:s.backgroundSize}});
+          assert.equal(dataUrls(surface.image),3);assert.match(surface.repeat,/, repeat$/);assert.match(surface.size,/44px 44px$/);
+        }
       }
       if(process.env.RHINE_CAPTURE==='1'){
         await page.evaluate(()=>{
@@ -76,16 +91,27 @@ test('Pioneer paint preserves native chat geometry, settings controls and theme 
   }finally{await browser.close()}
 });
 
-test('all four central assets use the approved 16 percent without changing ribbon entry mechanics',()=>{
-  for(const prefix of ['runtime/assets','dsh/skins/rhine-lab/assets'])for(const mode of ['light','dark']){
+test('central assets keep matched light / dark strength without changing ribbon entry mechanics',()=>{
+  // Codex dark mode lowers opacity so folds and mark read like the 16% light
+  // version; DeepSeek Harness keeps its released 16% assets.
+  const strength={'runtime/assets':{light:['.16','.16'],dark:['.08','.12']},'dsh/skins/rhine-lab/assets':{light:['.16','.16'],dark:['.16','.16']}};
+  for(const [prefix,modes] of Object.entries(strength))for(const [mode,[fold,flat]] of Object.entries(modes)){
     const motion=read(`${prefix}/watermark-${mode}.svg`),still=read(`${prefix}/watermark-${mode}-still.svg`);
-    assert.match(motion,/<g opacity="\.16" filter=/);assert.match(still,/<g opacity="\.16">/);
+    assert.ok(motion.includes(`<g opacity="${fold}" filter=`),`${prefix} ${mode} fold`);assert.ok(still.includes(`<g opacity="${flat}">`),`${prefix} ${mode} still`);
     assert.match(motion,/scale\(0\) rotate\(-90deg\)/);assert.match(motion,/scale\(\.008,1\)/);
+  }
+  for(const mode of ['light','dark']){
+    // The Codex cycle enters on the flat mark, so still -> motion is seamless.
+    const motion=read(`runtime/assets/watermark-${mode}.svg`);
+    assert.match(motion,/\.flat\{animation:rhine-flat-visible 14s ease-in-out -6\.44s infinite\}/);
+    assert.ok(motion.includes('begin="-6.44s"'));assert.match(motion,/\.rhine-ribbon\{animation:rhine-gap 6s linear infinite\}/);
+    // A <mask> in the static layers is re-rasterised on every watermark frame.
+    for(const kind of ['grid','ring'])assert.doesNotMatch(read(`runtime/assets/${kind}-${mode}.svg`),/<mask/);
   }
 });
 
 test('desktop rail, launch header, recycled rows and div composer stay in their native regions',async()=>{
-  const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'});
+  const browser=await launchBrowser();
   try{
     const page=await browser.newPage({viewport:{width:1225,height:830}});
     const errors=[];page.on('pageerror',e=>errors.push(e.message));
@@ -97,7 +123,7 @@ test('desktop rail, launch header, recycled rows and div composer stay in their 
         *{box-sizing:border-box}body{margin:0;font:14px Arial}aside{position:absolute;top:44px;bottom:4px;width:${width}px}.absolute{position:absolute;inset:0;display:flex}.rail{width:52px;flex:none;background:#ddd}.rail button{width:36px;height:36px;margin:8px}.navigation{flex:1;min-width:0;overflow:hidden}.navigation nav{height:100%;display:flex;flex-direction:column}.header{padding:0 8px;flex:none}.native-title{height:52px;display:flex;align-items:center}.launch{display:flex;flex-direction:column;margin-bottom:8px}.sidebar-item{display:flex;width:100%;height:32px;flex-shrink:0}.scroll{flex:1;min-height:0;overflow:auto}.row{height:32px;margin:4px 8px}.separator{position:absolute;top:0;bottom:0;right:-8px;width:16px}.icon{width:24px;height:24px}.main{position:absolute;left:${width}px;top:44px;right:0;bottom:4px}.chat{height:75%;padding:30px}.compose{margin:0 28px;height:98px;border-radius:22px;background:#eee}.ProseMirror{height:44px;padding:14px}.rail button,.icon{border:0}
       </style><aside class="app-shell-left-panel"><div class="absolute"><nav class="rail" data-app-navigation-rail><button aria-current="page" data-sidebar-destination="home">H</button></nav><div class="navigation" data-sidebar-navigation-root><nav><div class="header"><div class="native-title">Codex</div><div class="launch group/nav-list"><div data-codex-tab-conversation-drop-target><button class="sidebar-item" id="launch">新聊天</button></div></div></div><div class="scroll" data-app-action-sidebar-scroll>${Array.from({length:40},(_,i)=>`<div class="row" role="button" data-app-action-sidebar-thread-row ${i===0?'data-app-action-sidebar-thread-selected="true"':''}>${i===1?'新聊天':'示例会话 '+i}<button class="icon" aria-label="新聊天">+</button></div>`).join('')}</div></nav></div></div><div class="separator" role="separator"></div></aside><main class="main" data-app-shell-main-surface><div class="chat">隔离布局检查</div><div class="compose" data-composer-surface-variant="default"><div class="ProseMirror" contenteditable>草稿</div></div></main></html>`);
       const before=await page.locator('.main').boundingBox(),composeBefore=await page.locator('.compose').boundingBox();
-      await page.evaluate(`(${renderer})(${JSON.stringify({version:'native-test',enabled:true,motion:false,css,art})})`);
+      await page.evaluate(`(${renderer})(${JSON.stringify({version:'native-test',enabled:true,motion:false,css})})`);
       await page.waitForFunction(()=>document.querySelector('[data-rhine-launcher]'));
       const layout=await page.evaluate(()=>{
         const box=s=>{const r=document.querySelector(s).getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,b:r.bottom}};
@@ -128,17 +154,17 @@ test('desktop rail, launch header, recycled rows and div composer stay in their 
 });
 
 test('brand chrome and two-line native header retain controls and responsive hit areas',async()=>{
-  const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'});
+  const browser=await launchBrowser();
   try{
     const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
     for(const mode of ['light','dark'])for(const width of [1225,850,640,510]){
       await page.setViewportSize({width,height:830});
       await page.setContent(`<!doctype html><html data-theme="${mode}"><style>
       *{box-sizing:border-box}body{margin:0;font:14px Arial;--app-shell-titlebar-height:8px;--app-shell-header-height:52px}.frame{height:830px;position:relative}.native-top{height:36px;width:100%;display:flex;align-items:center;padding-left:6px;-webkit-app-region:drag}.nav-tools{width:102px;display:flex;flex:none}.nav-tools button{width:28px;height:28px}.native-top [role=menubar]{display:flex;padding:0 8px 0 4px;gap:2px}.native-top button{height:28px;border:0;color:var(--color-text-tertiary,#444);background:none;-webkit-app-region:no-drag;white-space:nowrap}.native-top [role=menuitem]{padding:0 10px}.caption{position:absolute;right:0;top:0;width:136px;height:36px;pointer-events:none}.page-head{--app-shell-titlebar-height:52px;position:absolute;left:0;top:44px;right:0;height:52px;display:flex;pointer-events:none;-webkit-app-region:drag}.native-toolbar{position:absolute;left:0;right:0;top:0;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 26px}.native-toolbar button{pointer-events:auto;-webkit-app-region:no-drag}main{position:absolute;left:0;right:0;top:44px;bottom:0}.workspace{height:100%;padding-top:52px;display:flex;flex-direction:column}.thread{flex:1;min-height:0;overflow:auto}.message{height:900px;padding:30px}.composer{height:98px;flex:none;margin:10px 26px;padding:20px}
-      </style><div class="frame"><div class="native-top _ApplicationMenuTopBar_fixture"><div class="nav-tools"><button id="back">←</button><button>→</button><button>☷</button></div><div role="menubar"><button role="menuitem" id="menu">文件</button><button role="menuitem">编辑</button><button role="menuitem">视图</button><button role="menuitem">帮助</button></div></div><div class="caption"></div><main data-app-shell-main-surface><div class="workspace _WorkspaceContent_fixture"><div class="thread"><div class="message">主题效果检查</div></div><div class="composer" data-composer-surface-variant="default"><div class="ProseMirror" contenteditable>保留草稿</div></div></div></main><header class="page-head" data-app-shell-titlebar data-app-shell-header-layout="thread-edge-scroll"><div class="native-toolbar"><span>莱茵生命研究所 / 实验记录</span><button id="action">原生操作</button></div></header></div>`);
+      </style><div class="frame"><div class="native-top ${mode==='light'?'_ApplicationMenuTopBar_fixture':'ApplicationMenuTopBar-fixture'}"><div class="nav-tools"><button id="back">←</button><button>→</button><button>☷</button></div><div role="menubar"><button role="menuitem" id="menu">文件</button><button role="menuitem">编辑</button><button role="menuitem">视图</button><button role="menuitem">帮助</button></div></div><div class="caption"></div><main data-app-shell-main-surface><div class="workspace ${mode==='light'?'_WorkspaceContent_fixture':'WorkspaceContent-fixture'}"><div class="thread"><div class="message" data-content-search-turn-key="turn-1">主题效果检查</div></div><div class="composer" data-composer-surface-variant="default"><div class="ProseMirror" contenteditable>保留草稿</div></div></div></main><header class="page-head" data-app-shell-titlebar data-app-shell-header-layout="thread-edge-scroll"><div class="native-toolbar"><span>莱茵生命研究所 / 实验记录</span><button id="action">原生操作</button></div></header></div>`);
       await page.evaluate(()=>{window.events=[];window.originalButtons=[...document.querySelectorAll('button')];for(const b of window.originalButtons)b.addEventListener('click',()=>window.events.push(b.id||'other'));});
       const mainBefore=await page.locator('main').boundingBox(),composeBefore=await page.locator('.composer').boundingBox();
-      const payload={version:'chrome-test',enabled:true,motion:false,css,art};
+      const payload={version:'chrome-test',enabled:true,motion:true,css};
       await page.evaluate(`(${renderer})(${JSON.stringify(payload)})`);
       const geometry=await page.evaluate(()=>{
         const rect=s=>{const e=document.querySelector(s),r=e.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,b:r.bottom,right:r.right}};
@@ -148,14 +174,31 @@ test('brand chrome and two-line native header retain controls and responsive hit
       assert.deepEqual(await page.locator('main').boundingBox(),mainBefore);
       assert.deepEqual(await page.locator('.composer').boundingBox(),composeBefore);
       assert.equal(geometry.top.h,36);assert.equal(geometry.header.h,84);assert.equal(geometry.channel.h,32);
+      assert.match(await page.locator('[data-rhine-decoration="channel"] > :first-child').evaluate(e=>getComputedStyle(e).fontFamily),/^Bahnschrift/);
       assert.equal(geometry.thread.y,geometry.header.b);assert.equal(geometry.sameButtons,true);
       assert.ok(geometry.lastMenu.right<=geometry.caption.x,`menu enters native caption region at ${width}`);
       assert.equal(geometry.drag,'drag');assert.equal(geometry.buttonDrag,'no-drag');assert.equal(geometry.channelOverflow,false);
       assert.equal(geometry.draft,'保留草稿');assert.equal(geometry.decorations,4);
+      const report=await page.evaluate('window.__RHINE_LAB_THEME_V7__.verify()');
+      assert.equal(report.route,'thread');assert.equal(report.motion,'off','threads show the still mark');
+      assert.deepEqual(report.missingHooks,[]);assert.equal(report.hooks.chrome,true);assert.equal(report.hooks.channel,true);
+      assert.equal('watermarkOpacity' in report,false);
       for(const id of ['menu','back','action'])await page.locator('#'+id).click();
       assert.deepEqual(await page.evaluate('window.events'),['menu','back','action']);
       await page.evaluate(`(${renderer})(${JSON.stringify(payload)})`);await page.waitForTimeout(50);
       assert.equal(await page.locator('[data-rhine-decoration]').count(),4,'repeat application must not duplicate chrome');
+      // A recycled header also exists on the empty page. Removing the last
+      // turn must restart motion and release the 32px of reserved space.
+      await page.locator('.message').evaluate(e=>e.removeAttribute('data-content-search-turn-key'));
+      await page.waitForFunction(()=>document.documentElement.dataset.rhineRoute==='chat');
+      assert.equal(await page.locator('[data-rhine-decoration="channel"]').count(),0);
+      assert.equal(await page.locator('html').getAttribute('data-rhine-motion'),'on');
+      await page.locator('.workspace').evaluate(e=>e.className='workspace');
+      await page.locator('.message').evaluate(e=>e.setAttribute('data-message-author-role','user'));
+      await page.waitForFunction(()=>document.documentElement.dataset.rhineRoute==='thread');
+      const unmatched=await page.evaluate('window.__RHINE_LAB_THEME_V7__.verify()');
+      assert.equal(unmatched.motion,'off');
+      assert.deepEqual(unmatched.missingHooks,['channel']);
       await page.evaluate('window.__RHINE_LAB_THEME_V7__.setEnabled(false)');
       assert.equal(await page.locator('[data-rhine-decoration="brand"]').isVisible(),false);
       assert.equal(await page.locator('header').evaluate(e=>e.getBoundingClientRect().height),52);
@@ -171,9 +214,44 @@ test('secondary text and links retain 4.5:1 over the strongest flat watermark',(
   const lum=c=>{const a=c.map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return a[0]*.2126+a[1]*.7152+a[2]*.0722};
   const contrast=(a,b)=>(Math.max(lum(a),lum(b))+.05)/(Math.min(lum(a),lum(b))+.05);
   for(const mode of ['light','dark']){
-    const block=mode==='light'?css.slice(0,css.indexOf('[data-theme="dark"]')):css.slice(css.indexOf('[data-theme="dark"]'));
+    const block=mode==='light'?themeCss.slice(0,themeCss.indexOf('[data-theme="dark"]')):themeCss.slice(themeCss.indexOf('[data-theme="dark"]'));
     const token=name=>hex(block.match(new RegExp(name+':(#[A-Fa-f0-9]{6})'))[1]);
     const surface=token('--rhine-surface'),mark=token('--rhine-ink'),strong=surface.map((v,i)=>v*.84+mark[i]*.16);
     for(const name of ['--rhine-ink','--rhine-muted','--rhine-accent'])assert.ok(contrast(token(name),strong)>=4.5,`${mode} ${name} over 16% watermark`);
   }
+});
+
+test('New chat plus mark keeps 3:1 against the card and its hover surface',()=>{
+  const hex=s=>s.slice(1).match(/../g).map(x=>parseInt(x,16));
+  const lum=c=>{const a=c.map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return a[0]*.2126+a[1]*.7152+a[2]*.0722};
+  const contrast=(a,b)=>(Math.max(lum(a),lum(b))+.05)/(Math.min(lum(a),lum(b))+.05);
+  for(const mode of ['light','dark']){
+    const block=mode==='light'?themeCss.slice(0,themeCss.indexOf('[data-theme="dark"]')):themeCss.slice(themeCss.indexOf('[data-theme="dark"]'));
+    const token=name=>hex(block.match(new RegExp(name+':(#[A-Fa-f0-9]{6})'))[1]);
+    for(const back of ['--rhine-panel','--rhine-surface'])assert.ok(contrast(token('--rhine-plus'),token(back))>=3,`${mode} plus over ${back}`);
+  }
+});
+
+test('English New chat label, style recovery and hook reporting',async()=>{
+  const browser=await launchBrowser();
+  try{
+    const page=await browser.newPage({viewport:{width:1120,height:820}});
+    const errors=[];page.on('pageerror',e=>errors.push(e.message));
+    await page.setContent(`<!doctype html><html data-theme="light"><body><aside class="app-shell-left-panel"><div class="group/nav-list"><button class="sidebar-item" data-sidebar-destination="new-chat"><span class="icon-leading-slot"></span><div>New chat</div></button></div></aside><main data-app-shell-main-surface><div class="ProseMirror" contenteditable>draft</div></main></body></html>`);
+    await page.evaluate(`(${renderer})(${JSON.stringify({version:'label-test',enabled:true,motion:true,css})})`);
+    const label=await page.locator('[data-rhine-label="translated"]').evaluate(el=>({size:getComputedStyle(el).fontSize,after:getComputedStyle(el,'::after').content,title:getComputedStyle(el.closest('button'),'::before').content}));
+    assert.deepEqual(label,{size:'0px',after:'"新聊天"',title:'"New chat"'});
+    // The composer has no native surface wrapper here, so its hook is reported.
+    assert.deepEqual((await page.evaluate('window.__RHINE_LAB_THEME_V7__.verify()')).missingHooks,['composer']);
+    await page.evaluate(()=>document.getElementById('rhine-lab-theme-v7').remove());
+    await page.waitForFunction(()=>document.getElementById('rhine-lab-theme-v7')?.isConnected);
+    assert.equal((await page.evaluate('window.__RHINE_LAB_THEME_V7__.verify()')).stylePresent,true);
+    // A Chinese label stays as the subtitle and is not translated.
+    await page.locator('button div').evaluate(el=>{el.textContent='新聊天';});
+    await page.waitForFunction(()=>!document.querySelector('[data-rhine-label]'));
+    await page.evaluate('window.__RHINE_LAB_THEME_V7__.remove()');
+    assert.equal(await page.locator('#rhine-lab-theme-v7,[data-rhine-part],[data-rhine-label]').count(),0);
+    assert.equal(await page.locator('html').getAttribute('data-rhine-motion'),null);
+    assert.deepEqual(errors,[]);
+  }finally{await browser.close()}
 });

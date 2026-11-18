@@ -1,5 +1,7 @@
 # 验证方法与范围
 
+Node 回归：在根目录运行 `npm install`，再运行 `npm test`。布局回归在 Windows 上使用已安装的 Edge；其他系统设置 `RHINE_BROWSER` 为 Chromium 可执行文件路径，或运行 `npx playwright install chromium`。若 `dsh/` 已执行 `npm ci`，同一测试会顺带检查 DSH 布局分支，否则跳过该分支。
+
 启动器回归：`powershell -NoProfile -ExecutionPolicy Bypass -File tests/startup.test.ps1`。在隔离环境中检查延迟就绪、启动超时、普通窗口与主题窗口并存、不可读进程身份、错误 profile/端口及外来监听。执行真实启动脚本的隔离测试会拦截进程启动和终止；不使用真实客户端。`runtime/start-official.ps1 -DiagnoseOnly` 只读检查当前连接，不启动、唤起或关闭窗口，也不改写 session 或状态文件。
 
 启动过程将阶段和明确的失败原因写入 `%LOCALAPPDATA%/RhineLabTheme7/startup-status.json`，`theme.ps1 -Action status` 会一并返回此记录。已识别的主题进程最多等待 40 秒就绪；界面加载确认最多等待 45 秒。普通窗口或无法验证身份的进程不会被自动关闭。

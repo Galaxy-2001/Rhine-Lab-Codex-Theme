@@ -10,14 +10,22 @@ const label='<text class="rhine-label" x="559" y="630" text-anchor="middle" font
 const keyTimes=schedule.map(f=>f.time).join(';');
 const frames=schedule.map(f=>buildRibbon(f.phase,f.depth));
 const order=frames[0].map((face,index)=>({index,z:face.z})).sort((a,b)=>a.z-b.z).map(f=>f.index);
+// The cycle starts on the flat mark (46% of 14s). Switching from the still
+// asset to the animated one is seamless; the ribbon unfolds a few seconds later.
+// The gap animation keeps its own 6s clock, which starts at the still offset.
+const entry='-6.44s';
+const timing=`keyTimes="${keyTimes}" dur="14s" begin="${entry}" repeatCount="indefinite"`;
 const paths=order.map(index=>{
  const values=frames.map(f=>f[index]);
- return `<path d="${values[0].d}" fill="${values[0].color}" opacity="${values[0].visible}"><animate attributeName="d" values="${values.map(f=>f.d).join(';')}" keyTimes="${keyTimes}" dur="14s" repeatCount="indefinite"/><animate attributeName="fill" values="${values.map(f=>f.color).join(';')}" keyTimes="${keyTimes}" dur="14s" repeatCount="indefinite"/><animate attributeName="opacity" values="${values.map(f=>f.visible).join(';')}" keyTimes="${keyTimes}" dur="14s" repeatCount="indefinite"/></path>`;
+ return `<path d="${values[0].d}" fill="${values[0].color}" opacity="${values[0].visible}"><animate attributeName="d" values="${values.map(f=>f.d).join(';')}" ${timing}/><animate attributeName="fill" values="${values.map(f=>f.color).join(';')}" ${timing}/><animate attributeName="opacity" values="${values.map(f=>f.visible).join(';')}" ${timing}/></path>`;
 }).join('');
+// Matched by luminance contrast: light paper folds read far stronger on the
+// dark surface, so dark mode uses lower opacities for the same presence.
+const strength={light:{fold:'.16',flat:'.16'},dark:{fold:'.08',flat:'.12'}};
 for(const mode of ['light','dark']){
  const flat=mode==='light'?'#292923':'#D7D4C9';
- // The approved 16% applies to the artwork alone, never to a chat ancestor.
- const foldOpacity='.16',flatOpacity='.16';
+ // Opacity applies to the artwork alone, never to a chat ancestor.
+ const {fold:foldOpacity,flat:flatOpacity}=strength[mode];
  const flatMark=`<g fill="${flat}"><path d="${outline}" fill="none" stroke="${flat}" stroke-width="84" stroke-linejoin="round" stroke-dasharray="${(totalLength-81).toFixed(4)} 81" stroke-dashoffset="971.5530" class="rhine-ribbon"/>${plus}${minus}${label}</g>`;
  const style=`<style>
 @keyframes rhine-fold-visible{0%,34%{opacity:1}45%,88%{opacity:0}100%{opacity:1}}
@@ -26,12 +34,12 @@ for(const mode of ['light','dark']){
 @keyframes rhine-plus-entry{0%,35%{transform:scale(0) rotate(-90deg)}44%,88%{transform:scale(1) rotate(0deg)}100%{transform:scale(0) rotate(-90deg)}}
 @keyframes rhine-minus-entry{0%,36%{transform:scale(.008,1)}44%,88%{transform:scale(1,1)}100%{transform:scale(.008,1)}}
 @keyframes rhine-label-entry{0%,36%{opacity:0}46%,88%{opacity:1}100%{opacity:0}}
-.folded{animation:rhine-fold-visible 14s ease-in-out infinite}
-.flat{animation:rhine-flat-visible 14s ease-in-out infinite}
+.folded{animation:rhine-fold-visible 14s ease-in-out ${entry} infinite}
+.flat{animation:rhine-flat-visible 14s ease-in-out ${entry} infinite}
 .rhine-ribbon{animation:rhine-gap 6s linear infinite}
-.rhine-plus{animation:rhine-plus-entry 14s cubic-bezier(.22,.61,.36,1) infinite;transform-origin:0 0}
-.rhine-minus{animation:rhine-minus-entry 14s cubic-bezier(.22,.61,.36,1) infinite;transform-origin:0 0}
-.rhine-label{animation:rhine-label-entry 14s ease-out infinite}
+.rhine-plus{animation:rhine-plus-entry 14s cubic-bezier(.22,.61,.36,1) ${entry} infinite;transform-origin:0 0}
+.rhine-minus{animation:rhine-minus-entry 14s cubic-bezier(.22,.61,.36,1) ${entry} infinite;transform-origin:0 0}
+.rhine-label{animation:rhine-label-entry 14s ease-out ${entry} infinite}
 @media(prefers-reduced-motion:reduce){.folded{display:none}.flat{animation:none;opacity:1}.rhine-ribbon,.rhine-plus,.rhine-minus,.rhine-label{animation:none;transform:none;opacity:1}}
 </style>`;
  const motion=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1118 680" aria-label="Rhine Lab rotating folded ribbon and flat symbol">${style}<defs><filter id="soft-contact" x="-8%" y="-12%" width="116%" height="124%"><feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#67573C" flood-opacity=".24"/></filter></defs><g class="folded"><g opacity="${foldOpacity}" filter="url(#soft-contact)">${paths}</g></g><g class="flat" opacity="0"><g opacity="${flatOpacity}">${flatMark}</g></g></svg>\n`;
@@ -39,4 +47,4 @@ for(const mode of ['light','dark']){
  await fs.writeFile(path.join(output,`watermark-${mode}.svg`),motion);
  await fs.writeFile(path.join(output,`watermark-${mode}-still.svg`),still);
 }
-console.log('Generated canonical 3D ribbon, normal-based lighting and symbol entry animations.');
+console.log('Generated canonical 3D ribbon, normal-based lighting and symbol entry animations (flat-phase entry).');

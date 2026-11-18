@@ -14,7 +14,11 @@ class RhineManager : ApplicationContext {
   public const string AppId="RhineLab.Codex.Theme";
   readonly string root=AppDomain.CurrentDomain.BaseDirectory;
   readonly string state=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"RhineLabTheme7");
-  NotifyIcon icon; System.Windows.Forms.Timer timer; HashSet<IntPtr> bound=new HashSet<IntPtr>(); bool busy; string lastBindingError;
+  const string IdleText="莱茵生命 · Codex 主题",BusyText="莱茵生命 · Codex 主题（处理中…）";
+  NotifyIcon icon; System.Windows.Forms.Timer timer; HashSet<IntPtr> bound=new HashSet<IntPtr>(); string lastBindingError,lastUnmanagedError;
+  // UI state (busy, menu, icon) is only touched on the UI thread; worker
+  // results are posted back through this context.
+  SynchronizationContext ui; ContextMenuStrip menu; ToolStripMenuItem themeItem,motionItem,restoreItem; bool busy;
   [STAThread] static void Main(string[] args) {
     try {
       if(args.Length==3 && args[0]=="--make-link") { MakeLink(args[1],args[2]);return; }
@@ -31,22 +35,46 @@ class RhineManager : ApplicationContext {
     } catch(Exception e) { Environment.ExitCode=1;if(args.Length>0)Console.Error.WriteLine(e.Message);else MessageBox.Show(e.Message,"莱茵生命主题"); }
   }
   RhineManager() {
-    var menu=new ContextMenuStrip();
-    menu.Items.Add("应用莱茵生命主题",null,(s,e)=>Run("enable"));
-    menu.Items.Add("暂停主题",null,(s,e)=>Run("disable"));
-    menu.Items.Add("开启缺口动画",null,(s,e)=>Run("motion-on"));
-    menu.Items.Add("暂停缺口动画",null,(s,e)=>Run("motion-off"));
+    menu=new ContextMenuStrip();
+    ui=SynchronizationContext.Current??new WindowsFormsSynchronizationContext();
+    // Two switches show the remembered state instead of four one-way commands.
+    themeItem=new ToolStripMenuItem("莱茵生命主题",null,(s,e)=>Run(themeItem.Checked?"disable":"enable"));
+    motionItem=new ToolStripMenuItem("折片与缺口动画",null,(s,e)=>Run(motionItem.Checked?"motion-off":"motion-on"));
+    restoreItem=new ToolStripMenuItem("恢复官方外观与桌面入口",null,(s,e)=>Run("restore"));
+    menu.Items.Add(themeItem);menu.Items.Add(motionItem);
     menu.Items.Add(new ToolStripSeparator());
-    menu.Items.Add("恢复官方外观与桌面入口",null,(s,e)=>Run("restore"));
+    menu.Items.Add(restoreItem);
     menu.Items.Add("打开主题文件夹",null,(s,e)=>Process.Start(root));
     menu.Items.Add("退出主题管理",null,(s,e)=>{icon.Visible=false;Application.Exit();});
+    menu.Opening+=(s,e)=>RefreshMenu();
     string iconFile=Path.Combine(root,"assets","codex-white.ico");
-    icon=new NotifyIcon{Icon=File.Exists(iconFile)?new Icon(iconFile):SystemIcons.Application,Text="莱茵生命 · Codex 主题",ContextMenuStrip=menu,Visible=true};
+    icon=new NotifyIcon{Icon=File.Exists(iconFile)?new Icon(iconFile):SystemIcons.Application,Text=IdleText,ContextMenuStrip=menu,Visible=true};
     icon.DoubleClick+=(s,e)=>Run("start");
     timer=new System.Windows.Forms.Timer{Interval=1500};timer.Tick+=(s,e)=>BindOfficialWindows();timer.Start();Run("start");
   }
+  Dictionary<string,object> ReadPreferences() {
+    try {
+      string file=Path.Combine(state,"preferences.json");
+      if(File.Exists(file))return new JavaScriptSerializer().Deserialize<Dictionary<string,object>>(File.ReadAllText(file));
+    }catch{}
+    return new Dictionary<string,object>();
+  }
+  static bool Flag(Dictionary<string,object> values,string name,bool fallback) {
+    object value;
+    return values.TryGetValue(name,out value)&&(value is bool)?(bool)value:fallback;
+  }
+  void RefreshMenu() {
+    var preferences=ReadPreferences();
+    themeItem.Checked=Flag(preferences,"enabled",true)&&!Flag(preferences,"restored",false);
+    motionItem.Checked=Flag(preferences,"motion",true);
+    themeItem.Enabled=motionItem.Enabled=restoreItem.Enabled=!busy;
+  }
+  void SetBusy(bool value) {
+    busy=value;icon.Text=value?BusyText:IdleText;RefreshMenu();
+  }
   void Run(string action) {
-    if(busy)return;busy=true;
+    if(busy)return;
+    SetBusy(true);
     Task.Factory.StartNew(()=>{
       string failure=null;
       try {
@@ -58,10 +86,13 @@ class RhineManager : ApplicationContext {
           else if(action=="start"||action=="enable")ShowOfficialWindow();
         }
       }catch(Exception e){failure=e.Message;}
-      busy=false;
-      if(failure!=null)icon.ShowBalloonTip(5000,"莱茵生命主题",failure,ToolTipIcon.Warning);
-      if(action=="restore"&&failure==null){icon.Visible=false;Application.Exit();}
+      ui.Post(ignored=>Finish(action,failure),null);
     });
+  }
+  void Finish(string action,string failure) {
+    SetBusy(false);
+    if(failure!=null)icon.ShowBalloonTip(5000,"莱茵生命主题",failure,ToolTipIcon.Warning);
+    if(action=="restore"&&failure==null){icon.Visible=false;Application.Exit();}
   }
   static void ShowOfficialWindow() {
     try {
@@ -97,15 +128,17 @@ class RhineManager : ApplicationContext {
         if(themed==null)return;
         ReleaseUnthemedWindows(executable,(string)official["AppUserModelId"],themed.Id);
         var process=themed;
+        IPropertyStore store=null;
         try {if(process.MainWindowHandle!=IntPtr.Zero && !bound.Contains(process.MainWindowHandle)){
-          IPropertyStore store;Guid iid=typeof(IPropertyStore).GUID;Marshal.ThrowExceptionForHR(SHGetPropertyStoreForWindow(process.MainWindowHandle,ref iid,out store));
+          Guid iid=typeof(IPropertyStore).GUID;Marshal.ThrowExceptionForHR(SHGetPropertyStoreForWindow(process.MainWindowHandle,ref iid,out store));
           string iconResource=Path.Combine(root,"assets","codex-white.ico")+",0";
           Set(store,2,"\""+Path.Combine(root,"RhineLabTheme.exe")+"\"");Set(store,4,"Codex");Set(store,3,iconResource);Set(store,5,AppId);Marshal.ThrowExceptionForHR(store.Commit());
           var key=new PropertyKey{format=new Guid("9F4C2855-9F79-4B39-A8D0-E1D42DE1D5F3"),id=5};PropVariant current;Marshal.ThrowExceptionForHR(store.GetValue(ref key,out current));string value=Marshal.PtrToStringUni(current.pointer);Marshal.FreeCoTaskMem(current.pointer);
           if(value!=AppId)throw new Exception("Taskbar window identity was not applied: type="+current.type+", value="+value);
           Directory.CreateDirectory(state);File.WriteAllText(Path.Combine(state,"window-binding.json"),new JavaScriptSerializer().Serialize(new{pid=process.Id,window=process.MainWindowHandle.ToInt64(),appId=value,relaunch=Path.Combine(root,"RhineLabTheme.exe"),icon=iconResource}));
-          Marshal.ReleaseComObject(store);bound.Add(process.MainWindowHandle);
+          bound.Add(process.MainWindowHandle);
         }}catch(Exception error){if(error.Message!=lastBindingError){lastBindingError=error.Message;Directory.CreateDirectory(state);File.WriteAllText(Path.Combine(state,"window-binding-error.log"),error.ToString());}}
+        finally{if(store!=null)Marshal.ReleaseComObject(store);}
       }
     }catch{}
   }
@@ -124,7 +157,7 @@ class RhineManager : ApplicationContext {
           if(restored!=originalAppId)throw new Exception("The ordinary official window identity was not restored.");
           File.WriteAllText(Path.Combine(state,"unmanaged-window-restored.json"),new JavaScriptSerializer().Serialize(new{pid=process.Id,appId=restored}));
         }finally{Marshal.ReleaseComObject(store);}
-      }catch(Exception error){File.WriteAllText(Path.Combine(state,"unmanaged-window-error.log"),error.ToString());}
+      }catch(Exception error){if(error.Message!=lastUnmanagedError){lastUnmanagedError=error.Message;Directory.CreateDirectory(state);File.WriteAllText(Path.Combine(state,"unmanaged-window-error.log"),error.ToString());}}
     }
   }
   static void MakeLink(string filename,string target) {

@@ -7,139 +7,64 @@
                       "size":  5978
                   },
                   {
+                      "path":  "art.mjs",
+                      "sha256":  "14b8617b032d6642b5546aa5391d8c589a1bd2eefe4367d31eded859635e3a1b",
+                      "size":  1666
+                  },
+                  {
                       "path":  "assets/codex-white.ico",
                       "sha256":  "7c4bd139c305ac4de332c12cf4a3b10184715990afcf48b49f2478fbd1b0e19e",
                       "size":  31140
                   },
                   {
-                      "path":  "assets/identity-dark.svg",
-                      "sha256":  "9b0b3fee3d72480a964222dd7794aa5bf848c0d6568e6e8f1fdac2b309569ab5",
-                      "size":  1955
+                      "path":  "assets/grid-dark.svg",
+                      "sha256":  "d0e4a94af652661e0d998d0bb04b0e8422a2054799b056b3d3d7f6412bc18ca4",
+                      "size":  164
                   },
                   {
-                      "path":  "assets/identity-dark-still.svg",
-                      "sha256":  "ca3c5ac2a4cf51027919fef3fa675a1d8db8f687624ebb3349d95d5b991a4a1f",
-                      "size":  1702
-                  },
-                  {
-                      "path":  "assets/identity-light.svg",
-                      "sha256":  "f46b682844a6ac7a6cb12b1b6c925eeb542306fc6a3b5e894975001e2b792687",
-                      "size":  1955
-                  },
-                  {
-                      "path":  "assets/identity-light-still.svg",
-                      "sha256":  "63946d64747186857b870f951918e826095e154efbb73163099f4a42e998d686",
-                      "size":  1702
-                  },
-                  {
-                      "path":  "assets/instrument-dark.svg",
-                      "sha256":  "a6c6dd345b1255e9d1d273117700a7893fb443db3c0c45b87868bbf01c64abf3",
-                      "size":  1051
-                  },
-                  {
-                      "path":  "assets/instrument-dark-still.svg",
-                      "sha256":  "a43a114beb0704382de98950898fe6d3e3c88ac07ca6925c0f735680fb357df7",
-                      "size":  927
-                  },
-                  {
-                      "path":  "assets/instrument-light.svg",
-                      "sha256":  "9b9462679262dc8e18fcdab32e87f60b3e3917fc7b7343dff28cf7d8598a563f",
-                      "size":  1051
-                  },
-                  {
-                      "path":  "assets/instrument-light-still.svg",
-                      "sha256":  "a4d1ae60bfabe07d5de226ada7e628ca1ad62fbc2b63044923dda8c76ec92f02",
-                      "size":  927
-                  },
-                  {
-                      "path":  "assets/rail-dark.svg",
-                      "sha256":  "6343465330bb9eb2cf3c266b9b8124e7499d4fcfe3a74316e3a97565050fbc72",
-                      "size":  885
-                  },
-                  {
-                      "path":  "assets/rail-dark-still.svg",
-                      "sha256":  "f8bd217aef4ec24250242c826c43357ac99429be6a93a8574501dbeda6aaee1e",
-                      "size":  632
-                  },
-                  {
-                      "path":  "assets/rail-light.svg",
-                      "sha256":  "d218ca6fce55b41dc0c614341b0d7e8f98ce82fc7f95f89a14a1fa3c69232848",
-                      "size":  885
-                  },
-                  {
-                      "path":  "assets/rail-light-still.svg",
-                      "sha256":  "5410ec224e4b5bb115c0e0ee3853a2ad05365348e6930ca359e6b2f24f472276",
-                      "size":  632
+                      "path":  "assets/grid-light.svg",
+                      "sha256":  "729a516918819817295ac860599cc39d664cd2a2d938b9948e93b4b51bb2db34",
+                      "size":  164
                   },
                   {
                       "path":  "assets/rhine-lab-dark.json",
-                      "sha256":  "7b4d73d6fa793486e9f5d8add2b70e8c0db3aa54f516af02b41c0fb2ad1851d9",
-                      "size":  544
+                      "sha256":  "4cf629f6332121c6af6209535f152df526f45450f049fa4b1eb799dc9e0194ce",
+                      "size":  612
                   },
                   {
                       "path":  "assets/rhine-lab-light.json",
-                      "sha256":  "28bfd225047f6955847b00727f6eb01bbb16bb2278917223fc17fa1b2787a5d6",
-                      "size":  545
+                      "sha256":  "79faac60d701aa24374954229e2ea16b37f548203fddfb92c47e2050785545c4",
+                      "size":  613
                   },
                   {
-                      "path":  "assets/structure-dark.svg",
-                      "sha256":  "b632a99c6b683d0b95d26e4b5ea42d078d2fe1c1488804a09204ef78e100d029",
-                      "size":  977
+                      "path":  "assets/ring-dark.svg",
+                      "sha256":  "2a38b7945041a038e61686461c8c30597a996333b865f99f5609a34e3b2ce3b5",
+                      "size":  459
                   },
                   {
-                      "path":  "assets/structure-dark-still.svg",
-                      "sha256":  "b632a99c6b683d0b95d26e4b5ea42d078d2fe1c1488804a09204ef78e100d029",
-                      "size":  977
-                  },
-                  {
-                      "path":  "assets/structure-light.svg",
-                      "sha256":  "1e93ba87d71f253a245972357807c1c212845471178fffa63bae42295c623f10",
-                      "size":  977
-                  },
-                  {
-                      "path":  "assets/structure-light-still.svg",
-                      "sha256":  "1e93ba87d71f253a245972357807c1c212845471178fffa63bae42295c623f10",
-                      "size":  977
-                  },
-                  {
-                      "path":  "assets/terminal-dark.svg",
-                      "sha256":  "36be3639b99bbdc7c0207d039268de128057f638a1fd4f833d6fc493589d77ce",
-                      "size":  608
-                  },
-                  {
-                      "path":  "assets/terminal-dark-still.svg",
-                      "sha256":  "36be3639b99bbdc7c0207d039268de128057f638a1fd4f833d6fc493589d77ce",
-                      "size":  608
-                  },
-                  {
-                      "path":  "assets/terminal-light.svg",
-                      "sha256":  "afe8624225aa678442ec4c4ff9be06faabd8bb852e71b010687d60690e8c50e7",
-                      "size":  608
-                  },
-                  {
-                      "path":  "assets/terminal-light-still.svg",
-                      "sha256":  "afe8624225aa678442ec4c4ff9be06faabd8bb852e71b010687d60690e8c50e7",
-                      "size":  608
+                      "path":  "assets/ring-light.svg",
+                      "sha256":  "edabb1e5bbc35e8e3db060f77d53fa8645c060db355f126b8ac1b14004ca6907",
+                      "size":  459
                   },
                   {
                       "path":  "assets/theme.css",
-                      "sha256":  "8c2eac8e5b053c6c82327c932ab3605b80c898003a5d7f41c5998cba5be27d8c",
-                      "size":  10604
+                      "sha256":  "200b3218efb4dd261206c39e9df22a95dc9a9dec41d1b8e91570f2b02169f657",
+                      "size":  13005
                   },
                   {
                       "path":  "assets/watermark-dark.svg",
-                      "sha256":  "40cf53ccb18ec495d906438aca8b88fde0e84f17fe46e7462ffcf75d24e88876",
-                      "size":  1553999
+                      "sha256":  "69c632f31e6d40d630abc6ea0169a76a37faa127c090d7cbf5c4b65365f5973f",
+                      "size":  1591474
                   },
                   {
                       "path":  "assets/watermark-dark-still.svg",
-                      "sha256":  "942063aa3cc91d61c629701213f5e1c561f4ff09c65e6be2098636518985d1b3",
+                      "sha256":  "96966de8335d3caa9c27dd02a9bf09de5fa2267150cb82ca146722d768b91e56",
                       "size":  706
                   },
                   {
                       "path":  "assets/watermark-light.svg",
-                      "sha256":  "9806b4dbced011ea5f41150913a299b4b03151ba7771494dc040ab2e69aaab4f",
-                      "size":  1553999
+                      "sha256":  "5f3e42b2e6bee178013170b95c514d446d86fa0ef76f28a61aa2a74c8485f9ae",
+                      "size":  1591474
                   },
                   {
                       "path":  "assets/watermark-light-still.svg",
@@ -153,8 +78,8 @@
                   },
                   {
                       "path":  "engine.mjs",
-                      "sha256":  "06d7429387a3d033e0f1e123584a20f62811cf7490884f397d0b8cc260bf83c9",
-                      "size":  5916
+                      "sha256":  "3bab5f49faf7d984d0ff93923c13f6e0bb8b7aa109223d881f7db40b744acc43",
+                      "size":  5947
                   },
                   {
                       "path":  "install.ps1",
@@ -173,8 +98,8 @@
                   },
                   {
                       "path":  "Manager.cs",
-                      "sha256":  "5e4bf1c1fcc4d17130fe136729264f896c1d1e529d9550b9ee5d0fcc76c72d54",
-                      "size":  13177
+                      "sha256":  "e918cae6a75e8410424ddbe82e7004df72d9d457e5cf61b95cd2cf9b541e0339",
+                      "size":  14913
                   },
                   {
                       "path":  "package-common.ps1",
@@ -183,13 +108,13 @@
                   },
                   {
                       "path":  "renderer.js",
-                      "sha256":  "0a344cd3ba13aa20ac9ef4ca49f2279549eb65ba729797954c23583d614986a4",
-                      "size":  8299
+                      "sha256":  "da0edf6d081c88961460d0e96db54f0df7a30b5932ce9bf8df7dd6ffe240edde",
+                      "size":  10390
                   },
                   {
                       "path":  "RhineLabTheme.exe",
-                      "sha256":  "16c07f3c763257513460eb0dff939d701508dc81a35c8938ce9fa365a7dba92e",
-                      "size":  50688
+                      "sha256":  "a56aff9e1909bc1473ae66c7ade842ac54189c27b1c3975dfe9e55a4874c0aac",
+                      "size":  52224
                   },
                   {
                       "path":  "start-official.ps1",

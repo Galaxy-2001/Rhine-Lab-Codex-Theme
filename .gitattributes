@@ -12,3 +12,4 @@
 *.zip binary
 # Runtime integrity hashes cover exact bytes; preserve them across Git checkouts.
 runtime/** -text
+*.txt text eol=lf

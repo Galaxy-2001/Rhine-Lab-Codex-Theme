@@ -4,8 +4,12 @@ html[data-rhine-enabled="true"] {
   --rhine-ink:#292923; --rhine-muted:#565347; --rhine-line:#D5CDBD;
   --rhine-accent:#8B3C1C; --rhine-orange:#DC7946; --rhine-gold:#D3B45E;
   --rhine-blue:#70A9A5; --rhine-chrome:#242722; --rhine-on-chrome:#F4EFDF;
+  --rhine-plus:#B4572A;
   --rhine-titlebar:#E3DED2; --rhine-titlebar-ink:#292923; --rhine-titlebar-muted:#565347;
   --rhine-titlebar-border:#ADA898; --rhine-titlebar-hover:#29292312;
+  --rhine-tricolor:linear-gradient(90deg,var(--rhine-orange) 44%,var(--rhine-gold) 44% 72%,var(--rhine-blue) 72%);
+  /* Bahnschrift (DIN 1451) ships with Windows 10 1709 and later. */
+  --rhine-display:Bahnschrift,"Segoe UI Variable Display","Segoe UI",Arial,sans-serif;
   --color-background-surface-primary:var(--rhine-surface);
   --color-background-surface-secondary:var(--rhine-panel);
   --color-background-surface-tertiary:var(--rhine-sidebar);
@@ -14,27 +18,37 @@ html[data-rhine-enabled="true"] {
   --color-text-tertiary:var(--rhine-muted); --color-border-primary:var(--rhine-line);
   --color-border-secondary:var(--rhine-line); --color-text-accent:var(--rhine-accent);
   --color-background-accent:var(--rhine-accent);
-  font-family:Arial,"Microsoft YaHei","PingFang SC",sans-serif;
+  font-family:"Segoe UI Variable Text","Segoe UI","Microsoft YaHei UI","Microsoft YaHei","PingFang SC",sans-serif;
 }
 html[data-rhine-enabled="true"][data-theme="dark"] {
   --rhine-surface:#1D2222; --rhine-panel:#252B2A; --rhine-sidebar:#252B29;
   --rhine-ink:#D7D4C9; --rhine-muted:#AAA99E; --rhine-line:#434943;
   --rhine-accent:#E69968; --rhine-orange:#C27C53; --rhine-gold:#B6A16C;
   --rhine-blue:#79AAA4; --rhine-chrome:#151B1B; --rhine-on-chrome:#DEDBD0;
+  --rhine-plus:#C27C53;
   --rhine-titlebar:#151B1B; --rhine-titlebar-ink:#DEDBD0; --rhine-titlebar-muted:#D2CEBF;
   --rhine-titlebar-border:#66695C; --rhine-titlebar-hover:#FFFFFF17;
 }
 html[data-rhine-enabled="true"] body {background-color:var(--rhine-surface);color:var(--rhine-ink)}
-html[data-rhine-enabled="true"] [data-rhine-surface="main"],
+/* Artwork URLs come from the generated rules appended by the engine.
+   Layers, top first: watermark, right-edge ruler, vertical fade, 44px grid. */
+html[data-rhine-enabled="true"] [data-rhine-surface="main"] {
+  background-color:var(--rhine-surface);
+  background-image:var(--rhine-watermark),var(--rhine-ring),linear-gradient(var(--rhine-surface),transparent 30% 80%,var(--rhine-surface)),var(--rhine-grid);
+  background-size:min(640px,calc(100% - 64px)) auto,140px 600px,100% 100%,44px 44px;
+  background-position:center,right 0 top 38%,0 0,0 0;
+  background-repeat:no-repeat,no-repeat,no-repeat,repeat;
+}
+/* Opaque settings cards would leave only slivers of the mark: grid only. */
 html[data-rhine-enabled="true"] [data-rhine-surface="settings"] {
   background-color:var(--rhine-surface);
-  background-image:var(--rhine-watermark),var(--rhine-structure);
-  background-size:min(640px,calc(100% - 64px)) auto,100% 100%;
-  background-position:center center,center;
-  background-repeat:no-repeat;
+  background-image:var(--rhine-ring),linear-gradient(var(--rhine-surface),transparent 30% 80%,var(--rhine-surface)),var(--rhine-grid);
+  background-size:140px 600px,100% 100%,44px 44px;
+  background-position:right 0 top 38%,0 0,0 0;
+  background-repeat:no-repeat,no-repeat,repeat;
+  background-attachment:local;
 }
 html[data-rhine-enabled="true"][data-rhine-route="settings"] [data-rhine-surface="main"] {background-image:none}
-html[data-rhine-enabled="true"] [data-rhine-surface="settings"] {background-attachment:local}
 html[data-rhine-enabled="true"] aside.app-shell-left-panel {
   background-color:var(--rhine-sidebar);border-color:var(--rhine-line);
 }
@@ -48,23 +62,23 @@ html[data-rhine-enabled="true"] [data-rhine-chrome] {
   --button-text-color:var(--rhine-titlebar-ink);--color-text-codex-description:var(--rhine-titlebar-ink);
 }
 html[data-rhine-enabled="true"] [data-rhine-chrome]::after {
-  content:"";position:absolute;left:0;right:0;bottom:0;height:3px;pointer-events:none;
-  background:linear-gradient(90deg,var(--rhine-orange) 44%,var(--rhine-gold) 44% 72%,var(--rhine-blue) 72%);
+  content:"";position:absolute;left:0;right:0;bottom:0;height:3px;pointer-events:none;background:var(--rhine-tricolor);
 }
 html[data-rhine-enabled="true"] [data-rhine-decoration="brand"] {
   display:flex;align-items:center;gap:9px;order:-3;flex:none;
-  font:900 15px/1 Arial,sans-serif;letter-spacing:1.1px;white-space:nowrap;
+  font:700 15px/1 var(--rhine-display);letter-spacing:1.4px;white-space:nowrap;
 }
 html[data-rhine-enabled="true"] [data-rhine-decoration="brand"] b {
-  padding:3px 4px;background:var(--rhine-titlebar-ink);color:var(--rhine-titlebar);letter-spacing:-1px;font-size:17px;
+  padding:3px 4px;background:var(--rhine-titlebar-ink);color:var(--rhine-titlebar);letter-spacing:-.5px;font-size:17px;
 }
 html[data-rhine-enabled="true"] [data-rhine-decoration="project"] {
   display:block;order:-2;color:var(--rhine-titlebar-muted);font:10px/1.4 Consolas,monospace;
   letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;max-width:255px;flex:1;
 }
+/* A label, not a control: no box, a hairline separator only. */
 html[data-rhine-enabled="true"] [data-rhine-decoration="client"] {
-  display:block;margin-left:auto;padding:4px 12px;border:1px solid var(--rhine-titlebar-border);border-radius:2px;
-  color:var(--rhine-titlebar-ink);font:12px/1 Arial,sans-serif;flex:none;
+  display:block;margin-left:auto;padding:2px 2px 2px 10px;border-left:1px solid var(--rhine-titlebar-border);
+  color:var(--rhine-titlebar-muted);font:600 11px/1.2 var(--rhine-display);letter-spacing:1.4px;text-transform:uppercase;flex:none;
 }
 html[data-rhine-enabled="true"] [data-rhine-chrome] > :not([data-rhine-decoration]) {flex-shrink:0}
 html[data-rhine-enabled="true"] [data-rhine-chrome] :is(button,[role="menuitem"]) {color:var(--rhine-titlebar-muted);--button-text-color:var(--rhine-titlebar-muted)}
@@ -85,46 +99,51 @@ html[data-rhine-enabled="true"] [data-rhine-decoration="channel"] {
 }
 html[data-rhine-enabled="true"] [data-rhine-decoration="channel"] > :first-child {
   color:var(--rhine-accent);border-bottom:2px solid var(--rhine-orange);height:100%;
-  display:flex;align-items:center;font-size:11px;font-weight:600;
+  display:flex;align-items:center;font:600 11px/1.4 var(--rhine-display);
 }
 /* The outer aside also owns the application rail and resize handle. A normal
-   flow banner inside the actual launch list cannot overlap either of them. */
+   flow banner inside the actual launch list cannot overlap either of them.
+   The tricolor edge appears twice only: the title bar and the New chat card. */
 html[data-rhine-enabled="true"] [data-rhine-launcher] {
   position:relative;container-type:inline-size;padding:12px 10px 6px;
-  border-top:3px solid var(--rhine-orange);
+  border-top:1px solid var(--rhine-line);
 }
 html[data-rhine-enabled="true"] [data-rhine-decoration="station"] {
-  display:block;position:relative;flex:none;margin-bottom:18px;padding:4px 0 19px;
-  color:var(--rhine-ink);border-bottom:4px solid transparent;
-  border-image:linear-gradient(90deg,var(--rhine-orange) 44%,var(--rhine-gold) 44% 72%,var(--rhine-blue) 72%) 1;
+  display:block;position:relative;flex:none;margin-bottom:18px;padding:4px 0 16px;
+  color:var(--rhine-ink);border-bottom:1px solid var(--rhine-line);
 }
 html[data-rhine-enabled="true"] .rhine-station-kicker {
   font:10px/1.45 Consolas,"Courier New",monospace;letter-spacing:.8px;color:var(--rhine-muted);
 }
 html[data-rhine-enabled="true"] .rhine-station-title {
-  position:relative;margin-top:7px;font:900 clamp(28px,19cqi,46px)/1.05 Arial,sans-serif;letter-spacing:-1.8px;
+  position:relative;margin-top:7px;font:700 clamp(28px,19cqi,46px)/1.05 var(--rhine-display);letter-spacing:-1px;
 }
+/* Reflection fades away from the title instead of reading as a smudge. */
 html[data-rhine-enabled="true"] .rhine-station-title span {
-  position:absolute;left:0;top:100%;transform:scaleY(-.6);transform-origin:center 8px;opacity:.085;
+  position:absolute;left:0;top:100%;transform:scaleY(-.6);transform-origin:center 8px;opacity:.14;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to top,#000 15%,transparent 70%);mask-image:linear-gradient(to top,#000 15%,transparent 70%);
 }
 html[data-rhine-enabled="true"] [data-rhine-part="new-chat"] {
   position:relative;min-height:78px;height:78px;box-sizing:border-box;
   background-color:var(--rhine-panel);border:1px solid var(--rhine-line);
   border-radius:0;padding:39px 12px 13px;margin:0 0 4px;justify-content:flex-start;
   font-size:12px;letter-spacing:0;color:var(--rhine-muted);
-  background-image:linear-gradient(90deg,var(--rhine-orange) 44%,var(--rhine-gold) 44% 72%,var(--rhine-blue) 72%);
+  background-image:var(--rhine-tricolor);
   background-position:left bottom;background-size:100% 4px;background-repeat:no-repeat;
 }
 html[data-rhine-enabled="true"] [data-rhine-part="new-chat"]::before {
   content:"New chat";position:absolute;left:12px;top:15px;
-  color:var(--rhine-ink);font:800 20px/1.15 Arial,sans-serif;letter-spacing:-.6px;pointer-events:none;
+  color:var(--rhine-ink);font:700 20px/1.15 var(--rhine-display);letter-spacing:-.2px;pointer-events:none;
 }
 html[data-rhine-enabled="true"] [data-rhine-part="new-chat"]::after {
-  content:"+";position:absolute;right:12px;top:21px;color:var(--rhine-orange);
+  content:"+";position:absolute;right:12px;top:21px;color:var(--rhine-plus);
   font:400 33px/1 Arial,sans-serif;pointer-events:none;
 }
 html[data-rhine-enabled="true"] [data-rhine-part="new-chat"] :is(svg,.icon-leading-slot) {display:none}
 html[data-rhine-enabled="true"] [data-rhine-part="new-chat"] > div {font-size:12px;color:var(--rhine-muted)}
+/* English clients: the native "New chat" would repeat the card title. */
+html[data-rhine-enabled="true"] [data-rhine-part="new-chat"] [data-rhine-label="translated"] {font-size:0}
+html[data-rhine-enabled="true"] [data-rhine-part="new-chat"] [data-rhine-label="translated"]::after {content:"新聊天";font-size:12px}
 html[data-rhine-enabled="true"] [data-rhine-part="new-chat"]:hover {background-color:var(--rhine-surface)}
 html[data-rhine-enabled="true"] [data-app-action-sidebar-thread-row][data-app-action-sidebar-thread-selected="true"],
 html[data-rhine-enabled="true"] [data-sidebar-navigation-root] [data-sidebar-destination][aria-current="page"] {
@@ -134,7 +153,8 @@ html[data-rhine-enabled="true"] [data-sidebar-navigation-root] [data-sidebar-des
 html[data-rhine-enabled="true"] [data-rhine-heading] {position:relative;letter-spacing:-1px;font-weight:800}
 html[data-rhine-enabled="true"] [data-rhine-heading]::after {
   content:attr(data-rhine-heading);position:absolute;inset-inline-start:0;top:80%;
-  transform:scaleY(-.5);transform-origin:top;opacity:.065;pointer-events:none;
+  transform:scaleY(-.5);transform-origin:top;opacity:.1;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to top,#000 15%,transparent 70%);mask-image:linear-gradient(to top,#000 15%,transparent 70%);
 }
 html[data-rhine-enabled="true"] [data-rhine-surface="settings"] :is(input,select) {accent-color:var(--rhine-accent)}
 html[data-rhine-enabled="true"] [data-rhine-composer] {
@@ -160,8 +180,17 @@ html[data-rhine-enabled="true"] [data-rhine-composer]:focus-within {box-shadow:i
   html[data-rhine-enabled="true"] [data-rhine-decoration="brand"] strong {display:none}
 }
 @media(max-width:700px) {
-  html[data-rhine-enabled="true"] [data-rhine-surface="main"],
-  html[data-rhine-enabled="true"] [data-rhine-surface="settings"] {
-    background-size:min(420px,calc(100% - 28px)) auto,100% 100%;
+  html[data-rhine-enabled="true"] [data-rhine-surface="main"] {
+    background-size:min(420px,calc(100% - 28px)) auto,0 0,100% 100%,44px 44px;
   }
+  html[data-rhine-enabled="true"] [data-rhine-surface="settings"] {background-size:0 0,100% 100%,44px 44px}
+}
+/* Short windows keep the conversation list higher in the sidebar. */
+@media(max-height:800px) {
+  html[data-rhine-enabled="true"] [data-rhine-decoration="station"] {margin-bottom:10px;padding-bottom:10px}
+  html[data-rhine-enabled="true"] .rhine-station-title {margin-top:4px;font-size:clamp(24px,14cqi,32px)}
+  html[data-rhine-enabled="true"] .rhine-station-title span {display:none}
+  html[data-rhine-enabled="true"] [data-rhine-part="new-chat"] {min-height:60px;height:60px;padding-top:30px;padding-bottom:8px}
+  html[data-rhine-enabled="true"] [data-rhine-part="new-chat"]::before {top:9px;font-size:17px}
+  html[data-rhine-enabled="true"] [data-rhine-part="new-chat"]::after {top:13px;font-size:28px}
 }
