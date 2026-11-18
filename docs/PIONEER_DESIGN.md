@@ -1,6 +1,6 @@
 # Pioneer 终端面板
 
-Codex 1.2.0 / DeepSeek Harness 1.3.0，2026-10-30。
+Codex 1.2.1 / DeepSeek Harness 1.3.1，2026-11-18。
 
 - 奶油白与石墨黑、暖色面板与莱茵橙。侧栏采用 Terminal 大标题、渐隐倒影和双语 New chat 卡片；橙 / 黄 / 青三色细边只用于标题栏与 New chat 卡片，避免重复稀释。标题与标签使用 Windows 自带的 Bahnschrift。
 - 顶栏保留原生菜单、窗口按钮和拖动区，加入 RHINE LAB 与客户端名称。浅深模式分别与 Windows 原生窗口按钮统一底色；DeepSeek Harness 完整拼写，小窗口隐藏装饰以保留操作空间。

@@ -113,7 +113,7 @@
                   },
                   {
                       "path":  "RhineLabTheme.exe",
-                      "sha256":  "a56aff9e1909bc1473ae66c7ade842ac54189c27b1c3975dfe9e55a4874c0aac",
+                      "sha256":  "0ea2190f48afa3c6bd0a014bb3a3d56b459974f2b7767d4970cfb6d75af60185",
                       "size":  52224
                   },
                   {
@@ -178,5 +178,5 @@
                   }
               ],
     "id":  "rhine-lab",
-    "version":  "1.2.0"
+    "version":  "1.2.1"
 }
