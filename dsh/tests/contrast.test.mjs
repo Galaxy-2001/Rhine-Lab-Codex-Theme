@@ -25,3 +25,9 @@ for(const [mode,block] of [['light',light],['dark',dark]]) {
     assert.ok(contrast(tooltipBg,token(block,'--dsw-alias-tooltip-fg'))>=7);
   });
 }
+
+for(const [mode,block] of [['light',light],['dark',dark]]){
+  test(mode+': New chat plus mark has 3:1 contrast on the native card',()=>{
+    assert.ok(contrast(token(block,'--rhine-plus'),token(block,'--rhine-card'))>=3);
+  });
+}

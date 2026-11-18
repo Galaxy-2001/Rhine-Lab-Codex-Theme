@@ -27,3 +27,13 @@ test('referenced artwork stays local and contains no executable SVG content',()=
     assert.doesNotMatch(svg,/CODEX/);
   }
 });
+
+test('the optional global wallpaper and the static chat layers have no masks or animation',()=>{
+  for(const mode of ['light','dark']){
+    for(const kind of ['grid','ring','background']){
+      const svg=readFileSync(join(root,'assets',kind+'-'+mode+'.svg'),'utf8');
+      assert.doesNotMatch(svg,/<mask\b|<animate|@keyframes/);
+    }
+    assert.doesNotMatch(readFileSync(join(root,'assets','watermark-'+mode+'-still.svg'),'utf8'),/<animate|@keyframes/);
+  }
+});

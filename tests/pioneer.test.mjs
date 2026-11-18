@@ -92,21 +92,15 @@ test('Pioneer paint preserves native chat geometry, settings controls and theme 
 });
 
 test('central assets keep matched light / dark strength without changing ribbon entry mechanics',()=>{
-  // Codex dark mode lowers opacity so folds and mark read like the 16% light
-  // version; DeepSeek Harness keeps its released 16% assets.
-  const strength={'runtime/assets':{light:['.16','.16'],dark:['.08','.12']},'dsh/skins/rhine-lab/assets':{light:['.16','.16'],dark:['.16','.16']}};
-  for(const [prefix,modes] of Object.entries(strength))for(const [mode,[fold,flat]] of Object.entries(modes)){
+  for(const prefix of ['runtime/assets','dsh/skins/rhine-lab/assets'])for(const mode of ['light','dark']){
+    const [fold,flat]=mode==='light'?['.16','.16']:['.08','.12'];
     const motion=read(`${prefix}/watermark-${mode}.svg`),still=read(`${prefix}/watermark-${mode}-still.svg`);
     assert.ok(motion.includes(`<g opacity="${fold}" filter=`),`${prefix} ${mode} fold`);assert.ok(still.includes(`<g opacity="${flat}">`),`${prefix} ${mode} still`);
     assert.match(motion,/scale\(0\) rotate\(-90deg\)/);assert.match(motion,/scale\(\.008,1\)/);
-  }
-  for(const mode of ['light','dark']){
-    // The Codex cycle enters on the flat mark, so still -> motion is seamless.
-    const motion=read(`runtime/assets/watermark-${mode}.svg`);
     assert.match(motion,/\.flat\{animation:rhine-flat-visible 14s ease-in-out -6\.44s infinite\}/);
     assert.ok(motion.includes('begin="-6.44s"'));assert.match(motion,/\.rhine-ribbon\{animation:rhine-gap 6s linear infinite\}/);
     // A <mask> in the static layers is re-rasterised on every watermark frame.
-    for(const kind of ['grid','ring'])assert.doesNotMatch(read(`runtime/assets/${kind}-${mode}.svg`),/<mask/);
+    for(const kind of ['grid','ring'])assert.doesNotMatch(read(`${prefix}/${kind}-${mode}.svg`),/<mask/);
   }
 });
 

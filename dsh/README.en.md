@@ -1,6 +1,6 @@
 # Rhine Lab · DeepSeek Harness theme
 
-Version **1.3.0** brings the Pioneer terminal design: cream and graphite surfaces, bold Terminal lettering, a bilingual New chat card, circular instrument marks and a three-color edge. Central animated artwork uses **16% opacity** without reducing the opacity of text or cards.
+Version **1.3.0** brings the Pioneer terminal design: cream and graphite surfaces, bold Terminal lettering, a bilingual New chat card, circular instrument marks and a three-color edge. The 1.3.0 release uses 16% watermark opacity. In the local development build, the empty conversation opens on a flat mark and unfolds into the ribbon. Light artwork stays at 16%. Dark folds use 8% and the dark flat mark uses 12%. Conversations with messages use a still mark. Settings show a tiled 44 px grid and a right-edge ruler.
 
 Light-mode titlebar and native Windows caption buttons share the same background. The badge spells out **DeepSeek Harness**. The sidebar toggle stays in its original position and no longer covers the window; normal input and control hit targets are preserved. Existing tooltip and billing-period contrast fixes remain.
 

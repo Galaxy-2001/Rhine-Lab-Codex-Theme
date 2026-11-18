@@ -6,8 +6,9 @@
   --rhine-line: #D5CDBD;
   --rhine-sidebar: #E8E2D3;
   --rhine-terminal: url(assets/terminal-light.svg);
-  --rhine-instrument: url(assets/instrument-light.svg);
-  --rhine-structure: url(assets/structure-light.svg);
+  --rhine-grid: url(assets/grid-light.svg);
+  --rhine-ring: url(assets/ring-light.svg);
+  --rhine-plus: #B4572A;
   --rhine-billing-off: #176A91;
   --rhine-billing-peak: #9C4F12;
   --rhine-billing-weekend: #27683D;
@@ -124,9 +125,8 @@
   --rhine-ink: #292923;
   --rhine-accent: #8B3C1C;
   --rhine-card: #F6F1E5;
-  --rhine-identity: url(assets/identity-light.svg);
-  --rhine-watermark: url(assets/watermark-light.svg);
-  --rhine-rail: url(assets/rail-light.svg);
+  --rhine-still: url(assets/watermark-light-still.svg);
+  --rhine-motion: url(assets/watermark-light.svg);
 }
 body[data-ds-dark-theme] {
   --rhine-orange: #C27C53;
@@ -135,8 +135,9 @@ body[data-ds-dark-theme] {
   --rhine-line: #434943;
   --rhine-sidebar: #252B29;
   --rhine-terminal: url(assets/terminal-dark.svg);
-  --rhine-instrument: url(assets/instrument-dark.svg);
-  --rhine-structure: url(assets/structure-dark.svg);
+  --rhine-grid: url(assets/grid-dark.svg);
+  --rhine-ring: url(assets/ring-dark.svg);
+  --rhine-plus: #C27C53;
   --rhine-billing-off: #6CCCF0;
   --rhine-billing-peak: #FFBA69;
   --rhine-billing-weekend: #83DA9C;
@@ -254,9 +255,8 @@ body[data-ds-dark-theme] {
   --rhine-ink: #D7D4C9;
   --rhine-accent: #E69968;
   --rhine-card: #252B2A;
-  --rhine-identity: url(assets/identity-dark.svg);
-  --rhine-watermark: url(assets/watermark-dark.svg);
-  --rhine-rail: url(assets/rail-dark.svg);
+  --rhine-still: url(assets/watermark-dark-still.svg);
+  --rhine-motion: url(assets/watermark-dark.svg);
 }
 
 :root {
@@ -307,24 +307,38 @@ body:has([data-windows-menu]) [data-dsh-surface="root"] > :first-child::after {
   display:flex;align-items:center;pointer-events:none;color:var(--dsw-alias-label-secondary);
   font:10px/1 Consolas,monospace;letter-spacing:.5px;
 }
+/* Keep the expensive animated image out of every painted layer until the
+   native conversation actually enters its empty hero state. */
 [data-dsh-surface="conversation"] {
+  --rhine-watermark:var(--rhine-still);
   background-color:var(--rhine-surface);
-  background-image:var(--rhine-watermark),var(--rhine-structure);
-  background-size:min(640px,calc(100% - 64px)) auto,100% 100%;
-  background-position:center center,center;background-repeat:no-repeat;
+  background-image:var(--rhine-watermark), var(--rhine-ring),
+    linear-gradient(var(--rhine-surface),transparent 30% 80%,var(--rhine-surface)), var(--rhine-grid);
+  background-size:min(640px,calc(100% - 64px)) auto,140px 600px,100% 100%,44px 44px;
+  background-position:center,right 0 top 38%,0 0,0 0;
+  background-repeat:no-repeat,no-repeat,no-repeat,repeat;
+}
+@media (prefers-reduced-motion:no-preference) {
+  [data-dsh-surface="conversation"]:where(:has([data-content-phase="hero"],[data-phase="hero"] [data-slot="conversation.composer"],[data-home-whale]):not(:has([data-chat-flow-kind],[data-dsh-part="message-row"],[data-content-phase="active"],[data-content-phase="settling"]))) {
+    --rhine-watermark:var(--rhine-motion);
+  }
+}
+/* Settings is a portal over the chat. Stop the underlying image as well. */
+body:has([data-dsh-surface="settings"],[role="dialog"] [data-slot="settings.section"]) [data-dsh-surface="conversation"] {
+  --rhine-watermark:none;
 }
 [data-dsh-surface="details"], [data-dsh-surface="details"] > :first-child {
   background-color:var(--dsw-alias-bg-layer-1);
-  background-image:var(--rhine-watermark);
+  background-image:var(--rhine-still);
   background-size:330px auto; background-position:right -95px bottom 32px;
   background-repeat:no-repeat;
 }
 [data-dsh-surface="settings"] {
   background-color:var(--rhine-surface);
-  background-image:var(--rhine-watermark),var(--rhine-structure);
-  background-size:min(640px,calc(100% - 64px)) auto,100% 100%;
-  background-position:center center,center;
-  background-repeat:no-repeat;
+  background-image:var(--rhine-ring),linear-gradient(var(--rhine-surface),transparent 30% 80%,var(--rhine-surface)),var(--rhine-grid);
+  background-size:140px 600px,100% 100%,44px 44px;
+  background-position:right 0 top 38%,0 0,0 0;
+  background-repeat:no-repeat,no-repeat,repeat;
 }
 [data-dsh-surface="settings"] [data-slot="settings.section"] { background-color:transparent; }
 [data-dsh-surface="composer"] { color:var(--rhine-ink); }
@@ -351,7 +365,7 @@ body:has([data-windows-menu]) [data-dsh-surface="root"] > :first-child::after {
 }
 [data-dsh-part="new-session"]::after {
   content:"+";position:absolute;right:12px;top:21px;pointer-events:none;
-  color:var(--rhine-orange);font:400 33px/1 Arial,sans-serif;
+  color:var(--rhine-plus);font:400 33px/1 Arial,sans-serif;
 }
 [data-dsh-part="new-session"] svg, [data-dsh-part="new-session"] > span[aria-hidden="true"] {display:none}
 [data-dsh-part="new-session"] > span:first-child > span {justify-content:flex-start;transform:none}
@@ -363,7 +377,8 @@ body:has([data-windows-menu]) [data-dsh-surface="root"] > :first-child::after {
 body::selection { background:var(--rhine-accent);color:var(--dsw-alias-label-primary-foreground); }
 @media(max-width:760px) {
   [data-windows-menu]::after {display:none}
-  [data-dsh-surface="settings"], [data-dsh-surface="conversation"] {background-size:min(420px,calc(100% - 28px)) auto,100% 100%;}
+  [data-dsh-surface="conversation"] {background-size:min(420px,calc(100% - 28px)) auto,0 0,100% 100%,44px 44px;}
+  [data-dsh-surface="settings"] {background-size:0 0,100% 100%,44px 44px;}
   body:has([data-windows-menu]) [data-dsh-surface="root"] > :first-child::after {display:none}
 }
 @media(max-width:1000px) {
@@ -381,21 +396,6 @@ body:has([data-sidebar-collapsed="true"]) [data-windows-menu] {left:286px}
   [data-windows-menu], body:has([data-sidebar-collapsed="true"]) [data-windows-menu] {left:88px;max-width:calc(100% - 238px)}
   [data-windows-menu]::before, [data-windows-menu]::after {display:none}
 }
-@media(prefers-reduced-motion:reduce) {
-  body {
-    --rhine-identity:url(assets/identity-light-still.svg);
-    --rhine-watermark:url(assets/watermark-light-still.svg);
-    --rhine-rail:url(assets/rail-light-still.svg);
-    --rhine-instrument:url(assets/instrument-light-still.svg);
-  }
-  body[data-ds-dark-theme] {
-    --rhine-identity:url(assets/identity-dark-still.svg);
-    --rhine-watermark:url(assets/watermark-dark-still.svg);
-    --rhine-rail:url(assets/rail-dark-still.svg);
-    --rhine-instrument:url(assets/instrument-dark-still.svg);
-  }
-}
-
 /* dsh-cost-meter: price periods must not inherit the orange brand accent.
    Root specificity keeps these rules effective even if plugin CSS loads later. */
 :root .cm-peak-high, :root .cm-peak-rail-high,
