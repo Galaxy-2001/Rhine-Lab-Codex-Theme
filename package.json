@@ -1,6 +1,6 @@
 {
   "name": "rhine-lab-codex-theme",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "private": true,
   "description": "莱茵生命 Codex 主题的生成脚本与回归测试。安装包不依赖 npm。",
   "license": "MIT",

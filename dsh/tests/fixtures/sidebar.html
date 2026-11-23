@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN" data-dsh-skin="rhine-lab">
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box }
+  body { margin: 0; font: 15px "Segoe UI", "Microsoft YaHei UI", sans-serif; color: var(--rhine-ink, #222) }
+  .sidebar { width: 288px; height: 100vh; display: flex; flex-direction: column; padding: 0 12px }
+  .brand { height: 54px; display: flex; align-items: center; font-size: 19px; font-weight: 650 }
+  button { color: inherit; font: inherit; text-align: left; cursor: pointer }
+  [data-dsh-part="new-session"] { height: 36px; display: flex; align-items: center; gap: 10px; padding: 0 12px; border: 0 }
+  .scroll-region { display: flex; position: relative; flex: 1; min-height: 0; margin-top: 4px; container-type: size }
+  [data-sidebar-scrollport] { flex: 1; display: grid; align-content: start; grid-template-rows: 8px max-content 2px max-content; min-height: 0; overflow: hidden auto; scrollbar-width: none }
+  nav { grid-row: 2; display: flex; flex-direction: column }
+  .workspaces { grid-row: 4 }
+  nav button, .session { background: transparent; border: 0; display: block; width: 100%; height: 32px; padding: 0 12px }
+  .session:hover { background: var(--dsw-specific-sidebar-nav-item-hover) }
+  .heading { margin: 16px 12px 6px; font-size: 13px; color: var(--dsw-alias-label-secondary) }
+</style>
+<aside data-dsh-surface="sidebar"><div class="sidebar">
+  <div class="brand" data-window-drag="true"><span data-slot="sidebar.brand.name">DeepSeek Harness</span></div>
+  <button data-dsh-part="new-session"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12M4 10h12" fill="none" stroke="currentColor" stroke-width="2"/></svg>新会话</button>
+  <div class="scroll-region"><div data-sidebar-scrollport>
+    <nav><button>插件</button><button>自动化任务</button></nav>
+    <div class="workspaces"><p class="heading">工作区</p><div data-sidebar-list-area></div></div>
+  </div></div>
+</div></aside>

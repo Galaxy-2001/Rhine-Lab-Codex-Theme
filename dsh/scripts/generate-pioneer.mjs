@@ -18,12 +18,17 @@ export function ring(p){
   return `<svg xmlns="http://www.w3.org/2000/svg" width="140" height="600" viewBox="0 0 140 600"><defs><pattern id="pioneer-ticks" width="9" height="15" patternUnits="userSpaceOnUse"><path d="M0 .5H9" stroke="${p.secondary}"/></pattern></defs><rect x="117" y="0" width="9" height="558" fill="url(#pioneer-ticks)" opacity=".2"/><g fill="none" stroke="${p.line}" opacity=".7"><circle cx="140" cy="470" r="126"/><circle cx="140" cy="470" r="106" stroke-dasharray="3 6"/></g></svg>\n`;
 }
 
+export function station(p,faint=false){
+  const body=`<text x="0" y="10" font-family="Consolas,monospace" font-size="9" letter-spacing="1.1" fill="${p.secondary}">RHINE LAB / PERSONAL WORKSPACE</text><g font-family="Bahnschrift,Arial,sans-serif" font-size="46" font-weight="700" letter-spacing="-1"><text x="0" y="62" fill="${p.ink}">Terminal</text><text x="0" y="0" transform="translate(0 65) scale(1 -.45)" fill="url(#station-fade)">Terminal</text></g><path d="M0 110H97" stroke="${p.orange}" stroke-width="4"/><path d="M97 110H158" stroke="${p.gold}" stroke-width="4"/><path d="M158 110H220" stroke="${p.blue}" stroke-width="4"/>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="220" height="112" viewBox="0 0 220 112"><defs><linearGradient id="station-fade" x1="0" y1="0%" x2="0" y2="100%"><stop offset="0" stop-color="${p.ink}" stop-opacity="0"/><stop offset="1" stop-color="${p.ink}" stop-opacity=".16"/></linearGradient></defs><g${faint?' opacity=".09"':''}>${body}</g></svg>\n`;
+}
+
 if(process.argv[1] && resolve(process.argv[1]) === resolve(import.meta.filename)){
   const out=resolve(import.meta.dirname,'../skins/rhine-lab/assets');
   mkdirSync(out,{recursive:true});
   for(const [mode,p] of Object.entries(pioneer)){
-    const station=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 184"><g font-family="Consolas,monospace" font-size="14" letter-spacing="1.6" fill="${p.secondary}"><text x="0" y="22">RHINE LAB / PERSONAL</text><text x="0" y="43">WORKSPACE</text></g><g font-family="Arial,sans-serif" font-size="76" font-weight="900" letter-spacing="-3" fill="${p.ink}"><text x="0" y="124">Terminal</text><text x="0" y="124" transform="translate(0 207) scale(1 -.6)" opacity=".085">Terminal</text></g><path d="M0 181H176" stroke="${p.orange}" stroke-width="6"/><path d="M176 181H288" stroke="${p.gold}" stroke-width="6"/><path d="M288 181H400" stroke="${p.blue}" stroke-width="6"/></svg>\n`;
-    writeFileSync(resolve(out,`terminal-${mode}.svg`),station);
+    writeFileSync(resolve(out,`terminal-${mode}.svg`),station(p));
+    writeFileSync(resolve(out,`terminal-${mode}-faint.svg`),station(p,true));
     writeFileSync(resolve(out,`grid-${mode}.svg`),grid(p));
     writeFileSync(resolve(out,`ring-${mode}.svg`),ring(p));
   }

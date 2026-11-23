@@ -1,10 +1,12 @@
 # 莱茵生命动态主题 · Codex / DeepSeek Harness
 
-莱茵生命风格的动态主题，当前版本为 **Codex 1.2.1 / DeepSeek Harness 1.3.1**。采用 [Pioneer 终端面板](docs/PIONEER_DESIGN.md)：奶油白与石墨黑、侧栏底部的 Terminal 站牌、圆环刻度和橙 / 黄 / 青三色细边。侧栏的新聊天、搜索等原生入口保持原有尺寸、位置、图标和快捷键提示，装饰只以背景方式绘制。中央水印在浅色下为 **16%**，深色折片为 8%、平面为 12%。空白新聊天页播放折片动画，已有消息的对话显示静态标志，设置页保留网格与刻度。
+莱茵生命风格的动态主题，当前版本为 **Codex 1.2.2 / DeepSeek Harness 1.3.2**。采用 [Pioneer 终端面板](docs/PIONEER_DESIGN.md)：奶油白与石墨黑、侧栏底部的 Terminal 站牌、圆环刻度和橙 / 黄 / 青三色细边。侧栏的新聊天、搜索等原生入口保持原有尺寸、位置、图标和快捷键提示，装饰只以背景方式绘制。中央水印在浅色下为 **16%**，深色折片为 8%、平面为 12%。空白新聊天页播放折片动画，已有消息的对话显示静态标志，设置页保留网格与刻度。
 
 两端浅色标题栏与原生窗口按钮使用一致的底色；DeepSeek Harness 顶栏显示完整名称，侧栏按钮保持原位和正常点击范围。装饰不挤占输入框，不接收鼠标事件。保留深色提示、计费时段配色及启动器等待重试修复。
 
 ## 本版效果
+
+![DSH 1.3.2 侧栏浅深色及长短列表对照，使用发布皮肤绘制](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/dsh-v1.3.2/dsh/docs/market/sidebar-1.3.2.png)
 
 ![1.3.1 浅深色水印与设置背景对照，使用发布皮肤绘制](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/watermarks-1.3.1.png)
 
@@ -16,7 +18,7 @@ Codex 1.2.1 官方 Windows 客户端的浅深色新聊天局部实测如下。
 
 ## 实机介绍视频
 
-以下实机图与视频摄于上一版（Codex 1.2.0、DSH 1.3.0），用于展示完整界面。
+以下实机图与视频摄于早期版本（Codex 1.2.0、DSH 1.3.0），用于展示完整界面。
 
 [![Codex 与 DeepSeek Harness 实机演示](docs/media/full-demo-cover.png)](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/demo-2026-10-30)
 
@@ -28,10 +30,10 @@ Codex 1.2.1 官方 Windows 客户端的浅深色新聊天局部实测如下。
 
 | 使用的客户端 | 下载 | 安装说明 |
 | --- | --- | --- |
-| 官方 DeepSeek Harness 桌面版 / 网页版 | [插件 1.3.1](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.3.1) | [安装说明](dsh/README.md) |
-| Windows Codex / 集成 Codex 的 ChatGPT | [主题 1.2.1](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/v1.2.1) | 见下文 |
+| 官方 DeepSeek Harness 桌面版 / 网页版 | [插件 1.3.2](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.3.2) | [安装说明](dsh/README.md) |
+| Windows Codex / 集成 Codex 的 ChatGPT | [主题 1.2.2](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/v1.2.2) | 见下文 |
 
-DeepSeek Harness 用户下载 `dsh-plugin-rhine-lab-theme-1.3.1.tgz`，无需解压，在客户端“插件 → 添加插件”输入文件的完整绝对路径，安装后点击“立即启用”。首次启用自动应用，后续启动保留皮肤选择与背景设置，日常继续使用原来的客户端图标。源码在 [`dsh/`](dsh/)。
+DeepSeek Harness 用户下载 `dsh-plugin-rhine-lab-theme-1.3.2.tgz`，无需解压，在客户端“插件 → 添加插件”输入文件的完整绝对路径，安装后点击“立即启用”。首次启用自动应用，后续启动保留皮肤选择与背景设置，日常继续使用原来的客户端图标。源码在 [`dsh/`](dsh/)。
 
 ## DeepSeek Harness 实机效果
 
@@ -59,7 +61,7 @@ DeepSeek Harness 用户下载 `dsh-plugin-rhine-lab-theme-1.3.1.tgz`，无需解
 
 ## 下载与安装
 
-在 GitHub Releases 下载 `Rhine-Lab-Codex-Theme-1.2.1-Windows.zip`，完整解压，再双击 **安装主题.cmd**。日常双击桌面 **莱茵生命 Codex**，或双击 **启动主题.cmd**。
+在 GitHub Releases 下载 `Rhine-Lab-Codex-Theme-1.2.2-Windows.zip`，完整解压，再双击 **安装主题.cmd**。日常双击桌面 **莱茵生命 Codex**，或双击 **启动主题.cmd**。
 
 需要：
 
@@ -93,7 +95,7 @@ DeepSeek Harness 用户下载 `dsh-plugin-rhine-lab-theme-1.3.1.tgz`，无需解
 
 双击 **安装可选 Skill.cmd**，将完整 Skill 安装到 `CODEX_HOME/skills`（未设置时使用用户目录 `.codex/skills`）。同名旧 Skill 会备份到 `skill-backups`。
 
-也可以从 Releases 下载 `rhine-lab-theme-1.2.1-skill.zip`，在 Windows 文件属性中解除下载 ZIP 的锁定后解压，将里面的 `rhine-lab-theme` 文件夹放到 Codex 的 skills 目录。新聊天中可以说：
+也可以从 Releases 下载 `rhine-lab-theme-1.2.2-skill.zip`，在 Windows 文件属性中解除下载 ZIP 的锁定后解压，将里面的 `rhine-lab-theme` 文件夹放到 Codex 的 skills 目录。新聊天中可以说：
 
 - “安装莱茵生命主题”
 - “应用莱茵生命主题”

@@ -1,6 +1,8 @@
 # Rhine Lab · DeepSeek Harness theme
 
-Version **1.3.1** uses the Pioneer terminal design: cream and graphite surfaces, bold Terminal lettering, a bilingual New chat card, circular instrument marks and a three-color edge. The empty conversation opens on a flat mark and unfolds into the ribbon. Light artwork stays at 16%. Dark folds use 8% and the dark flat mark uses 12%. Conversations with messages use a still mark. Settings show a tiled 44 px grid and a right-edge ruler.
+Version **1.3.2** keeps the native brand, New session icon and sidebar controls in place. The Terminal sign fills free space below the workspace list and fades to 9% behind longer lists. Empty chats animate the central ribbon. Existing conversations use a still watermark.
+
+![Light and dark sidebar with short and long lists, rendered with the release skin](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/dsh-v1.3.2/dsh/docs/market/sidebar-1.3.2.png)
 
 Light-mode titlebar and native Windows caption buttons share the same background. The badge spells out **DeepSeek Harness**. The sidebar toggle stays in its original position and no longer covers the window; normal input and control hit targets are preserved. Existing tooltip and billing-period contrast fixes remain.
 
@@ -16,11 +18,11 @@ The 1.3.0 desktop screenshots below were captured from official Windows DSH 0.2.
 
 ![Native dark mode](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/dsh-chat-dark-1.3.0.png)
 
-Get the plugin tarball from the [DSH 1.3.1 release](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.3.1). The Skin ZIP is for manual installation with Skin Center already present; the Source ZIP is for development.
+Get the plugin tarball from the [DSH 1.3.2 release](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.3.2). The Skin ZIP is for manual installation with Skin Center already present; the Source ZIP is for development.
 
-Download `dsh-plugin-rhine-lab-theme-1.3.1.tgz`. In official DSH Desktop, open Plugins > Add plugin, enter the tarball's absolute local path and install. After installation, click Enable now. The plugin declares Skin Center as a dependency, installs its artwork on first activation and selects Rhine Lab automatically. Later launches preserve your choices. Keep using the ordinary DSH application shortcut. The package has not been published to npm yet.
+Download `dsh-plugin-rhine-lab-theme-1.3.2.tgz`. In official DSH Desktop, open Plugins > Add plugin, enter the tarball's absolute local path and install. After installation, click Enable now. The plugin declares Skin Center as a dependency, installs its artwork on first activation and selects Rhine Lab automatically. Later launches preserve your choices. Keep using the ordinary DSH application shortcut. The package has not been published to npm yet.
 
-For Web, run `dsh plugin --profile web add "C:\Downloads\dsh-plugin-rhine-lab-theme-1.3.1.tgz"`, then start the host with `dsh web`. A refused connection at port 3080 means the host is not running; installing a theme does not start a persistent web host. Do not use the ordinary CLI to mutate Desktop's reserved profile.
+For Web, run `dsh plugin --profile web add "C:\Downloads\dsh-plugin-rhine-lab-theme-1.3.2.tgz"`, then start the host with `dsh web`. A refused connection at port 3080 means the host is not running; installing a theme does not start a persistent web host. Do not use the ordinary CLI to mutate Desktop's reserved profile.
 
 For an asset-only installation with Skin Center already present, copy the Skin ZIP's `rhine-lab` directory into `$DSH_HOME/skins/` and select Rhine Lab in Settings > Skin Center.
 

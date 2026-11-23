@@ -1,6 +1,8 @@
 # 莱茵生命 · DeepSeek Harness 主题
 
-**1.3.1** 采用 Pioneer 终端面板：奶油白 / 石墨黑、Terminal 大标题、双语 New chat 卡片、圆环刻度与三色细边。新会话播放折片，已有消息时使用静态标志，打开设置后只绘制网格与刻度。
+**1.3.2** 保留官方的品牌、新会话图标和操作入口。列表下方有空位时显示 Terminal 站牌与渐隐倒影，列表放满时退为 9% 淡水印。空白会话展开折片，阅读已有消息时水印保持静止。
+
+![1.3.2 侧栏在浅色、深色及长短列表下的效果，使用发布皮肤绘制](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/dsh-v1.3.2/dsh/docs/market/sidebar-1.3.2.png)
 
 浅色标题栏与 Windows 原生窗口按钮统一底色，右上角显示完整的 **DeepSeek Harness**。修复侧栏开关被误扩展到整个窗口的问题：按钮留在左上角，输入框和其他控件正常接收点击。保留深色提示框、计费时段配色和原有动画。
 
@@ -8,7 +10,7 @@
 
 [96 秒双客户端实机视频](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/demo-2026-10-30)
 
-本版背景对照使用 1.3.1 的皮肤素材和加载器绘制。
+以下背景对照使用 1.3.1 的皮肤素材和加载器绘制。
 
 ![1.3.1 浅深色水印与设置背景对照，使用发布皮肤绘制](https://raw.githubusercontent.com/Galaxy-2001/Rhine-Lab-Codex-Theme/main/dsh/docs/market/watermarks-1.3.1.png)
 
@@ -24,12 +26,12 @@
 
 ## 安装
 
-下载 [DSH 1.3.1 发布包](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.3.1)。桌面版选用 `dsh-plugin-rhine-lab-theme-1.3.1.tgz`；Skin ZIP 用于已有皮肤中心的手动安装，Source ZIP 用于开发。
+下载 [DSH 1.3.2 发布包](https://github.com/Galaxy-2001/Rhine-Lab-Codex-Theme/releases/tag/dsh-v1.3.2)。桌面版选用 `dsh-plugin-rhine-lab-theme-1.3.2.tgz`；Skin ZIP 用于已有皮肤中心的手动安装，Source ZIP 用于开发。
 
 ### 官方桌面客户端（推荐）
 
-1. 下载 Release 中的 `dsh-plugin-rhine-lab-theme-1.3.1.tgz`，保持压缩包原样。
-2. 打开官方 DSH 桌面版，在“插件 → 添加插件”输入这个文件的完整绝对路径，例如 `C:\Downloads\dsh-plugin-rhine-lab-theme-1.3.1.tgz`。
+1. 下载 Release 中的 `dsh-plugin-rhine-lab-theme-1.3.2.tgz`，保持压缩包原样。
+2. 打开官方 DSH 桌面版，在“插件 → 添加插件”输入这个文件的完整绝对路径，例如 `C:\Downloads\dsh-plugin-rhine-lab-theme-1.3.2.tgz`。
 3. 点击安装，完成后点击“立即启用”。客户端会安装依赖，首次启用自动应用主题。日常仍从原来的 DSH 图标打开。
 
 首次安装需要联网下载皮肤中心依赖。如果客户端提示重新加载，按其提示操作。这个包尚未发布到 npm，不能直接按包名从注册表安装。不要用普通 CLI 改写保留的 desktop profile。
@@ -37,7 +39,7 @@
 ### 网页版
 
 ```powershell
-dsh plugin --profile web add "C:\Downloads\dsh-plugin-rhine-lab-theme-1.3.1.tgz"
+dsh plugin --profile web add "C:\Downloads\dsh-plugin-rhine-lab-theme-1.3.2.tgz"
 dsh web
 ```
 

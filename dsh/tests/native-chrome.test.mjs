@@ -6,15 +6,15 @@ import {transformSkinCss} from '@linxin666/dsh-client-ui-skin-center';
 
 const css=transformSkinCss(readFileSync('skins/rhine-lab/skin.css','utf8'),{skinId:'rhine-lab',filename:'skin.css'}).code;
 // DSH 0.2.1-rc.3 Windows structure: both brand and fixed toggle have
-// aria-keyshortcuts. The skin must only resize the brand, never the toggle.
+// aria-keyshortcuts. Both must retain their native sizes and hit targets.
 const fixture=`<!doctype html><html data-dsh-skin="rhine-lab"><style>
 *{box-sizing:border-box}body{margin:0;--dsw-specific-sidebar-fill:#f8f9fa;--dsw-alias-label-primary:#000}.frame{padding-top:40px;height:800px}
 [data-dsh-surface=sidebar]{display:contents}.sidebar{width:280px}
 .brand-row{height:48px;display:flex}.brand{flex:1}.toggle{position:fixed;left:12px;top:6px;width:28px;height:28px;z-index:30}
-[data-dsh-part=new-session]{display:flex;margin:8px 12px;width:256px}
+[data-dsh-part=new-session]{display:flex;margin:8px 12px;width:256px;height:36px;align-items:center}
 [data-sidebar-collapsed=true] .sidebar{width:0}
 [data-sidebar-collapsed=true] .brand{display:none}
-[data-sidebar-collapsed=true] [data-dsh-part=new-session]{position:fixed;left:48px;top:6px;width:28px;margin:0;font-size:0;z-index:30}
+[data-sidebar-collapsed=true] [data-dsh-part=new-session]{position:fixed;left:48px;top:6px;width:28px;height:28px;margin:0;font-size:0;z-index:30}
 [data-windows-menu]{position:fixed;top:0;height:40px;width:130px;z-index:1100;display:flex}
 [data-windows-menu] button{width:65px}
 .chat{position:absolute;left:320px;right:10px;top:300px;height:300px}
@@ -43,7 +43,11 @@ test('native fixed toggle retains its hit area in both modes and sidebar states'
     const r=await page.locator('.toggle').boundingBox();assert.deepEqual(r,{x:12,y:6,width:28,height:28});
     await page.locator('textarea').click();assert.equal(await page.evaluate(()=>window.toggles),collapsed?1:0);
     assert.equal(await page.locator('textarea').evaluate(e=>e===document.activeElement),true);
-    const row=await page.locator('.brand-row').boundingBox();assert.equal(row.height,collapsed?0:144);
+    const geometry=()=>page.locator('.brand-row,.toggle,[data-dsh-part=new-session],[data-dsh-part=new-session] svg').evaluateAll(nodes=>nodes.map(e=>e.getBoundingClientRect().toJSON()));
+    const themed=await geometry();
+    await page.locator('html').evaluate(e=>e.removeAttribute('data-dsh-skin'));
+    assert.deepEqual(await geometry(),themed);
+    await page.locator('html').evaluate(e=>e.setAttribute('data-dsh-skin','rhine-lab'));
     const menu=await page.locator('[data-windows-menu]').boundingBox();assert.ok(menu.x+menu.width<=width-150);
     if(collapsed){const n=await page.locator('[data-dsh-part=new-session]').boundingBox();assert.equal(n.width,28);assert.equal(n.height,28);}
     await page.locator('.toggle').click();

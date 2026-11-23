@@ -6,6 +6,7 @@
   --rhine-line: #D5CDBD;
   --rhine-sidebar: #E8E2D3;
   --rhine-terminal: url(assets/terminal-light.svg);
+  --rhine-terminal-faint: url(assets/terminal-light-faint.svg);
   --rhine-grid: url(assets/grid-light.svg);
   --rhine-ring: url(assets/ring-light.svg);
   --rhine-plus: #B4572A;
@@ -135,6 +136,7 @@ body[data-ds-dark-theme] {
   --rhine-line: #434943;
   --rhine-sidebar: #252B29;
   --rhine-terminal: url(assets/terminal-dark.svg);
+  --rhine-terminal-faint: url(assets/terminal-dark-faint.svg);
   --rhine-grid: url(assets/grid-dark.svg);
   --rhine-ring: url(assets/ring-dark.svg);
   --rhine-plus: #C27C53;
@@ -275,15 +277,25 @@ body {
 [data-dsh-surface="sidebar"], [data-dsh-surface="sidebar"] > :first-child {
   background-color:var(--rhine-sidebar);
 }
-[data-dsh-surface="sidebar"] > :first-child {position:relative;box-sizing:border-box}
-/* Paint the existing brand row, not a fixed overlay over the session list. */
-[data-dsh-surface="sidebar"] > :first-child > [data-window-drag="true"] {
-  height:144px;min-height:144px;margin:0;padding:12px 0;
-  border-top:3px solid var(--rhine-orange);
-  background:var(--rhine-terminal) left center/100% auto no-repeat;
+/* The host exposes this scrollport only on the expanded sidebar. Its last
+   grid item contains the workspaces, and its parent is the native scroll region. */
+[data-dsh-surface="sidebar"] :has(> [data-sidebar-scrollport]) {
+  anchor-scope:--rhine-list-end;
+  background:var(--rhine-terminal-faint) left 16px bottom 20px/min(220px,calc(100% - 32px)) auto no-repeat;
 }
-[data-dsh-surface="sidebar"] [data-window-drag="true"] > button:has([data-slot="sidebar.brand.name"]) {height:100%;width:100%;padding:0}
-[data-dsh-surface="sidebar"] [data-window-drag="true"] > button:has([data-slot="sidebar.brand.name"]) > span {visibility:hidden}
+/* Earlier clients expose only the workspace list. Use the faint artwork
+   there without adding a sizing or positioning context to native controls. */
+[data-dsh-surface="sidebar"]:not(:has([data-sidebar-scrollport])) [data-slot="sidebar.workspaces"] > :only-child:not([data-sidebar-collapsed="true"] *) {
+  background:var(--rhine-terminal-faint) left 16px bottom 20px/min(220px,calc(100% - 32px)) auto no-repeat;
+}
+@supports (top:anchor(bottom)) {
+  [data-dsh-surface="sidebar"] [data-sidebar-scrollport] > :last-child {anchor-name:--rhine-list-end}
+  [data-dsh-surface="sidebar"] :has(> [data-sidebar-scrollport])::after {
+    content:"";pointer-events:none;position:absolute;position-anchor:--rhine-list-end;
+    top:anchor(bottom);bottom:20px;left:16px;right:16px;max-width:220px;
+    background:var(--rhine-terminal) left bottom/100% clamp(0px,calc((100% - 120px) * 1000),112px) no-repeat;
+  }
+}
 /* Native desktop menu and caption controls share the sidebar color token. */
 [data-windows-menu] {left:270px;max-width:calc(100% - 420px)}
 [data-windows-menu]::before {
@@ -353,22 +365,12 @@ body:has([data-dsh-surface="settings"],[role="dialog"] [data-slot="settings.sect
   background-color:var(--rhine-card);
 }
 [data-dsh-part="new-session"] {
-  position:relative;min-height:78px;height:78px;padding:39px 12px 13px;justify-content:flex-start;
-  border:1px solid var(--rhine-line);border-radius:2px;background-color:var(--rhine-card);
-  font-size:12px;letter-spacing:0;color:var(--dsw-alias-label-secondary);
+  background-color:var(--rhine-card);border-radius:3px;box-shadow:inset 0 0 0 1px var(--rhine-line);
   background-image:linear-gradient(90deg,var(--rhine-orange) 44%,var(--rhine-gold) 44% 72%,var(--rhine-blue) 72%);
-  background-position:bottom;background-size:100% 4px;background-repeat:no-repeat;
+  background-position:bottom;background-size:100% 2px;background-repeat:no-repeat;
 }
-[data-dsh-part="new-session"]::before {
-  content:"New chat";position:absolute;left:12px;top:15px;color:var(--rhine-ink);
-  font:800 20px/1.15 Arial,sans-serif;letter-spacing:-.6px;pointer-events:none;
-}
-[data-dsh-part="new-session"]::after {
-  content:"+";position:absolute;right:12px;top:21px;pointer-events:none;
-  color:var(--rhine-plus);font:400 33px/1 Arial,sans-serif;
-}
-[data-dsh-part="new-session"] svg, [data-dsh-part="new-session"] > span[aria-hidden="true"] {display:none}
-[data-dsh-part="new-session"] > span:first-child > span {justify-content:flex-start;transform:none}
+[data-dsh-part="new-session"]:hover {background-color:var(--rhine-surface)}
+[data-dsh-part="new-session"] svg {color:var(--rhine-plus)}
 [data-dsh-surface="session-header"] { font-weight:600; letter-spacing:.02em; }
 [data-dsh-surface="session-header"] > :first-child {background-color:var(--rhine-surface);border-bottom:1px solid var(--rhine-line)}
 [data-dsh-surface="session-header"] [role="tablist"] {border-top:1px solid var(--rhine-line)}
@@ -384,12 +386,6 @@ body::selection { background:var(--rhine-accent);color:var(--dsw-alias-label-pri
 @media(max-width:1000px) {
   body:has([data-windows-menu]) [data-dsh-surface="root"] > :first-child::after {display:none}
 }
-/* Collapsed native rail keeps its compact buttons and never reserves a banner. */
-[data-sidebar-collapsed="true"] [data-dsh-surface="sidebar"] > :first-child > [data-window-drag="true"] {height:0;min-height:0;padding:0;border:0;background:none}
-[data-sidebar-collapsed="true"] [data-dsh-part="new-session"] {min-height:28px;height:28px;padding:0;background-image:none}
-[data-sidebar-collapsed="true"] [data-dsh-part="new-session"]::before,
-[data-sidebar-collapsed="true"] [data-dsh-part="new-session"]::after {display:none}
-[data-sidebar-collapsed="true"] [data-dsh-part="new-session"] svg {display:block}
 body:has([data-sidebar-collapsed="true"]) [data-windows-menu]::before {left:88px}
 body:has([data-sidebar-collapsed="true"]) [data-windows-menu] {left:286px}
 @media(max-width:560px) {
