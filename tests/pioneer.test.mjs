@@ -104,7 +104,7 @@ test('central assets keep matched light / dark strength without changing ribbon 
   }
 });
 
-test('desktop rail, launch header, recycled rows and div composer stay in their native regions',async()=>{
+test('sidebar entries keep native geometry while the station is painted behind the list',async()=>{
   const browser=await launchBrowser();
   try{
     const page=await browser.newPage({viewport:{width:1225,height:830}});
@@ -115,33 +115,52 @@ test('desktop rail, launch header, recycled rows and div composer stay in their 
       // composer. No real account titles/content are captured in this fixture.
       await page.setContent(`<!doctype html><html data-theme="${mode}"><style>
         *{box-sizing:border-box}body{margin:0;font:14px Arial}aside{position:absolute;top:44px;bottom:4px;width:${width}px}.absolute{position:absolute;inset:0;display:flex}.rail{width:52px;flex:none;background:#ddd}.rail button{width:36px;height:36px;margin:8px}.navigation{flex:1;min-width:0;overflow:hidden}.navigation nav{height:100%;display:flex;flex-direction:column}.header{padding:0 8px;flex:none}.native-title{height:52px;display:flex;align-items:center}.launch{display:flex;flex-direction:column;margin-bottom:8px}.sidebar-item{display:flex;width:100%;height:32px;flex-shrink:0}.scroll{flex:1;min-height:0;overflow:auto}.row{height:32px;margin:4px 8px}.separator{position:absolute;top:0;bottom:0;right:-8px;width:16px}.icon{width:24px;height:24px}.main{position:absolute;left:${width}px;top:44px;right:0;bottom:4px}.chat{height:75%;padding:30px}.compose{margin:0 28px;height:98px;border-radius:22px;background:#eee}.ProseMirror{height:44px;padding:14px}.rail button,.icon{border:0}
-      </style><aside class="app-shell-left-panel"><div class="absolute"><nav class="rail" data-app-navigation-rail><button aria-current="page" data-sidebar-destination="home">H</button></nav><div class="navigation" data-sidebar-navigation-root><nav><div class="header"><div class="native-title">Codex</div><div class="launch group/nav-list"><div data-codex-tab-conversation-drop-target><button class="sidebar-item" id="launch">新聊天</button></div></div></div><div class="scroll" data-app-action-sidebar-scroll>${Array.from({length:40},(_,i)=>`<div class="row" role="button" data-app-action-sidebar-thread-row ${i===0?'data-app-action-sidebar-thread-selected="true"':''}>${i===1?'新聊天':'示例会话 '+i}<button class="icon" aria-label="新聊天">+</button></div>`).join('')}</div></nav></div></div><div class="separator" role="separator"></div></aside><main class="main" data-app-shell-main-surface><div class="chat">隔离布局检查</div><div class="compose" data-composer-surface-variant="default"><div class="ProseMirror" contenteditable>草稿</div></div></main></html>`);
-      const before=await page.locator('.main').boundingBox(),composeBefore=await page.locator('.compose').boundingBox();
+      </style><aside class="app-shell-left-panel"><div class="absolute"><nav class="rail" data-app-navigation-rail><button aria-current="page" data-sidebar-destination="home">H</button></nav><div class="navigation" data-sidebar-navigation-root><nav><div class="header"><div class="native-title">Codex</div><div class="launch group/nav-list"><div data-codex-tab-conversation-drop-target><button class="sidebar-item" id="launch"><span class="icon-leading-slot">✎</span>新聊天<kbd id="hint">Ctrl+N</kbd></button></div><button class="sidebar-item" id="search">搜索</button></div></div><div class="scroll" data-app-action-sidebar-scroll>${Array.from({length:40},(_,i)=>`<div class="row" role="button" data-app-action-sidebar-thread-row ${i===0?'data-app-action-sidebar-thread-selected="true"':''}>${i===1?'新聊天':'示例会话 '+i}<button class="icon" aria-label="新聊天">+</button></div>`).join('')}</div></nav></div></div><div class="separator" role="separator"></div></aside><main class="main" data-app-shell-main-surface><div class="chat">隔离布局检查</div><div class="compose" data-composer-surface-variant="default"><div class="ProseMirror" contenteditable>草稿</div></div></main></html>`);
+      // Every native control keeps its exact box: the theme only paints.
+      const native=['.rail','.native-title','.launch','#launch','#launch .icon-leading-slot','#hint','#search','.scroll','.row','.icon','.main','.compose'];
+      const boxes=()=>page.evaluate(list=>list.map(s=>{const r=document.querySelector(s).getBoundingClientRect();return [s,r.x,r.y,r.width,r.height]}),native);
+      const before=await boxes();
       await page.evaluate(`(${renderer})(${JSON.stringify({version:'native-test',enabled:true,motion:false,css})})`);
-      await page.waitForFunction(()=>document.querySelector('[data-rhine-launcher]'));
-      const layout=await page.evaluate(()=>{
-        const box=s=>{const r=document.querySelector(s).getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,b:r.bottom}};
-        const launcher=document.querySelector('[data-rhine-launcher]');
-        return {rail:box('.rail'),title:box('.native-title'),banner:box('[data-rhine-launcher]'),station:box('[data-rhine-decoration="station"]'),button:box('#launch'),scroll:box('.scroll'),compose:box('.compose'),rowHeight:box('.row').h,iconHeight:box('.icon').h,marked:document.querySelectorAll('[data-rhine-part="new-chat"]').length,outerPseudo:getComputedStyle(document.querySelector('aside'),'::after').content,composerMarked:document.querySelector('.compose').hasAttribute('data-rhine-composer'),railShadow:getComputedStyle(document.querySelector('.rail button')).boxShadow};
+      await page.waitForFunction(()=>document.querySelector('[data-rhine-station]'));
+      assert.deepEqual(await boxes(),before,`native sidebar geometry changed at ${width}px`);
+      const state=await page.evaluate(()=>({
+        marked:document.querySelectorAll('[data-rhine-part="new-chat"]').length,
+        inserted:document.querySelectorAll('aside [data-rhine-decoration]').length,
+        station:document.querySelector('.scroll').getAttribute('data-rhine-station'),
+        stationImage:getComputedStyle(document.querySelector('.scroll')).backgroundImage.startsWith('url("data:'),
+        icon:getComputedStyle(document.querySelector('#launch .icon-leading-slot')).display,
+        cardPseudo:[getComputedStyle(document.querySelector('#launch'),'::before').content,getComputedStyle(document.querySelector('#launch'),'::after').content],
+        outerPseudo:getComputedStyle(document.querySelector('aside'),'::after').content,
+        composerMarked:document.querySelector('.compose').hasAttribute('data-rhine-composer'),
+        railShadow:getComputedStyle(document.querySelector('.rail button')).boxShadow
+      }));
+      assert.equal(state.marked,1);assert.equal(state.inserted,0,'nothing is inserted into the native sidebar');
+      assert.equal(state.station,'faint','40 rows leave no room: faint watermark');assert.equal(state.stationImage,true);
+      assert.notEqual(state.icon,'none');assert.deepEqual(state.cardPseudo,['none','none']);
+      assert.equal(state.outerPseudo,'none');assert.equal(state.composerMarked,true);assert.equal(state.railShadow,'none');
+      // A short list leaves room below the rows: full-strength station.
+      await page.evaluate(()=>{for(const row of [...document.querySelectorAll('.row')].slice(3))row.remove();});
+      await page.waitForFunction(()=>document.querySelector('.scroll').getAttribute('data-rhine-station')==='full');
+      assert.equal((await boxes()).find(b=>b[0]==='#launch')[2],before.find(b=>b[0]==='#launch')[2]);
+      // Nested display:contents wrappers in 26.1117 have no rectangle of their own.
+      await page.locator('.scroll').evaluate(el=>{
+        const wrap=document.createElement('div'), inner=wrap.cloneNode();
+        wrap.style.display=inner.style.display='contents';
+        inner.append(...el.children);wrap.append(inner);el.append(wrap);
+        const block=document.createElement('div');block.style.height=(el.clientHeight-105)+'px';inner.replaceChildren(block);
       });
-      assert.deepEqual(await page.locator('.main').boundingBox(),before);
-      assert.deepEqual(await page.locator('.compose').boundingBox(),composeBefore);
-      assert.equal(layout.marked,1);assert.equal(layout.rowHeight,32);assert.equal(layout.iconHeight,24);
-      assert.ok(layout.banner.x>=layout.rail.x+layout.rail.w);assert.ok(layout.banner.y>=layout.title.b);
-      assert.ok(layout.button.y>=layout.station.b);assert.equal(layout.button.h,78);
-      assert.ok(layout.station.x>=layout.banner.x&&layout.station.x+layout.station.w<=layout.banner.x+layout.banner.w);
-      assert.ok(layout.scroll.y>=layout.button.b);assert.equal(layout.outerPseudo,'none');
-      assert.equal(layout.composerMarked,true);assert.equal(layout.railShadow,'none');
+      await page.waitForFunction(()=>document.querySelector('.scroll').getAttribute('data-rhine-station')==='faint');
+      assert.equal(await page.locator('.scroll').evaluate(el=>el.scrollHeight<=el.clientHeight+1),true);
       // A header node reused as an unrelated action must lose its marker and
       // banner. Keep the physical node to cover React virtualization.
       await page.evaluate(()=>{
         const action=document.querySelector('#launch');action.textContent='打开归档';
         action.parentElement.removeAttribute('data-codex-tab-conversation-drop-target');
       });
-      await page.waitForFunction(()=>!document.querySelector('[data-rhine-part],[data-rhine-launcher]'));
+      await page.waitForFunction(()=>!document.querySelector('[data-rhine-part]'));
       await page.evaluate('window.__RHINE_LAB_THEME_V7__.remove()');
       assert.equal(await page.locator('[data-rhine-composer]').count(),0);
-      assert.equal(await page.locator('[data-rhine-decoration]').count(),0);
+      assert.equal(await page.locator('[data-rhine-decoration],[data-rhine-station]').count(),0);
     }
     assert.deepEqual(errors,[]);
   }finally{await browser.close()}
@@ -157,6 +176,19 @@ test('brand chrome and two-line native header retain controls and responsive hit
       *{box-sizing:border-box}body{margin:0;font:14px Arial;--app-shell-titlebar-height:8px;--app-shell-header-height:52px}.frame{height:830px;position:relative}.native-top{height:36px;width:100%;display:flex;align-items:center;padding-left:6px;-webkit-app-region:drag}.nav-tools{width:102px;display:flex;flex:none}.nav-tools button{width:28px;height:28px}.native-top [role=menubar]{display:flex;padding:0 8px 0 4px;gap:2px}.native-top button{height:28px;border:0;color:var(--color-text-tertiary,#444);background:none;-webkit-app-region:no-drag;white-space:nowrap}.native-top [role=menuitem]{padding:0 10px}.caption{position:absolute;right:0;top:0;width:136px;height:36px;pointer-events:none}.page-head{--app-shell-titlebar-height:52px;position:absolute;left:0;top:44px;right:0;height:52px;display:flex;pointer-events:none;-webkit-app-region:drag}.native-toolbar{position:absolute;left:0;right:0;top:0;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 26px}.native-toolbar button{pointer-events:auto;-webkit-app-region:no-drag}main{position:absolute;left:0;right:0;top:44px;bottom:0}.workspace{height:100%;padding-top:52px;display:flex;flex-direction:column}.thread{flex:1;min-height:0;overflow:auto}.message{height:900px;padding:30px}.composer{height:98px;flex:none;margin:10px 26px;padding:20px}
       </style><div class="frame"><div class="native-top ${mode==='light'?'_ApplicationMenuTopBar_fixture':'ApplicationMenuTopBar-fixture'}"><div class="nav-tools"><button id="back">←</button><button>→</button><button>☷</button></div><div role="menubar"><button role="menuitem" id="menu">文件</button><button role="menuitem">编辑</button><button role="menuitem">视图</button><button role="menuitem">帮助</button></div></div><div class="caption"></div><main data-app-shell-main-surface><div class="workspace ${mode==='light'?'_WorkspaceContent_fixture':'WorkspaceContent-fixture'}"><div class="thread"><div class="message" data-content-search-turn-key="turn-1">主题效果检查</div></div><div class="composer" data-composer-surface-variant="default"><div class="ProseMirror" contenteditable>保留草稿</div></div></div></main><header class="page-head" data-app-shell-titlebar data-app-shell-header-layout="thread-edge-scroll"><div class="native-toolbar"><span>莱茵生命研究所 / 实验记录</span><button id="action">原生操作</button></div></header></div>`);
       await page.evaluate(()=>{window.events=[];window.originalButtons=[...document.querySelectorAll('button')];for(const b of window.originalButtons)b.addEventListener('click',()=>window.events.push(b.id||'other'));});
+      // In 26.1117 the frame and active page expose semantic anchors. The
+      // caption gutter means the header and main can differ by four pixels.
+      if(width===850)await page.evaluate(()=>{
+        const frame=document.querySelector('.frame'),bar=document.querySelector('.native-top');
+        frame.dataset.appShellFrame='';frame.dataset.appShellApplicationMenuBar='';
+        bar.className='native-top';
+        const page=document.createElement('div');page.style.display='contents';page.dataset.appShellActivePage='';
+        const main=document.querySelector('main'),header=document.querySelector('header');
+        frame.append(page);page.append(main,header);header.style.right='4px';
+        header.removeAttribute('data-app-shell-header-layout');header.dataset.appShellApplicationMenuBar='';
+        const workspace=main.firstElementChild;workspace.className='workspace';
+        workspace.firstElementChild.dataset.appShellMainContentLayout='';
+      });
       const mainBefore=await page.locator('main').boundingBox(),composeBefore=await page.locator('.composer').boundingBox();
       const payload={version:'chrome-test',enabled:true,motion:true,css};
       await page.evaluate(`(${renderer})(${JSON.stringify(payload)})`);
@@ -187,7 +219,7 @@ test('brand chrome and two-line native header retain controls and responsive hit
       await page.waitForFunction(()=>document.documentElement.dataset.rhineRoute==='chat');
       assert.equal(await page.locator('[data-rhine-decoration="channel"]').count(),0);
       assert.equal(await page.locator('html').getAttribute('data-rhine-motion'),'on');
-      await page.locator('.workspace').evaluate(e=>e.className='workspace');
+      await page.locator('.workspace').evaluate(e=>{e.className='workspace';e.firstElementChild.removeAttribute('data-app-shell-main-content-layout');});
       await page.locator('.message').evaluate(e=>e.setAttribute('data-message-author-role','user'));
       await page.waitForFunction(()=>document.documentElement.dataset.rhineRoute==='thread');
       const unmatched=await page.evaluate('window.__RHINE_LAB_THEME_V7__.verify()');
@@ -215,7 +247,7 @@ test('secondary text and links retain 4.5:1 over the strongest flat watermark',(
   }
 });
 
-test('New chat plus mark keeps 3:1 against the card and its hover surface',()=>{
+test('New chat icon colour keeps 3:1 against the card and its hover surface',()=>{
   const hex=s=>s.slice(1).match(/../g).map(x=>parseInt(x,16));
   const lum=c=>{const a=c.map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return a[0]*.2126+a[1]*.7152+a[2]*.0722};
   const contrast=(a,b)=>(Math.max(lum(a),lum(b))+.05)/(Math.min(lum(a),lum(b))+.05);
@@ -226,25 +258,24 @@ test('New chat plus mark keeps 3:1 against the card and its hover surface',()=>{
   }
 });
 
-test('English New chat label, style recovery and hook reporting',async()=>{
+test('English New chat label stays native, style recovery and hook reporting',async()=>{
   const browser=await launchBrowser();
   try{
     const page=await browser.newPage({viewport:{width:1120,height:820}});
     const errors=[];page.on('pageerror',e=>errors.push(e.message));
     await page.setContent(`<!doctype html><html data-theme="light"><body><aside class="app-shell-left-panel"><div class="group/nav-list"><button class="sidebar-item" data-sidebar-destination="new-chat"><span class="icon-leading-slot"></span><div>New chat</div></button></div></aside><main data-app-shell-main-surface><div class="ProseMirror" contenteditable>draft</div></main></body></html>`);
     await page.evaluate(`(${renderer})(${JSON.stringify({version:'label-test',enabled:true,motion:true,css})})`);
-    const label=await page.locator('[data-rhine-label="translated"]').evaluate(el=>({size:getComputedStyle(el).fontSize,after:getComputedStyle(el,'::after').content,title:getComputedStyle(el.closest('button'),'::before').content}));
-    assert.deepEqual(label,{size:'0px',after:'"新聊天"',title:'"New chat"'});
+    // No card title is drawn any more, so the native English label is never hidden or repeated.
+    const label=await page.locator('button div').evaluate(el=>({size:getComputedStyle(el).fontSize,text:el.textContent,title:getComputedStyle(el.closest('button'),'::before').content}));
+    assert.notEqual(label.size,'0px');assert.equal(label.text,'New chat');assert.equal(label.title,'none');
+    assert.equal(await page.locator('[data-rhine-part="new-chat"]').count(),1);
     // The composer has no native surface wrapper here, so its hook is reported.
     assert.deepEqual((await page.evaluate('window.__RHINE_LAB_THEME_V7__.verify()')).missingHooks,['composer']);
     await page.evaluate(()=>document.getElementById('rhine-lab-theme-v7').remove());
     await page.waitForFunction(()=>document.getElementById('rhine-lab-theme-v7')?.isConnected);
     assert.equal((await page.evaluate('window.__RHINE_LAB_THEME_V7__.verify()')).stylePresent,true);
-    // A Chinese label stays as the subtitle and is not translated.
-    await page.locator('button div').evaluate(el=>{el.textContent='新聊天';});
-    await page.waitForFunction(()=>!document.querySelector('[data-rhine-label]'));
     await page.evaluate('window.__RHINE_LAB_THEME_V7__.remove()');
-    assert.equal(await page.locator('#rhine-lab-theme-v7,[data-rhine-part],[data-rhine-label]').count(),0);
+    assert.equal(await page.locator('#rhine-lab-theme-v7,[data-rhine-part],[data-rhine-station]').count(),0);
     assert.equal(await page.locator('html').getAttribute('data-rhine-motion'),null);
     assert.deepEqual(errors,[]);
   }finally{await browser.close()}

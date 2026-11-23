@@ -19,9 +19,9 @@ export function buildArtCss(assetDir){
   const on='html[data-rhine-enabled="true"]';
   // Order matters: dark still must follow light motion at equal specificity.
   return [
-    rule(on,{watermark:asset('watermark-light-still.svg'),grid:asset('grid-light.svg'),ring:asset('ring-light.svg')}),
+    rule(on,{watermark:asset('watermark-light-still.svg'),grid:asset('grid-light.svg'),ring:asset('ring-light.svg'),station:asset('station-light.svg'),'station-faint':asset('station-light-faint.svg')}),
     rule(`${on}[data-rhine-motion="on"]`,{watermark:asset('watermark-light.svg')}),
-    rule(`${on}[data-theme="dark"]`,{watermark:asset('watermark-dark-still.svg'),grid:asset('grid-dark.svg'),ring:asset('ring-dark.svg')}),
+    rule(`${on}[data-theme="dark"]`,{watermark:asset('watermark-dark-still.svg'),grid:asset('grid-dark.svg'),ring:asset('ring-dark.svg'),station:asset('station-dark.svg'),'station-faint':asset('station-dark-faint.svg')}),
     rule(`${on}[data-theme="dark"][data-rhine-motion="on"]`,{watermark:asset('watermark-dark.svg')})
   ].join('\n')+'\n';
 }

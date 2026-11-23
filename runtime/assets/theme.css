@@ -101,49 +101,21 @@ html[data-rhine-enabled="true"] [data-rhine-decoration="channel"] > :first-child
   color:var(--rhine-accent);border-bottom:2px solid var(--rhine-orange);height:100%;
   display:flex;align-items:center;font:600 11px/1.4 var(--rhine-display);
 }
-/* The outer aside also owns the application rail and resize handle. A normal
-   flow banner inside the actual launch list cannot overlap either of them.
-   The tricolor edge appears twice only: the title bar and the New chat card. */
-html[data-rhine-enabled="true"] [data-rhine-launcher] {
-  position:relative;container-type:inline-size;padding:12px 10px 6px;
-  border-top:1px solid var(--rhine-line);
+/* Sidebar: native entries keep their exact size, position, icons and hints.
+   Only paint changes here (colour, background, inset shadow, radius); no
+   margin, padding, border, font size, display or inserted element.
+   The Terminal station is a background of the conversation list: full
+   strength when the list leaves room below, a faint watermark otherwise. */
+html[data-rhine-enabled="true"] [data-rhine-station] {
+  background-image:var(--rhine-station);background-repeat:no-repeat;
+  background-size:min(220px,calc(100% - 32px)) auto;background-position:left 16px bottom 20px;
 }
-html[data-rhine-enabled="true"] [data-rhine-decoration="station"] {
-  display:block;position:relative;flex:none;margin-bottom:18px;padding:4px 0 16px;
-  color:var(--rhine-ink);border-bottom:1px solid var(--rhine-line);
-}
-html[data-rhine-enabled="true"] .rhine-station-kicker {
-  font:10px/1.45 Consolas,"Courier New",monospace;letter-spacing:.8px;color:var(--rhine-muted);
-}
-html[data-rhine-enabled="true"] .rhine-station-title {
-  position:relative;margin-top:7px;font:700 clamp(28px,19cqi,46px)/1.05 var(--rhine-display);letter-spacing:-1px;
-}
-/* Reflection fades away from the title instead of reading as a smudge. */
-html[data-rhine-enabled="true"] .rhine-station-title span {
-  position:absolute;left:0;top:100%;transform:scaleY(-.6);transform-origin:center 8px;opacity:.14;pointer-events:none;
-  -webkit-mask-image:linear-gradient(to top,#000 15%,transparent 70%);mask-image:linear-gradient(to top,#000 15%,transparent 70%);
-}
+html[data-rhine-enabled="true"] [data-rhine-station="faint"] {background-image:var(--rhine-station-faint)}
 html[data-rhine-enabled="true"] [data-rhine-part="new-chat"] {
-  position:relative;min-height:78px;height:78px;box-sizing:border-box;
-  background-color:var(--rhine-panel);border:1px solid var(--rhine-line);
-  border-radius:0;padding:39px 12px 13px;margin:0 0 4px;justify-content:flex-start;
-  font-size:12px;letter-spacing:0;color:var(--rhine-muted);
-  background-image:var(--rhine-tricolor);
-  background-position:left bottom;background-size:100% 4px;background-repeat:no-repeat;
+  background-color:var(--rhine-panel);box-shadow:inset 0 0 0 1px var(--rhine-line);border-radius:3px;
+  background-image:var(--rhine-tricolor);background-position:left bottom;background-size:100% 2px;background-repeat:no-repeat;
 }
-html[data-rhine-enabled="true"] [data-rhine-part="new-chat"]::before {
-  content:"New chat";position:absolute;left:12px;top:15px;
-  color:var(--rhine-ink);font:700 20px/1.15 var(--rhine-display);letter-spacing:-.2px;pointer-events:none;
-}
-html[data-rhine-enabled="true"] [data-rhine-part="new-chat"]::after {
-  content:"+";position:absolute;right:12px;top:21px;color:var(--rhine-plus);
-  font:400 33px/1 Arial,sans-serif;pointer-events:none;
-}
-html[data-rhine-enabled="true"] [data-rhine-part="new-chat"] :is(svg,.icon-leading-slot) {display:none}
-html[data-rhine-enabled="true"] [data-rhine-part="new-chat"] > div {font-size:12px;color:var(--rhine-muted)}
-/* English clients: the native "New chat" would repeat the card title. */
-html[data-rhine-enabled="true"] [data-rhine-part="new-chat"] [data-rhine-label="translated"] {font-size:0}
-html[data-rhine-enabled="true"] [data-rhine-part="new-chat"] [data-rhine-label="translated"]::after {content:"新聊天";font-size:12px}
+html[data-rhine-enabled="true"] [data-rhine-part="new-chat"] :is(svg,.icon-leading-slot) {color:var(--rhine-plus)}
 html[data-rhine-enabled="true"] [data-rhine-part="new-chat"]:hover {background-color:var(--rhine-surface)}
 html[data-rhine-enabled="true"] [data-app-action-sidebar-thread-row][data-app-action-sidebar-thread-selected="true"],
 html[data-rhine-enabled="true"] [data-sidebar-navigation-root] [data-sidebar-destination][aria-current="page"] {
@@ -184,13 +156,4 @@ html[data-rhine-enabled="true"] [data-rhine-composer]:focus-within {box-shadow:i
     background-size:min(420px,calc(100% - 28px)) auto,0 0,100% 100%,44px 44px;
   }
   html[data-rhine-enabled="true"] [data-rhine-surface="settings"] {background-size:0 0,100% 100%,44px 44px}
-}
-/* Short windows keep the conversation list higher in the sidebar. */
-@media(max-height:800px) {
-  html[data-rhine-enabled="true"] [data-rhine-decoration="station"] {margin-bottom:10px;padding-bottom:10px}
-  html[data-rhine-enabled="true"] .rhine-station-title {margin-top:4px;font-size:clamp(24px,14cqi,32px)}
-  html[data-rhine-enabled="true"] .rhine-station-title span {display:none}
-  html[data-rhine-enabled="true"] [data-rhine-part="new-chat"] {min-height:60px;height:60px;padding-top:30px;padding-bottom:8px}
-  html[data-rhine-enabled="true"] [data-rhine-part="new-chat"]::before {top:9px;font-size:17px}
-  html[data-rhine-enabled="true"] [data-rhine-part="new-chat"]::after {top:13px;font-size:28px}
 }

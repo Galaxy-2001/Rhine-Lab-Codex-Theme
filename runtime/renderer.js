@@ -1,6 +1,6 @@
 (function installRhine(payload) {
   const key = '__RHINE_LAB_THEME_V7__';
-  const revision = 'pioneer-native-6';
+  const revision = 'pioneer-native-8';
   const root = document.documentElement;
   const existing = window[key];
   if (existing?.version === payload.version && existing.revision === revision && existing.root === root) {
@@ -24,7 +24,6 @@
   const decorations = new Map();
   let wantedDecorations;
 
-  const NEW_CHAT_EN = /^new[ -]?(?:chat|thread|conversation|task)$/i;
   const NEW_CHAT_ANY = /^(?:新(?:聊天|对话|会话|任务)|new[ -]?(?:chat|thread|conversation|task))$/i;
 
   function setAttribute(element, name, value) {
@@ -61,7 +60,7 @@
   function decorateChrome(found) {
     for (const menu of document.querySelectorAll('[role="menubar"]')) {
       const bar = menu.parentElement;
-      if (!bar?.matches('[class*="ApplicationMenuTopBar_"],[class*="ApplicationMenuTopBar-"]')) continue;
+      if (!bar?.matches('[class*="ApplicationMenuTopBar_"],[class*="ApplicationMenuTopBar-"], [data-app-shell-frame][data-app-shell-application-menu-bar] > *')) continue;
       found.chrome = true;
       mark(bar, 'data-rhine-chrome', 'true');
       decorate(bar, 'brand', '<b>R.</b><strong>RHINE LAB</strong>', true);
@@ -74,18 +73,21 @@
   // workspace that actually has conversation turns.
   function decorateThreadHeader(found, mains) {
     if (!mains.length) return;
-    for (const header of document.querySelectorAll('header[data-app-shell-titlebar][data-app-shell-header-layout="thread-edge-scroll"]')) {
+    for (const header of document.querySelectorAll('header[data-app-shell-titlebar]:is([data-app-shell-header-layout="thread-edge-scroll"],[data-app-shell-application-menu-bar])')) {
       const rect = header.getBoundingClientRect();
       if (!rect.width) continue;
+      const page = header.closest('[data-app-shell-active-page]');
       const main = mains.find(element => {
+        if (page) return element.closest('[data-app-shell-active-page]') === page;
         const r = element.getBoundingClientRect();
         return r.width && Math.abs(r.x - rect.x) < 2 && Math.abs(r.width - rect.width) < 2;
       });
       const content = main?.querySelector('[class*="_WorkspaceContent_"],[class*="WorkspaceContent-"]');
-      if (!content) continue;
+      const inset = content || main?.querySelector(':scope > div > [data-app-shell-main-content-layout]')?.parentElement;
+      if (!inset) continue;
       found.channel = true;
       mark(header, 'data-rhine-titlebar', 'true');
-      mark(content, 'data-rhine-content', 'true');
+      mark(inset, 'data-rhine-content', 'true');
       decorate(header, 'channel', '<span>任务 / CONVERSATION</span><span>STRUCTURAL SECTION · STRU-001</span>');
     }
   }
@@ -99,9 +101,28 @@
     }
   }
 
-  // The outer aside wraps both the application rail and the navigation. Scope
-  // the banner to the native launch list, never the outer panel or a
-  // virtualized conversation row (even one titled "New chat").
+  // Station artwork: 220 x 112 drawn 16px from the left and 20px from the
+  // bottom of the conversation list. It is paint only, so the native list
+  // keeps its full height. Shown at full strength only when the rows end
+  // above it; otherwise it falls back to a faint watermark behind the rows.
+  function stationRoom(scroll) {
+    const box = scroll.getBoundingClientRect();
+    if (scroll.scrollHeight > scroll.clientHeight + 1) return false;
+    let bottom = box.top;
+    const pending = [...scroll.children];
+    while (pending.length) {
+      const child = pending.pop();
+      const r = child.getBoundingClientRect();
+      if (r.height) bottom = Math.max(bottom, r.bottom);
+      else if (getComputedStyle(child).display === 'contents') pending.push(...child.children);
+    }
+    const width = Math.min(220, box.width - 32);
+    return box.bottom - bottom >= width * 112 / 220 + 36;
+  }
+
+  // The outer aside wraps both the application rail and the navigation. Only
+  // the native launch entry is restyled (paint only), never a virtualized
+  // conversation row, even one titled "New chat".
   function decorateLauncher(found) {
     for (const sidebar of document.querySelectorAll('aside.app-shell-left-panel')) {
       const native = '[data-codex-tab-conversation-drop-target] > button.sidebar-item,[data-sidebar-destination="new-chat"]';
@@ -109,19 +130,9 @@
         if (element.closest('[data-app-action-sidebar-scroll],[data-app-action-sidebar-thread-row],[data-app-navigation-rail]')) return false;
         return element.matches(native) || NEW_CHAT_ANY.test(element.textContent.trim());
       });
-      if (!action) continue;
-      found.launcher = true;
-      mark(action, 'data-rhine-part', 'new-chat');
-      // The card title is English. An English native label would repeat it,
-      // so that label is shown as the Chinese subtitle instead.
-      const label = action.textContent.trim();
-      if (NEW_CHAT_EN.test(label)) {
-        const leaf = [...action.querySelectorAll('*')].find(element => !element.children.length && element.textContent.trim() === label);
-        mark(leaf, 'data-rhine-label', 'translated');
-      }
-      const launcher = action.closest('.group\\/nav-list');
-      mark(launcher, 'data-rhine-launcher', 'true');
-      decorate(launcher, 'station', '<div class="rhine-station-kicker">RHINE LAB / PERSONAL<br>WORKSPACE</div><div class="rhine-station-title">Terminal<span>Terminal</span></div>', true);
+      if (action) { found.launcher = true; mark(action, 'data-rhine-part', 'new-chat'); }
+      const scroll = sidebar.querySelector('[data-app-action-sidebar-scroll]');
+      if (scroll && visible(scroll) && !sidebar.closest('[data-app-shell-sidebar-open="false"]')) mark(scroll, 'data-rhine-station', stationRoom(scroll) ? 'full' : 'faint');
     }
   }
 
@@ -212,7 +223,7 @@
   const domObserver = new MutationObserver(schedule);
   domObserver.observe(root, {
     childList: true, characterData: true, subtree: true, attributes: true,
-    attributeFilter: ['data-app-shell-header-layout', 'data-content-search-turn-key', 'data-message-author-role', 'aria-label', 'data-sidebar-destination', 'data-codex-tab-conversation-drop-target', 'data-app-action-sidebar-thread-row', 'data-composer-surface-variant']
+    attributeFilter: ['data-app-shell-header-layout', 'data-content-search-turn-key', 'data-message-author-role', 'aria-label', 'data-sidebar-destination', 'data-codex-tab-conversation-drop-target', 'data-app-action-sidebar-thread-row', 'data-app-action-sidebar-section-collapsed', 'data-app-shell-sidebar-open', 'data-composer-surface-variant']
   });
   window.addEventListener('resize', schedule);
   window[key] = {

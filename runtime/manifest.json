@@ -8,8 +8,8 @@
                   },
                   {
                       "path":  "art.mjs",
-                      "sha256":  "14b8617b032d6642b5546aa5391d8c589a1bd2eefe4367d31eded859635e3a1b",
-                      "size":  1666
+                      "sha256":  "61aa0adea6bb1b296768f39b726ac85c83fbfa1d4bc53c93c4571164cb5d4d7a",
+                      "size":  1832
                   },
                   {
                       "path":  "assets/codex-white.ico",
@@ -47,9 +47,29 @@
                       "size":  459
                   },
                   {
+                      "path":  "assets/station-dark.svg",
+                      "sha256":  "eaedb1a06822911c2c84b0a873fdc5b0b49d05ff3e99ae0fc0e8369aa8b241c7",
+                      "size":  873
+                  },
+                  {
+                      "path":  "assets/station-dark-faint.svg",
+                      "sha256":  "e330c2d8aed7f29c5bc765ecc33a89c73e9765e5c8218f1431f71979594fdbc5",
+                      "size":  887
+                  },
+                  {
+                      "path":  "assets/station-light.svg",
+                      "sha256":  "30880109a6f279eb790afa726bb691fb96c78cdbb6082ad867c2f200e62b44bd",
+                      "size":  873
+                  },
+                  {
+                      "path":  "assets/station-light-faint.svg",
+                      "sha256":  "1110df60f7097726380d969538e710a128de28da233ee802993d4c4e54ec0bb4",
+                      "size":  887
+                  },
+                  {
                       "path":  "assets/theme.css",
-                      "sha256":  "200b3218efb4dd261206c39e9df22a95dc9a9dec41d1b8e91570f2b02169f657",
-                      "size":  13005
+                      "sha256":  "868fc31278a73b679114814fdc204fa7d3bbb10572986424fbc7fe4c1e3ef4f0",
+                      "size":  10603
                   },
                   {
                       "path":  "assets/watermark-dark.svg",
@@ -108,12 +128,12 @@
                   },
                   {
                       "path":  "renderer.js",
-                      "sha256":  "da0edf6d081c88961460d0e96db54f0df7a30b5932ce9bf8df7dd6ffe240edde",
-                      "size":  10390
+                      "sha256":  "5d069e72f61cc6a6d519153cb86a4316ded093b522c18905d501824f26d5133b",
+                      "size":  11172
                   },
                   {
                       "path":  "RhineLabTheme.exe",
-                      "sha256":  "0ea2190f48afa3c6bd0a014bb3a3d56b459974f2b7767d4970cfb6d75af60185",
+                      "sha256":  "0917fd6650322c5009b4c5eb6d66c172abaaf05734d0e6a698351b4e0b6427fb",
                       "size":  52224
                   },
                   {
