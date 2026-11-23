@@ -54,7 +54,8 @@ Off-peak billing periods use blue with stripes, peak periods use amber, and week
 
 - **[Galaxy-2001](https://github.com/Galaxy-2001)**: project initiator and maintainer; design direction, requirements, reference materials, hands-on validation, visual feedback and release decisions.
 - **[OpenAI Codex](https://github.com/codex) (AI development assistant)**: implemented most of the code under the maintainer's direction and feedback, and contributed to visual design, 3D SVG animation, Codex and DSH integration, fixes, testing, packaging, documentation, demo materials, GitHub releases and the marketplace submission.
+- **[Claude](https://github.com/claude) (Anthropic)** contributed to the project as an AI development assistant.
 
-The project was developed collaboratively by its maintainer and an AI assistant. This credit records development contributions and does not imply an official OpenAI project or endorsement.
+Galaxy-2001 maintains this independent project. Codex and Claude are credited for their development contributions.
 
 Codex-assisted commits use `Co-authored-by: Codex <noreply@openai.com>` to record commit-level credit alongside the maintainer. Earlier published commits retain their original history.
